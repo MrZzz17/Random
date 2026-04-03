@@ -1,0 +1,15 @@
+# Google APIs
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+
+# Spotify
+spotipy
+
+# Finance
+plaid-python
+requests
+
+# Utilities
+python-dotenv

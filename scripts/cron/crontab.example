@@ -1,0 +1,17 @@
+# Personal automation cron jobs
+# Install with: crontab crontab.example
+# Verify with:  crontab -l
+#
+# Syntax: minute hour day-of-month month day-of-week command
+
+# Daily digest at 8:00 AM
+0 8 * * * cd ~/Documents/GitHub/Personal/Random && python scripts/automation/daily_digest.py >> logs/daily_digest.log 2>&1
+
+# Back up Spotify liked songs every Sunday at 10:00 AM
+0 10 * * 0 cd ~/Documents/GitHub/Personal/Random && python media/spotify/scripts/backup_liked.py >> logs/spotify_backup.log 2>&1
+
+# Export Chrome extensions list every Monday at 9:00 AM
+0 9 * * 1 cd ~/Documents/GitHub/Personal/Random && python browser/scripts/list_extensions.py >> logs/chrome_extensions.log 2>&1
+
+# Crypto portfolio check every weekday at 9:00 AM
+0 9 * * 1-5 cd ~/Documents/GitHub/Personal/Random && python finance/crypto/portfolio.py >> logs/crypto.log 2>&1

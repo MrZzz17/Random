@@ -1,0 +1,56 @@
+# Environment & secrets — NEVER commit these
+.env
+.env.local
+*.secret
+secrets/
+credentials/
+credentials.json
+token.json
+*.pem
+*.key
+*.p12
+
+# Finance — sensitive exports
+finance/bank/*.csv
+finance/bank/*.ofx
+finance/bank/*.qif
+finance/budgeting/data/*.csv
+finance/crypto/holdings.json
+
+# Browser — profile data (can be large and contains personal info)
+browser/chrome/profiles/*/
+
+# Media — downloaded content
+media/youtube/downloads/*
+media/spotify/playlists/cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log
+.npm
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/

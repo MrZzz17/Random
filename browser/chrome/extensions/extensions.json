@@ -1,0 +1,16 @@
+{
+  "_comment": "Run browser/scripts/list_extensions.py to regenerate this file automatically.",
+  "last_updated": "2026-04-03",
+  "extensions": [
+    {
+      "name": "uBlock Origin",
+      "id": "cjpalhdlnbpafiamejdnhcphjbkeiagm",
+      "store_url": "https://chrome.google.com/webstore/detail/cjpalhdlnbpafiamejdnhcphjbkeiagm"
+    },
+    {
+      "name": "1Password",
+      "id": "aeblfdkhhhdcdjpifhhbdiojplfjncoa",
+      "store_url": "https://chrome.google.com/webstore/detail/aeblfdkhhhdcdjpifhhbdiojplfjncoa"
+    }
+  ]
+}

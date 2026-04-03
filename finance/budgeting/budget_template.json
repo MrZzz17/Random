@@ -1,0 +1,47 @@
+{
+  "month": "YYYY-MM",
+  "income": {
+    "salary": 0,
+    "freelance": 0,
+    "other": 0
+  },
+  "expenses": {
+    "housing": {
+      "rent_mortgage": 0,
+      "utilities": 0,
+      "internet": 0,
+      "insurance": 0
+    },
+    "food": {
+      "groceries": 0,
+      "dining_out": 0,
+      "coffee": 0
+    },
+    "transport": {
+      "gas": 0,
+      "public_transit": 0,
+      "parking": 0,
+      "car_insurance": 0
+    },
+    "subscriptions": {
+      "spotify": 0,
+      "youtube_premium": 0,
+      "netflix": 0,
+      "other_streaming": 0,
+      "software": 0,
+      "gym": 0
+    },
+    "personal": {
+      "clothing": 0,
+      "healthcare": 0,
+      "personal_care": 0
+    },
+    "savings": {
+      "emergency_fund": 0,
+      "investments": 0,
+      "retirement": 0
+    },
+    "miscellaneous": 0
+  },
+  "notes": ""
+}
