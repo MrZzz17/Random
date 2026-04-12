@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Istanbul with Anta ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#c9a84c;
+  --gold-light:#e8d48b;
+  --rose:#d4917b;
+  --rose-light:#f0c4b3;
+  --cream:#faf6f0;
+  --dark:#1a1412;
+  --dark-soft:#2d2420;
+  --text:#3d3029;
+  --text-light:#7a6e63;
+  --card-bg:rgba(255,255,255,0.92);
+  --glass:rgba(255,255,255,0.15);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* Sparkle Canvas */
+#sparkle-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:var(--dark)}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=1600&q=80') center/cover no-repeat;opacity:0.55;transition:opacity 1s}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,20,18,0.3) 0%,rgba(26,20,18,0.6) 60%,rgba(26,20,18,0.95) 100%)}
+.hero-content{position:relative;z-index:2;padding:2rem;max-width:700px}
+.hero-sparkle{font-size:1.2rem;letter-spacing:0.5em;color:var(--gold-light);text-transform:uppercase;margin-bottom:1rem;opacity:0;animation:fadeUp 1s 0.3s forwards}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,8vw,5.5rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:0.5rem;opacity:0;animation:fadeUp 1s 0.5s forwards}
+.hero-title span{color:var(--gold-light);font-style:italic}
+.hero-sub{font-size:clamp(1rem,3vw,1.3rem);color:rgba(255,255,255,0.7);font-weight:300;margin-bottom:2.5rem;opacity:0;animation:fadeUp 1s 0.7s forwards}
+.hero-date{display:inline-block;padding:0.6rem 2rem;border:1px solid var(--gold);color:var(--gold-light);font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase;border-radius:50px;opacity:0;animation:fadeUp 1s 0.9s forwards}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:2;opacity:0;animation:fadeUp 1s 1.2s forwards}
+.hero-scroll a{color:var(--gold-light);text-decoration:none;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:0.5rem}
+.hero-scroll .arrow{width:20px;height:20px;border-right:1.5px solid var(--gold-light);border-bottom:1.5px solid var(--gold-light);transform:rotate(45deg);animation:bounce 2s infinite}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:rotate(45deg) translateY(0)}40%{transform:rotate(45deg) translateY(-8px)}60%{transform:rotate(45deg) translateY(-4px)}}
+
+/* Navigation */
+.day-nav{position:sticky;top:0;z-index:100;background:rgba(250,246,240,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.15);padding:0.6rem 0;transition:box-shadow 0.3s}
+.day-nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08)}
+.day-nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:0.3rem;padding:0 1rem;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.day-nav-inner::-webkit-scrollbar{display:none}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);white-space:nowrap;margin-right:1rem;font-weight:600}
+.nav-btn{padding:0.45rem 1rem;border:none;background:transparent;color:var(--text-light);font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.05em;cursor:pointer;border-radius:50px;white-space:nowrap;transition:all 0.3s}
+.nav-btn:hover{color:var(--gold);background:rgba(201,168,76,0.08)}
+.nav-btn.active{background:var(--gold);color:#fff}
+
+/* Main content */
+.main{max-width:1100px;margin:0 auto;padding:2rem 1rem 4rem}
+
+/* Day Section */
+.day-section{margin-bottom:3rem;opacity:0;transform:translateY(40px);transition:opacity 0.7s,transform 0.7s}
+.day-section.visible{opacity:1;transform:translateY(0)}
+.day-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;cursor:pointer;padding:1.2rem 1.5rem;background:var(--card-bg);border-radius:20px;box-shadow:0 2px 20px rgba(0,0,0,0.04);border:1px solid rgba(201,168,76,0.1);transition:all 0.3s}
+.day-header:hover{box-shadow:0 4px 30px rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.25)}
+.day-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--rose));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.day-num span{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:#fff}
+.day-meta{flex:1;min-width:0}
+.day-date{font-size:0.75rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;font-weight:600}
+.day-theme{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--dark);font-weight:600;margin-top:0.15rem}
+.day-toggle{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;background:transparent}
+.day-toggle svg{width:14px;height:14px;stroke:var(--gold);transition:transform 0.3s}
+.day-header.open .day-toggle{background:var(--gold);border-color:var(--gold)}
+.day-header.open .day-toggle svg{stroke:#fff;transform:rotate(180deg)}
+
+/* Day Body */
+.day-body{max-height:0;overflow:hidden;transition:max-height 0.6s cubic-bezier(0.4,0,0.2,1);padding:0 0.5rem}
+.day-body.open{max-height:3000px}
+
+/* Timeline */
+.timeline{position:relative;padding:0.5rem 0 1rem 2.5rem}
+.timeline::before{content:'';position:absolute;left:0.75rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold-light),var(--rose-light),transparent)}
+.tl-item{position:relative;margin-bottom:1.5rem}
+.tl-item::before{content:'';position:absolute;left:-1.85rem;top:0.5rem;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--cream);box-shadow:0 0 0 3px rgba(201,168,76,0.2)}
+.tl-item.food::before{background:var(--rose)}
+.tl-item.photo::before{background:#7eb8a0}
+.tl-time{font-size:0.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;font-weight:600;margin-bottom:0.25rem}
+.tl-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--dark);font-weight:600;margin-bottom:0.3rem}
+.tl-desc{font-size:0.88rem;color:var(--text-light);line-height:1.65}
+.tl-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem}
+.tl-tag{font-size:0.68rem;padding:0.2rem 0.7rem;border-radius:50px;font-weight:500;letter-spacing:0.03em}
+.tl-tag.photo-tag{background:rgba(126,184,160,0.15);color:#4a8a6e}
+.tl-tag.food-tag{background:rgba(212,145,123,0.15);color:#b06b50}
+.tl-tag.shop-tag{background:rgba(201,168,76,0.15);color:#9a7e2e}
+.tl-tag.culture-tag{background:rgba(130,120,180,0.15);color:#6a60a0}
+.tl-link{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:500;margin-top:0.4rem;transition:color 0.2s}
+.tl-link:hover{color:var(--rose)}
+.tl-link svg{width:12px;height:12px}
+
+/* Day Image */
+.day-image{border-radius:16px;overflow:hidden;margin-bottom:1.5rem;aspect-ratio:21/9;position:relative}
+.day-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+.day-image:hover img{transform:scale(1.03)}
+.day-image-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(26,20,18,0.4) 100%)}
+
+/* Pro Tips */
+.pro-tip{background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(212,145,123,0.06));border:1px solid rgba(201,168,76,0.15);border-radius:14px;padding:1rem 1.2rem;margin-top:1rem;display:flex;gap:0.8rem;align-items:flex-start}
+.pro-tip-icon{font-size:1.2rem;flex-shrink:0;margin-top:0.1rem}
+.pro-tip p{font-size:0.82rem;color:var(--text-light);line-height:1.6}
+.pro-tip strong{color:var(--dark);font-weight:600}
+
+/* Footer */
+.footer{text-align:center;padding:3rem 1rem;border-top:1px solid rgba(201,168,76,0.15)}
+.footer-heart{font-size:2.5rem;margin-bottom:1rem}
+.footer-text{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--dark);margin-bottom:0.5rem}
+.footer-sub{font-size:0.85rem;color:var(--text-light)}
+
+/* Responsive */
+@media(max-width:640px){
+  .day-header{padding:1rem;border-radius:16px}
+  .day-num{width:46px;height:46px}
+  .day-num span{font-size:1.1rem}
+  .day-theme{font-size:1.15rem}
+  .timeline{padding-left:2rem}
+  .tl-item::before{left:-1.35rem}
+  .day-image{aspect-ratio:16/9}
+  .nav-brand{font-size:0.95rem;margin-right:0.5rem}
+}
+
+/* Shimmer animation for gold accents */
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.shimmer{background:linear-gradient(90deg,var(--gold),var(--gold-light),#fff,var(--gold-light),var(--gold));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
+
+/* Loading */
+.loader{position:fixed;inset:0;background:var(--dark);z-index:10000;display:flex;align-items:center;justify-content:center;transition:opacity 0.6s}
+.loader.hide{opacity:0;pointer-events:none}
+.loader-text{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold-light);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader"><span class="loader-text">Istanbul awaits ✨</span></div>
+
+<canvas id="sparkle-canvas"></canvas>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-sparkle">✨ a journey curated for ✨</p>
+    <h1 class="hero-title"><span>Anta's</span><br>Istanbul</h1>
+    <p class="hero-sub">Seven days of magic between two continents</p>
+    <span class="hero-date">April 12 &ndash; 18, 2026</span>
+  </div>
+  <div class="hero-scroll">
+    <a href="#day1"><span>Explore</span><span class="arrow"></span></a>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="day-nav" id="dayNav">
+  <div class="day-nav-inner">
+    <span class="nav-brand shimmer">Istanbul ✨</span>
+    <button class="nav-btn active" data-day="1">Day 1</button>
+    <button class="nav-btn" data-day="2">Day 2</button>
+    <button class="nav-btn" data-day="3">Day 3</button>
+    <button class="nav-btn" data-day="4">Day 4</button>
+    <button class="nav-btn" data-day="5">Day 5</button>
+    <button class="nav-btn" data-day="6">Day 6</button>
+    <button class="nav-btn" data-day="7">Day 7</button>
+  </div>
+</nav>
+
+<!-- DAYS -->
+<main class="main">
+
+<!-- DAY 1 -->
+<section class="day-section" id="day1">
+  <div class="day-header open" onclick="toggleDay(this)">
+    <div class="day-num"><span>1</span></div>
+    <div class="day-meta">
+      <div class="day-date">Saturday, April 12</div>
+      <div class="day-theme">Galata &amp; Karakoy</div>
+    </div>
+    <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="day-body open">
+    <div class="day-image">
+      <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=1200&q=80" alt="Galata Tower Istanbul" loading="lazy">
+      <div class="day-image-overlay"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">10:00 AM</div>
+        <div class="tl-title">Galata Tower &amp; Streets</div>
+        <div class="tl-desc">Start at Istanbul's most iconic landmark. Walk the charming cobblestone side streets around the tower for golden-hour photos before the crowds arrive.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Photo Spot</span><span class="tl-tag culture-tag">🏛 Landmark</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Galata+Tower+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">11:00 AM</div>
+        <div class="tl-title">Kamondo Steps</div>
+        <div class="tl-desc">An Art Nouveau staircase built in the 1870s by a wealthy Venetian banking family. One of Istanbul's most photographed spots&mdash;the curved iron railings are pure elegance.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Kamondo+Steps+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">11:45 AM</div>
+        <div class="tl-title">Karakoy Waterfront Cafes</div>
+        <div class="tl-desc">Walk down to the revitalized Karakoy district for specialty coffee at one of the rooftop cafes with panoramic Bosphorus and Golden Horn views.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">☕ Cafe</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">1:00 PM &middot; Lunch</div>
+        <div class="tl-title">Karakoy Lokantasi</div>
+        <div class="tl-desc">Modern Turkish cuisine in a stunning tile-walled interior. Known for their meze platters and fresh seafood. Photogenic and delicious.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍽 Fine Dining</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Karakoy+Lokantasi+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">2:30 PM</div>
+        <div class="tl-title">Galataport Promenade</div>
+        <div class="tl-desc">Istanbul's newest waterfront destination&mdash;a sleek 1.2km promenade with boutique shops, art galleries, and stunning sea views. Great for shopping and strolling.</div>
+        <div class="tl-tags"><span class="tl-tag shop-tag">🛍 Shopping</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Galataport+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">7:00 PM &middot; Evening</div>
+        <div class="tl-title">Roof 106 Cocktail Bar</div>
+        <div class="tl-desc">End day one with handcrafted cocktails at this intimate rooftop, right in the shadow of Galata Tower. Panoramic views of the Bosphorus as the city lights up. Pure magic.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍸 Rooftop Bar</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://www.roof106.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Reserve a Table</a>
+      </div>
+    </div>
+    <div class="pro-tip">
+      <span class="pro-tip-icon">💡</span>
+      <p><strong>Pro tip:</strong> The side streets below Galata Tower are most photogenic in the late morning light. Arrive before 11am for photos without crowds blocking the tower views.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 2 -->
+<section class="day-section" id="day2">
+  <div class="day-header" onclick="toggleDay(this)">
+    <div class="day-num"><span>2</span></div>
+    <div class="day-meta">
+      <div class="day-date">Sunday, April 13</div>
+      <div class="day-theme">Sultanahmet Classics</div>
+    </div>
+    <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="day-body">
+    <div class="day-image">
+      <img src="https://images.unsplash.com/photo-1545156521-77bd85671d30?w=1200&q=80" alt="Hagia Sophia Istanbul" loading="lazy">
+      <div class="day-image-overlay"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">9:00 AM</div>
+        <div class="tl-title">Hagia Sophia</div>
+        <div class="tl-desc">Arrive early to beat the crowds at this 1,500-year-old marvel. Once a church, then a mosque, then a museum, now a mosque again. The massive dome and golden mosaics will take your breath away.</div>
+        <div class="tl-tags"><span class="tl-tag culture-tag">🏛 Must-See</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Hagia+Sophia+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">10:30 AM</div>
+        <div class="tl-title">Blue Mosque</div>
+        <div class="tl-desc">Sultan Ahmed Mosque, with its cascading domes and six minarets, is stunning from the outside. Inside, over 20,000 handmade Iznik tiles in blue patterns line the walls. Free entry; headscarves available at the door.</div>
+        <div class="tl-tags"><span class="tl-tag culture-tag">🏛 Landmark</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Blue+Mosque+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">11:30 AM</div>
+        <div class="tl-title">Basilica Cistern</div>
+        <div class="tl-desc">An underground cathedral of 336 marble columns, atmospheric lighting reflected in shallow water, and the mysterious Medusa heads. One of the most dramatic, otherworldly spaces you'll ever see.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Iconic</span><span class="tl-tag culture-tag">🏛 Must-See</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Basilica+Cistern+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">1:00 PM &middot; Lunch</div>
+        <div class="tl-title">Seven Hills Restaurant</div>
+        <div class="tl-desc">Rooftop dining with a jaw-dropping panorama of the Blue Mosque and Hagia Sophia. Fresh seafood and Turkish classics while soaking in the most iconic view in the city.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍽 Rooftop Dining</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Seven+Hills+Restaurant+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">2:30 PM</div>
+        <div class="tl-title">Topkapi Palace &amp; Harem</div>
+        <div class="tl-desc">The Ottoman sultans' residence for 400 years. Wander through jewel-encrusted rooms, the Imperial Treasury (home to the 86-carat Spoonmaker's Diamond), and the legendary Harem quarters.</div>
+        <div class="tl-tags"><span class="tl-tag culture-tag">🏛 Must-See</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Topkapi+Palace+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">4:30 PM &middot; Afternoon Tea</div>
+        <div class="tl-title">Hafiz Mustafa 1864</div>
+        <div class="tl-desc">Ottoman-era patisserie with a gorgeous interior. Try the baklava, Turkish delight, and a cup of thick Turkish coffee. The chandeliers and ornate decor make it incredibly photogenic.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍰 Patisserie</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Hafiz+Mustafa+1864+Sultanahmet" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+    </div>
+    <div class="pro-tip">
+      <span class="pro-tip-icon">💡</span>
+      <p><strong>Pro tip:</strong> Hagia Sophia is free but can have 1-2 hour lines by 10am. Arriving at 9am sharp gets you inside with space to breathe. Dress modestly (shoulders and knees covered).</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 3 -->
+<section class="day-section" id="day3">
+  <div class="day-header" onclick="toggleDay(this)">
+    <div class="day-num"><span>3</span></div>
+    <div class="day-meta">
+      <div class="day-date">Monday, April 14</div>
+      <div class="day-theme">Bosphorus &amp; Palaces</div>
+    </div>
+    <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="day-body">
+    <div class="day-image">
+      <img src="https://images.unsplash.com/photo-1549918864-48ac978761a4?w=1200&q=80" alt="Bosphorus sunset Istanbul" loading="lazy">
+      <div class="day-image-overlay"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">10:00 AM</div>
+        <div class="tl-title">Dolmabahce Palace</div>
+        <div class="tl-desc">The most opulent palace in Turkey, where Ottoman meets European baroque. The 36-ton Bohemian crystal chandelier in the throne room alone is worth the trip. Book tickets online in advance.</div>
+        <div class="tl-tags"><span class="tl-tag culture-tag">🏛 Must-See</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Dolmabahce+Palace+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:30 PM</div>
+        <div class="tl-title">Ortakoy Mosque &amp; Waterfront</div>
+        <div class="tl-desc">The baroque-style Ortakoy Mosque sits right at the water's edge with the Bosphorus Bridge soaring behind it. One of the most iconic photo compositions in all of Istanbul. Grab a famous Ortakoy kumpir (stuffed baked potato) while you're here.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Iconic</span><span class="tl-tag food-tag">🥔 Street Food</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Ortakoy+Mosque+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">1:30 PM &middot; Lunch</div>
+        <div class="tl-title">Bebek or Arnavutkoy Waterfront</div>
+        <div class="tl-desc">Continue along the Bosphorus to these charming coastal villages. Elegant wooden Ottoman mansions line the water. Pick a waterfront restaurant for fresh fish with views of the strait.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍽 Seafood</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Bebek+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">5:30 PM &middot; Sunset</div>
+        <div class="tl-title">Private Bosphorus Sunset Yacht Cruise</div>
+        <div class="tl-desc">The highlight of the trip. A 2-hour private yacht cruise at golden hour, sailing between Europe and Asia. Watch the city's mosques, palaces, and bridges glow as the sun sets over the strait. Drinks on board, photographer optional.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Unforgettable</span><span class="tl-tag culture-tag">⛵ Experience</span></div>
+        <a class="tl-link" href="https://getturkeytour.com/tours/istanbul-tours/sunset-private-bosphorus-cruise/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Book Cruise (~$315)</a>
+      </div>
+    </div>
+    <div class="pro-tip">
+      <span class="pro-tip-icon">💡</span>
+      <p><strong>Pro tip:</strong> For the yacht cruise, bring a light jacket&mdash;it gets breezy on the water at sunset. The best photo moment is passing Maiden's Tower with the Old City skyline behind you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 4 -->
+<section class="day-section" id="day4">
+  <div class="day-header" onclick="toggleDay(this)">
+    <div class="day-num"><span>4</span></div>
+    <div class="day-meta">
+      <div class="day-date">Tuesday, April 15</div>
+      <div class="day-theme">Bazaars &amp; Boutiques</div>
+    </div>
+    <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="day-body">
+    <div class="day-image">
+      <img src="https://images.unsplash.com/photo-1527838832700-5059252407fa?w=1200&q=80" alt="Grand Bazaar Istanbul" loading="lazy">
+      <div class="day-image-overlay"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">10:30 AM</div>
+        <div class="tl-title">Grand Bazaar</div>
+        <div class="tl-desc">Over 4,000 shops in one of the world's oldest covered markets. Head to the Lantern Courtyard for hand-blown glass lamps glowing in warm colors, the carpet tunnels where sunlight hits vivid kilims, and the hidden tea balcony above the jewelry section. Arrive at 10:30 for the golden skylight effect.</div>
+        <div class="tl-tags"><span class="tl-tag shop-tag">🛍 Shopping</span><span class="tl-tag photo-tag">📸 Photo Spot</span><span class="tl-tag culture-tag">🏛 Historic</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Grand+Bazaar+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:30 PM</div>
+        <div class="tl-title">Spice Bazaar (Misir Carsisi)</div>
+        <div class="tl-desc">Mountains of colorful spices, Turkish delight, dried fruits, teas, and saffron. The aromas are intoxicating. The surrounding streets have even better prices&mdash;explore the alleys behind the bazaar for local finds.</div>
+        <div class="tl-tags"><span class="tl-tag shop-tag">🛍 Shopping</span><span class="tl-tag food-tag">🫖 Treats</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Spice+Bazaar+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">1:30 PM &middot; Lunch</div>
+        <div class="tl-title">Hamdi Restaurant</div>
+        <div class="tl-desc">Terrace dining overlooking the Golden Horn, Galata Bridge, and the waterfront. Famous for their kebabs and meze. The views from the top-floor terrace are spectacular.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍽 Turkish Cuisine</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Hamdi+Restaurant+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">3:00 PM</div>
+        <div class="tl-title">Nisantasi Luxury Shopping</div>
+        <div class="tl-desc">Istanbul's most prestigious fashion district. Browse Begum Khan (artisan jewelry in a whimsical emerald boutique), Zadig &amp; Voltaire, and local designer boutiques along Abdi Ipekci Caddesi. Stop for coffee at a chic Nisantasi cafe.</div>
+        <div class="tl-tags"><span class="tl-tag shop-tag">🛍 Luxury Shopping</span><span class="tl-tag food-tag">☕ Cafe</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Nisantasi+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+    </div>
+    <div class="pro-tip">
+      <span class="pro-tip-icon">💡</span>
+      <p><strong>Pro tip:</strong> At the Grand Bazaar, never accept the first price&mdash;haggling is expected and part of the fun. Start at 40-50% of the asking price. The lantern courtyard photos are best between 10:30am-12:30pm when natural light mixes with the lamps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 5 -->
+<section class="day-section" id="day5">
+  <div class="day-header" onclick="toggleDay(this)">
+    <div class="day-num"><span>5</span></div>
+    <div class="day-meta">
+      <div class="day-date">Wednesday, April 16</div>
+      <div class="day-theme">Princes' Islands Escape</div>
+    </div>
+    <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="day-body">
+    <div class="day-image">
+      <img src="https://images.unsplash.com/photo-1605385995397-3aa2e2510bbe?w=1200&q=80" alt="Princes Islands Istanbul" loading="lazy">
+      <div class="day-image-overlay"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">9:00 AM &middot; Ferry</div>
+        <div class="tl-title">Kabatas to Buyukada</div>
+        <div class="tl-desc">Catch an early ferry from Kabatas pier (a short walk from Beyoglu). The 60-minute ride across the Sea of Marmara is breathtaking&mdash;grab a seat on the upper rear deck for the best views of the receding Istanbul skyline. Tap your Istanbulkart (75 TL one way).</div>
+        <div class="tl-tags"><span class="tl-tag culture-tag">⛴ Ferry Ride</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+        <a class="tl-link" href="https://sehirhatlari.istanbul/en/timetables/domestic-trips/adalar-princes-islands-lines-176" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Check Ferry Schedule</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">10:30 AM</div>
+        <div class="tl-title">Explore Buyukada by Bike</div>
+        <div class="tl-desc">The largest Princess Island is completely car-free. Rent bikes or hop on the Adabus BA-1 electric shuttle (Great Tour, 60 TL) for a loop around the island. Pine forests, Victorian mansions, lavender gardens, and sea breeze. A total escape from the city.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Photo Spot</span><span class="tl-tag culture-tag">🚲 Nature</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:00 PM</div>
+        <div class="tl-title">Aya Yorgi Church Hike</div>
+        <div class="tl-desc">Hike up to the hilltop Greek Orthodox monastery of St. George. The panoramic views from the top&mdash;the Sea of Marmara, the other islands, and Istanbul in the distance&mdash;are absolutely worth the climb.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Panoramic Views</span><span class="tl-tag culture-tag">⛪ Historic</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Aya+Yorgi+Church+Buyukada" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">1:30 PM &middot; Lunch</div>
+        <div class="tl-title">Seafood by the Water</div>
+        <div class="tl-desc">Fresh grilled fish at one of the waterfront restaurants near the main pier. Simple, fresh, and incredibly satisfying after the hike. Try the fried calamari and a cold glass of Efes.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🐟 Seafood</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">5:30 PM &middot; Sunset Ferry</div>
+        <div class="tl-title">Return to Istanbul</div>
+        <div class="tl-desc">Catch the late afternoon ferry back. The return trip at sunset, watching Istanbul's skyline light up as you approach, is one of the most magical moments of the whole trip.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Sunset</span></div>
+      </div>
+    </div>
+    <div class="pro-tip">
+      <span class="pro-tip-icon">💡</span>
+      <p><strong>Pro tip:</strong> Go on a weekday (like today, Wednesday) to avoid massive weekend crowds. Bring water, sunscreen, and comfortable shoes for the Aya Yorgi hike. The 9:00-9:45 AM ferries are best for beating the rush.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 6 -->
+<section class="day-section" id="day6">
+  <div class="day-header" onclick="toggleDay(this)">
+    <div class="day-num"><span>6</span></div>
+    <div class="day-meta">
+      <div class="day-date">Thursday, April 17</div>
+      <div class="day-theme">Colorful Balat &amp; Asian Side</div>
+    </div>
+    <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="day-body">
+    <div class="day-image">
+      <img src="https://images.unsplash.com/photo-1575999080087-40e0acf66359?w=1200&q=80" alt="Colorful houses of Balat Istanbul" loading="lazy">
+      <div class="day-image-overlay"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">10:00 AM</div>
+        <div class="tl-title">Balat Neighborhood</div>
+        <div class="tl-desc">The Instagram goldmine of Istanbul. Walk Kiremit Street for the famous rainbow row houses, climb the colorful painted stairs at Incir Agaci Kahvesi, and wander through narrow streets filled with street art, quirky antique shops, and artsy cafes. Every corner is a photo op.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Instagram Heaven</span><span class="tl-tag shop-tag">🛍 Antiques</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Balat+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">11:30 AM</div>
+        <div class="tl-title">Coffee at a Balat Cafe</div>
+        <div class="tl-desc">Ducked into a quirky, colorful cafe is a Balat essential. Try Incir Agaci Kahvesi at the top of the painted stairs, or Forno Balat for excellent coffee and pastries in an old brick-oven bakery.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">☕ Cafe</span><span class="tl-tag photo-tag">📸 Photo Spot</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">1:00 PM &middot; Ferry</div>
+        <div class="tl-title">Cross to Kadikoy (Asian Side)</div>
+        <div class="tl-desc">Take a ferry from Eminonu to Kadikoy&mdash;a quick 20-minute ride across the Bosphorus to Asia. The ferry ride itself is an experience with views of Maiden's Tower and the Old City skyline.</div>
+        <div class="tl-tags"><span class="tl-tag culture-tag">⛴ Ferry Ride</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">1:30 PM</div>
+        <div class="tl-title">Kadikoy Market</div>
+        <div class="tl-desc">A vibrant, authentic local food market. Sample olives, fresh cheese, baklava, pomegranate juice, and pickled everything. This is where actual Istanbulites shop&mdash;more genuine than the tourist bazaars.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🫒 Market</span><span class="tl-tag shop-tag">🛍 Local Finds</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Kadikoy+Market+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">3:00 PM</div>
+        <div class="tl-title">Moda Seaside Promenade</div>
+        <div class="tl-desc">Walk the charming Moda coastal path. Indie boutiques, vintage stores, ice cream shops, and panoramic views of the European skyline from the Asian side. A completely different vibe from the tourist areas.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Photo Spot</span><span class="tl-tag shop-tag">🛍 Boutiques</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Moda+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">5:00 PM &middot; Sunset</div>
+        <div class="tl-title">Camlica Hill</div>
+        <div class="tl-desc">The highest point in Istanbul. Panoramic 360-degree views of the entire city, both continents, the Bosphorus, and the Sea of Marmara. At sunset, the view is unreal. The new Camlica Mosque is also stunning.</div>
+        <div class="tl-tags"><span class="tl-tag photo-tag">📸 Panoramic</span><span class="tl-tag culture-tag">🏛 Mosque</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Camlica+Hill+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">7:30 PM &middot; Dinner</div>
+        <div class="tl-title">Ciya Sofrasi</div>
+        <div class="tl-desc">A legendary Kadikoy institution serving traditional Anatolian dishes you won't find anywhere else. Seasonal stews, unique kebabs, and regional specialties from all corners of Turkey. Anthony Bourdain called it a must-visit.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍽 Legendary</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Ciya+Sofrasi+Kadikoy+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+    </div>
+    <div class="pro-tip">
+      <span class="pro-tip-icon">💡</span>
+      <p><strong>Pro tip:</strong> In Balat, arrive before 11am to get photos of the colorful houses without crowds. The best light for Kiremit Street is mid-morning. For Camlica Hill, a taxi from Kadikoy is easiest (~15 min, cheap).</p>
+    </div>
+  </div>
+</section>
+
+<!-- DAY 7 -->
+<section class="day-section" id="day7">
+  <div class="day-header" onclick="toggleDay(this)">
+    <div class="day-num"><span>7</span></div>
+    <div class="day-meta">
+      <div class="day-date">Friday, April 18</div>
+      <div class="day-theme">Hammam, Istiklal &amp; Farewell</div>
+    </div>
+    <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+  </div>
+  <div class="day-body">
+    <div class="day-image">
+      <img src="https://images.unsplash.com/photo-1603228254119-e6a4d095dc59?w=1200&q=80" alt="Istanbul Istiklal sunset" loading="lazy">
+      <div class="day-image-overlay"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">10:00 AM</div>
+        <div class="tl-title">Hurrem Sultan Hamam</div>
+        <div class="tl-desc">A 470-year-old Turkish bath built in 1556, sitting between Hagia Sophia and the Blue Mosque. The Zevk-i Sefa package (80 min, &euro;220) includes a traditional scrub, foam massage, and oil treatment under magnificent Ottoman domes with star-shaped skylights. Pure luxury and renewal.</div>
+        <div class="tl-tags"><span class="tl-tag culture-tag">🛁 Hammam</span><span class="tl-tag culture-tag">✨ Luxury</span></div>
+        <a class="tl-link" href="https://www.hurremsultanhamami.com/en/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Book Hammam</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">12:00 PM</div>
+        <div class="tl-title">Istiklal Street Stroll</div>
+        <div class="tl-desc">Istanbul's vibrant main avenue. Ride the nostalgic red tram, browse local designer boutiques and bookshops in the side streets, pop into Cicek Pasaji (Flower Passage) for its ornate glass arcades. The energy here is electric.</div>
+        <div class="tl-tags"><span class="tl-tag shop-tag">🛍 Shopping</span><span class="tl-tag culture-tag">🚃 Nostalgic Tram</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Istiklal+Street+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">1:30 PM &middot; Lunch</div>
+        <div class="tl-title">360 Istanbul</div>
+        <div class="tl-desc">A 360-degree panoramic rooftop restaurant on top of the historic Misir Apartment building. Modern Turkish cuisine and sushi, award-winning cocktails, and views that span the entire city. The space transforms into a club at night.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍽 Fine Dining</span><span class="tl-tag photo-tag">📸 360&deg; Views</span></div>
+        <a class="tl-link" href="https://360istanbul.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Reserve a Table</a>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">3:00 PM</div>
+        <div class="tl-title">Last-Minute Treasures</div>
+        <div class="tl-desc">Free time to revisit your favorite spots, pick up last-minute gifts, or explore any places you missed. The streets around Cihangir and Cukurcuma are full of hidden antique shops and design stores.</div>
+        <div class="tl-tags"><span class="tl-tag shop-tag">🛍 Shopping</span></div>
+      </div>
+      <div class="tl-item food">
+        <div class="tl-time">7:30 PM &middot; Farewell Dinner</div>
+        <div class="tl-title">Mikla Restaurant</div>
+        <div class="tl-desc">The grand finale. New Anatolian fine dining on the Marmara Pera Hotel rooftop, by celebrity chef Mehmet Gurs. Tasting menus that reinvent Turkish cuisine with Scandinavian precision. The terrace view of the Golden Horn at night is the perfect way to say goodbye to Istanbul.</div>
+        <div class="tl-tags"><span class="tl-tag food-tag">🍽 Fine Dining</span><span class="tl-tag photo-tag">📸 Rooftop</span><span class="tl-tag culture-tag">⭐ Michelin</span></div>
+        <a class="tl-link" href="https://maps.google.com/?q=Mikla+Restaurant+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Open in Maps</a>
+      </div>
+    </div>
+    <div class="pro-tip">
+      <span class="pro-tip-icon">💡</span>
+      <p><strong>Pro tip:</strong> Book the hammam in advance&mdash;Hurrem Sultan gets fully booked. For Mikla, a reservation is essential (try to book a terrace table). The tasting menu is the way to go for a special last night.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-heart">✨</div>
+  <p class="footer-text">Made with love for Anta</p>
+  <p class="footer-sub">Istanbul, April 2026</p>
+</footer>
+
+<script>
+// Loader
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loader').classList.add('hide')},800);
+});
+
+// Toggle days
+function toggleDay(header){
+  const body=header.nextElementSibling;
+  const isOpen=header.classList.contains('open');
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+// Sticky nav scroll effect
+const nav=document.getElementById('dayNav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>100);
+});
+
+// Nav buttons
+document.querySelectorAll('.nav-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const day=btn.dataset.day;
+    const section=document.getElementById('day'+day);
+    if(section){
+      const header=section.querySelector('.day-header');
+      const body=section.querySelector('.day-body');
+      if(!header.classList.contains('open')){
+        header.classList.add('open');
+        body.classList.add('open');
+      }
+      section.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Intersection observer for scroll animations + active nav
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      const id=entry.target.id;
+      if(id&&id.startsWith('day')){
+        const num=id.replace('day','');
+        document.querySelectorAll('.nav-btn').forEach(b=>{
+          b.classList.toggle('active',b.dataset.day===num);
+        });
+      }
+    }
+  });
+},{threshold:0.15,rootMargin:'-50px 0px'});
+
+document.querySelectorAll('.day-section').forEach(s=>observer.observe(s));
+
+// Sparkle canvas
+const canvas=document.getElementById('sparkle-canvas');
+const ctx=canvas.getContext('2d');
+let sparkles=[];
+let mouse={x:-100,y:-100};
+
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+resize();
+window.addEventListener('resize',resize);
+
+document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
+document.addEventListener('touchmove',e=>{mouse.x=e.touches[0].clientX;mouse.y=e.touches[0].clientY});
+
+class Sparkle{
+  constructor(x,y){
+    this.x=x+(Math.random()-0.5)*30;
+    this.y=y+(Math.random()-0.5)*30;
+    this.size=Math.random()*3+1;
+    this.life=1;
+    this.decay=Math.random()*0.03+0.015;
+    this.vx=(Math.random()-0.5)*1.5;
+    this.vy=(Math.random()-0.5)*1.5-0.5;
+    this.color=Math.random()>0.5?'201,168,76':'212,145,123';
+  }
+  update(){
+    this.life-=this.decay;
+    this.x+=this.vx;
+    this.y+=this.vy;
+    this.size*=0.98;
+  }
+  draw(){
+    ctx.save();
+    ctx.globalAlpha=this.life;
+    ctx.fillStyle=`rgba(${this.color},${this.life})`;
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+let frameCount=0;
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  frameCount++;
+  if(frameCount%3===0&&mouse.x>0){
+    sparkles.push(new Sparkle(mouse.x,mouse.y));
+  }
+  sparkles=sparkles.filter(s=>s.life>0);
+  sparkles.forEach(s=>{s.update();s.draw()});
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
