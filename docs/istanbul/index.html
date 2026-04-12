@@ -23,7 +23,9 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 .hero-bg{position:absolute;inset:0;background:url('img/blue-mosque.png') center/cover no-repeat;opacity:0.5}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,20,18,0.2) 0%,rgba(26,20,18,0.5) 50%,rgba(26,20,18,0.95) 100%)}
 .hero-content{position:relative;z-index:2;padding:2rem;max-width:720px}
-.hero-profile{width:100px;height:100px;border-radius:50%;border:3px solid var(--gold);object-fit:cover;margin:0 auto 1.2rem;display:block;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero-photo{position:absolute;bottom:0;height:85%;width:auto;object-fit:contain;object-position:bottom;z-index:1;opacity:0;animation:fadeUp 1.2s .3s forwards;pointer-events:none}
+.hero-photo-left{left:0;clip-path:inset(0 50% 0 0)}
+.hero-photo-right{right:0;clip-path:inset(0 0 0 50%)}
 .hero-sparkle{font-size:1rem;letter-spacing:.5em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.8rem;opacity:0;animation:fadeUp .8s .4s forwards}
 .hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,8vw,5.2rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:.4rem;opacity:0;animation:fadeUp .8s .6s forwards}
 .hero-title span{color:var(--gold-light);font-style:italic}
@@ -104,11 +106,6 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 .insta-spot p{font-size:.78rem;color:var(--text-light);line-height:1.55}
 .insta-spot strong{color:#c34682;font-weight:600}
 
-/* ANTA SECTION */
-.anta-gallery{display:flex;gap:.5rem;overflow-x:auto;padding:.8rem 0;scrollbar-width:none;-ms-overflow-style:none}
-.anta-gallery::-webkit-scrollbar{display:none}
-.anta-gallery img{height:200px;width:auto;border-radius:12px;flex-shrink:0;object-fit:cover;border:2px solid rgba(201,168,76,.15);transition:transform .3s}
-.anta-gallery img:hover{transform:scale(1.03)}
 
 /* PRO TIP */
 .pro-tip{background:linear-gradient(135deg,rgba(201,168,76,.06),rgba(212,145,123,.04));border:1px solid rgba(201,168,76,.12);border-radius:12px;padding:.8rem 1rem;margin-top:.8rem;display:flex;gap:.7rem;align-items:flex-start}
@@ -154,8 +151,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
   .tl-item::before{left:-1.2rem}
   .day-image{aspect-ratio:16/9}
   .tl-gallery{grid-template-columns:repeat(2,1fr)}
-  .hero-profile{width:80px;height:80px}
-  .anta-gallery img{height:160px}
+  .hero-photo{height:65%;opacity:0;animation:fadeUp 1.2s .3s forwards}
 }
 </style>
 </head>
@@ -180,31 +176,15 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 <section class="hero" id="top">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
+  <img class="hero-photo hero-photo-left" src="img/anta-hero.png" alt="Anta">
+  <img class="hero-photo hero-photo-right" src="img/anta-hero.png" alt="Anta">
   <div class="hero-content">
-    <img class="hero-profile" src="img/anta-profile.jpg" alt="Anta">
-    <p class="hero-sparkle" data-en="✨ a journey curated for ✨" data-ru="✨ путешествие для ✨">✨ a journey curated for ✨</p>
+    <p class="hero-sparkle" data-en="✨ a journey curated for ✨" data-ru="✨ путешествие для Анты ✨">✨ a journey curated for ✨</p>
     <h1 class="hero-title"><span data-en="Anta's" data-ru="Анта">Anta's</span><br><span data-en="Istanbul" data-ru="Стамбул">Istanbul</span></h1>
     <p class="hero-sub" data-en="Seven days of magic between two continents" data-ru="Семь дней магии между двумя континентами">Seven days of magic between two continents</p>
     <span class="hero-date" data-en="April 12 – 18, 2026" data-ru="12 – 18 апреля 2026">April 12 – 18, 2026</span>
   </div>
   <div class="hero-scroll"><a href="#day1"><span data-en="Explore" data-ru="Начать">Explore</span><span class="arrow"></span></a></div>
-</section>
-
-<!-- ANTA'S PHOTOS -->
-<section style="background:var(--dark);padding:2rem 1rem;">
-  <div style="max-width:1100px;margin:0 auto;text-align:center">
-    <p style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold-light);margin-bottom:.8rem" data-en="Anta ✨" data-ru="Анта ✨">Anta ✨</p>
-    <div class="anta-gallery">
-      <img src="img/anta-1.jpg" alt="Anta" onclick="openLightbox(this)">
-      <img src="img/anta-2.jpg" alt="Anta" onclick="openLightbox(this)">
-      <img src="img/anta-3.jpg" alt="Anta" onclick="openLightbox(this)">
-      <img src="img/anta-4.jpg" alt="Anta" onclick="openLightbox(this)">
-      <img src="img/anta-5.jpg" alt="Anta" onclick="openLightbox(this)">
-      <img src="img/anta-6.jpg" alt="Anta" onclick="openLightbox(this)">
-      <img src="img/anta-7.jpg" alt="Anta" onclick="openLightbox(this)">
-      <img src="img/anta-8.jpg" alt="Anta" onclick="openLightbox(this)">
-    </div>
-  </div>
 </section>
 
 <!-- NAV -->
@@ -235,7 +215,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
     <div class="day-toggle"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
   </div>
   <div class="day-body open">
-    <div class="day-image"><img src="img/galata-tower.jpg" alt="Galata Tower" loading="lazy"><div class="day-image-overlay"></div></div>
+    <div class="day-image"><img src="img/karakoy-streets.png" alt="Karakoy streets" loading="lazy"><div class="day-image-overlay"></div></div>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-time">10:00</div>
