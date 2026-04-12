@@ -23,7 +23,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 .hero-bg{position:absolute;inset:0;background:url('img/blue-mosque.png?v=1775976540') center/cover no-repeat;opacity:0.5}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,20,18,0.2) 0%,rgba(26,20,18,0.5) 50%,rgba(26,20,18,0.95) 100%)}
 .hero-content{position:relative;z-index:2;padding:2rem;max-width:720px}
-.hero-photo{position:absolute;bottom:0;height:75%;width:auto;max-width:40%;object-fit:contain;object-position:bottom;z-index:1;opacity:0;animation:fadeUp 1.2s .3s forwards;pointer-events:none}
+.hero-photo{position:absolute;bottom:0;width:50%;height:auto;max-height:80%;object-fit:contain;object-position:bottom;z-index:1;opacity:0;animation:fadeUp 1.2s .3s forwards;pointer-events:none}
 .hero-photo-left{left:0;clip-path:inset(0 50% 0 0)}
 .hero-photo-right{right:0;clip-path:inset(0 0 0 50%)}
 .hero-sparkle{font-size:1rem;letter-spacing:.5em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.8rem;opacity:0;animation:fadeUp .8s .4s forwards}
@@ -151,7 +151,9 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
   .tl-item::before{left:-1.2rem}
   .day-image{aspect-ratio:16/9}
   .tl-gallery{grid-template-columns:repeat(2,1fr)}
-  .hero-photo{height:55%;max-width:35%}
+  .hero-photo{width:100%;max-height:60%;clip-path:none;position:absolute;bottom:0;opacity:0.2;left:0;right:0;margin:auto;object-fit:cover;object-position:top}
+  .hero-photo-left{display:none}
+  .hero-photo-right{display:block;width:100%;max-width:100%}
 }
 </style>
 </head>
@@ -176,8 +178,8 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 <section class="hero" id="top">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
-  <img class="hero-photo hero-photo-left" src="img/anta-hero.png?v=1775976540" alt="Anta">
-  <img class="hero-photo hero-photo-right" src="img/anta-hero.png?v=1775976540" alt="Anta">
+  <img class="hero-photo hero-photo-left" src="img/anta-hero.png?v=1775976659" alt="Anta">
+  <img class="hero-photo hero-photo-right" src="img/anta-hero.png?v=1775976659" alt="Anta">
   <div class="hero-content">
     <p class="hero-sparkle" data-en="✨ a journey curated for ✨" data-ru="✨ путешествие для Анты ✨">✨ a journey curated for ✨</p>
     <h1 class="hero-title"><span data-en="Anta's" data-ru="Анта">Anta's</span><br><span data-en="Istanbul" data-ru="Стамбул">Istanbul</span></h1>
@@ -230,7 +232,7 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
         <div class="tl-time">11:00</div>
         <div class="tl-title" data-en="Kamondo Steps" data-ru="Лестница Камондо">Kamondo Steps</div>
         <div class="tl-desc" data-en="Art Nouveau staircase from the 1870s by a Venetian banking family. Curved iron railings, pure elegance — one of Istanbul's most photographed spots." data-ru="Лестница в стиле ар-нуво 1870-х годов, построенная венецианской банковской семьёй. Изогнутые кованые перила — один из самых фотографируемых мест Стамбула.">Art Nouveau staircase from the 1870s by a Venetian banking family. Curved iron railings, pure elegance — one of Istanbul's most photographed spots.</div>
-        <div class="tl-gallery single"><img src="img/galata-tower.png?v=1775976540" alt="Galata Tower" onclick="openLightbox(this)" loading="lazy"></div>
+        <div class="tl-gallery single"><img src="img/kamondo-steps.png?v=1775976591" alt="Kamondo Steps" onclick="openLightbox(this)" loading="lazy"></div>
         <div class="tl-tags"><span class="tl-tag insta-tag">📷 Instagrammable</span></div>
         <a class="tl-link" href="https://maps.google.com/?q=Kamondo+Steps+Istanbul" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> <span data-en="Open in Maps" data-ru="Открыть на карте">Open in Maps</span></a>
       </div>
