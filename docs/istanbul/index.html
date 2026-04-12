@@ -43,7 +43,8 @@ body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);ov
 .anta-feature img{display:block;margin:0 auto;width:60%;max-width:480px;border-radius:16px;border:2px solid rgba(201,168,76,.25);box-shadow:0 8px 40px rgba(0,0,0,.5);opacity:0;animation:fadeUp .8s .2s forwards}
 
 /* LANG TOGGLE */
-.lang-toggle{position:fixed;top:1rem;right:1rem;z-index:200;display:flex;background:rgba(26,20,18,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:50px;padding:3px;border:1px solid rgba(201,168,76,.2)}
+.lang-toggle{position:fixed;top:1rem;right:1rem;z-index:200;display:flex;background:rgba(26,20,18,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:50px;padding:3px;border:1px solid rgba(201,168,76,.2);transition:opacity .4s,transform .4s}
+.lang-toggle.hidden{opacity:0;pointer-events:none;transform:translateY(-10px)}
 .lang-btn{padding:.4rem .9rem;border:none;background:transparent;color:rgba(255,255,255,.5);font-family:'Inter',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;border-radius:50px;transition:all .3s;letter-spacing:.05em}
 .lang-btn.active{background:var(--gold);color:#fff}
 
@@ -426,7 +427,11 @@ window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loa
 function toggleDay(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open')}
 
 const nav=document.getElementById('dayNav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>100)});
+const langToggle=document.querySelector('.lang-toggle');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>100);
+  langToggle.classList.toggle('hidden',window.scrollY>window.innerHeight*0.6);
+});
 
 document.querySelectorAll('.nav-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
