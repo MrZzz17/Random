@@ -1,0 +1,123 @@
+{% comment %}
+  Countdown Timer — Creates urgency on product pages or promotions.
+  Usage:
+    {% render 'countdown-timer', hours: 2, label: 'Sale ends in' %}
+    {% render 'countdown-timer', end_date: '2026-12-31T23:59:59' %}
+{% endcomment %}
+
+{%- assign timer_hours = hours | default: 24 -%}
+{%- assign timer_label = label | default: 'Offer ends in' -%}
+{%- assign timer_id = 'countdown-' | append: timer_hours | append: '-' | append: 'now' | date: '%s' -%}
+
+<div class="countdown-timer" id="{{ timer_id }}" data-hours="{{ timer_hours }}" {% if end_date %}data-end="{{ end_date }}"{% endif %}>
+  <span class="countdown-timer__label">{{ timer_label }}</span>
+  <div class="countdown-timer__digits">
+    <div class="countdown-timer__unit">
+      <span class="countdown-timer__number" data-unit="hours">00</span>
+      <span class="countdown-timer__unit-label">hrs</span>
+    </div>
+    <span class="countdown-timer__sep">:</span>
+    <div class="countdown-timer__unit">
+      <span class="countdown-timer__number" data-unit="minutes">00</span>
+      <span class="countdown-timer__unit-label">min</span>
+    </div>
+    <span class="countdown-timer__sep">:</span>
+    <div class="countdown-timer__unit">
+      <span class="countdown-timer__number" data-unit="seconds">00</span>
+      <span class="countdown-timer__unit-label">sec</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .countdown-timer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    background: #fff3f5;
+    border: 1px solid #E94560;
+    border-radius: 8px;
+    margin: 12px 0;
+  }
+
+  .countdown-timer__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #E94560;
+    white-space: nowrap;
+  }
+
+  .countdown-timer__digits {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .countdown-timer__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 36px;
+  }
+
+  .countdown-timer__number {
+    font-size: 20px;
+    font-weight: 700;
+    color: #E94560;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown-timer__unit-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #666;
+  }
+
+  .countdown-timer__sep {
+    font-size: 20px;
+    font-weight: 700;
+    color: #E94560;
+    margin-top: -14px;
+  }
+</style>
+
+<script>
+  (function() {
+    var el = document.getElementById('{{ timer_id }}');
+    if (!el) return;
+
+    var endDate = el.dataset.end;
+    var hours = parseInt(el.dataset.hours, 10) || 24;
+    var deadline;
+
+    if (endDate) {
+      deadline = new Date(endDate).getTime();
+    } else {
+      var stored = sessionStorage.getItem('countdown_' + hours);
+      if (stored && parseInt(stored, 10) > Date.now()) {
+        deadline = parseInt(stored, 10);
+      } else {
+        deadline = Date.now() + hours * 3600 * 1000;
+        sessionStorage.setItem('countdown_' + hours, deadline.toString());
+      }
+    }
+
+    function pad(n) { return n < 10 ? '0' + n : n; }
+
+    function tick() {
+      var diff = Math.max(0, deadline - Date.now());
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+
+      el.querySelector('[data-unit="hours"]').textContent = pad(h);
+      el.querySelector('[data-unit="minutes"]').textContent = pad(m);
+      el.querySelector('[data-unit="seconds"]').textContent = pad(s);
+
+      if (diff > 0) requestAnimationFrame(function() { setTimeout(tick, 1000); });
+    }
+
+    tick();
+  })();
+</script>

@@ -1,0 +1,122 @@
+/* =============================================
+   Custom CSS Overrides for Dropshipping Store
+   Apply via: Shopify Admin > Themes > Edit Code > assets/
+   Then add to layout/theme.liquid:
+     {{ 'custom-dropship.css' | asset_url | stylesheet_tag }}
+   ============================================= */
+
+/* -- Announcement bar emphasis -- */
+.announcement-bar {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* -- Product card hover effect -- */
+.card-wrapper {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* -- "Add to Cart" button prominence -- */
+.product-form__submit {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  transition: transform 0.15s ease;
+}
+
+.product-form__submit:hover {
+  transform: scale(1.02);
+}
+
+/* -- Price styling -- */
+.price-item--regular {
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.price-item--sale {
+  color: #E94560;
+  font-weight: 700;
+}
+
+.price-item--regular.price-item--last {
+  text-decoration: line-through;
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+/* -- Product page: stack info cleanly on mobile -- */
+@media screen and (max-width: 749px) {
+  .product__info-wrapper {
+    padding-top: 16px;
+  }
+
+  .product__title {
+    font-size: 24px;
+  }
+}
+
+/* -- Smooth scroll behavior -- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* -- Newsletter section -- */
+.newsletter__wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* -- Collection page: cleaner grid spacing -- */
+.collection .grid {
+  gap: 16px;
+}
+
+/* -- Cart page: more visible checkout button -- */
+.cart__ctas button[name="checkout"] {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 32px;
+}
+
+/* -- Sale badge -- */
+.badge.price__badge-sale {
+  background: #E94560;
+  color: white;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* -- Sticky add-to-cart on mobile -- */
+@media screen and (max-width: 749px) {
+  .product-form {
+    position: sticky;
+    bottom: 0;
+    background: var(--color-background);
+    padding: 12px 0;
+    z-index: 10;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* -- Skeleton loading animation for images -- */
+.media--loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

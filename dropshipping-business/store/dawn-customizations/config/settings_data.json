@@ -1,0 +1,312 @@
+{
+  "_comment": "Dawn theme settings pre-configured for a dropshipping store. Upload via Shopify Admin > Themes > Edit Code > config/settings_data.json",
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "color_scheme": "scheme-1",
+          "logo_position": "middle-left",
+          "menu_type_desktop": "dropdown",
+          "sticky_header_type": "on-scroll-up",
+          "show_line_separator": false,
+          "margin_bottom": 0
+        }
+      },
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-1": {
+            "type": "announcement",
+            "settings": {
+              "text": "FREE SHIPPING on orders over $49 \ud83d\ude9a",
+              "color_scheme": "scheme-4",
+              "link": ""
+            }
+          }
+        },
+        "block_order": ["announcement-1"],
+        "settings": {
+          "color_scheme": "scheme-4",
+          "announcement_height_desktop": 40,
+          "announcement_height_mobile": 36,
+          "auto_rotate": true,
+          "change_slides_speed": 5
+        }
+      },
+      "hero-banner": {
+        "type": "image-banner",
+        "settings": {
+          "image_overlay_opacity": 30,
+          "image_height": "medium",
+          "desktop_content_position": "middle-left",
+          "show_text_box": true,
+          "desktop_content_alignment": "left",
+          "color_scheme": "scheme-1",
+          "mobile_content_alignment": "center",
+          "stack_images_on_mobile": true,
+          "show_text_below": false
+        },
+        "blocks": {
+          "heading": {
+            "type": "heading",
+            "settings": {
+              "heading": "Discover Products You'll Love",
+              "heading_size": "h0"
+            }
+          },
+          "text": {
+            "type": "text",
+            "settings": {
+              "text": "Carefully curated products delivered to your door. Quality guaranteed.",
+              "text_style": "subtitle"
+            }
+          },
+          "button": {
+            "type": "buttons",
+            "settings": {
+              "button_label_1": "Shop Now",
+              "button_link_1": "/collections/all",
+              "button_style_secondary_1": false,
+              "button_label_2": "",
+              "button_link_2": "",
+              "button_style_secondary_2": false
+            }
+          }
+        },
+        "block_order": ["heading", "text", "button"]
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "Best Sellers",
+          "heading_size": "h2",
+          "description": "",
+          "show_description": false,
+          "description_style": "body",
+          "collection": "",
+          "products_to_show": 8,
+          "columns_desktop": 4,
+          "full_width": false,
+          "show_view_all": true,
+          "view_all_style": "solid",
+          "enable_desktop_slider": false,
+          "color_scheme": "scheme-1",
+          "image_ratio": "portrait",
+          "image_shape": "default",
+          "show_secondary_image": true,
+          "show_vendor": false,
+          "show_rating": true,
+          "columns_mobile": "2",
+          "padding_top": 36,
+          "padding_bottom": 36
+        }
+      },
+      "trust-badges": {
+        "type": "rich-text",
+        "blocks": {
+          "trust-heading": {
+            "type": "heading",
+            "settings": {
+              "heading": "Why Shop With Us",
+              "heading_size": "h2"
+            }
+          },
+          "trust-text": {
+            "type": "text",
+            "settings": {
+              "text": "<p>\u2705 Free Shipping on $49+ &nbsp;&nbsp; \ud83d\udd12 Secure Checkout &nbsp;&nbsp; \ud83d\udce6 30-Day Returns &nbsp;&nbsp; \ud83c\udf1f 5-Star Reviews</p>"
+            }
+          }
+        },
+        "block_order": ["trust-heading", "trust-text"],
+        "settings": {
+          "desktop_content_position": "center",
+          "content_alignment": "center",
+          "color_scheme": "scheme-2",
+          "full_width": true,
+          "padding_top": 40,
+          "padding_bottom": 40
+        }
+      },
+      "new-arrivals": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "New Arrivals",
+          "heading_size": "h2",
+          "collection": "",
+          "products_to_show": 4,
+          "columns_desktop": 4,
+          "show_view_all": true,
+          "view_all_style": "outline",
+          "color_scheme": "scheme-1",
+          "image_ratio": "portrait",
+          "show_secondary_image": true,
+          "show_vendor": false,
+          "show_rating": true,
+          "columns_mobile": "2",
+          "padding_top": 36,
+          "padding_bottom": 36
+        }
+      },
+      "testimonials": {
+        "type": "rich-text",
+        "blocks": {
+          "testimonial-heading": {
+            "type": "heading",
+            "settings": {
+              "heading": "What Our Customers Say",
+              "heading_size": "h2"
+            }
+          },
+          "testimonial-text": {
+            "type": "text",
+            "settings": {
+              "text": "<p>\"Absolutely love the quality! Fast shipping and exactly as described. Will definitely order again.\" — Sarah M. \u2b50\u2b50\u2b50\u2b50\u2b50</p><p>\"Great customer service and the products are amazing. My new go-to store!\" — James T. \u2b50\u2b50\u2b50\u2b50\u2b50</p>"
+            }
+          }
+        },
+        "block_order": ["testimonial-heading", "testimonial-text"],
+        "settings": {
+          "desktop_content_position": "center",
+          "content_alignment": "center",
+          "color_scheme": "scheme-3",
+          "full_width": true,
+          "padding_top": 40,
+          "padding_bottom": 52
+        }
+      },
+      "newsletter": {
+        "type": "newsletter",
+        "blocks": {
+          "newsletter-heading": {
+            "type": "heading",
+            "settings": {
+              "heading": "Join the Club",
+              "heading_size": "h2"
+            }
+          },
+          "newsletter-text": {
+            "type": "paragraph",
+            "settings": {
+              "text": "Subscribe for exclusive deals, new arrivals, and 10% off your first order."
+            }
+          },
+          "newsletter-email": {
+            "type": "email_form",
+            "settings": {}
+          }
+        },
+        "block_order": ["newsletter-heading", "newsletter-text", "newsletter-email"],
+        "settings": {
+          "color_scheme": "scheme-1",
+          "full_width": true,
+          "padding_top": 40,
+          "padding_bottom": 52
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "link_list_1": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Quick Links",
+              "menu": "footer"
+            }
+          },
+          "link_list_2": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Policies",
+              "menu": "footer-policies"
+            }
+          },
+          "text": {
+            "type": "text",
+            "settings": {
+              "heading": "About Us",
+              "subtext": "We curate the best products from around the world and deliver them to your doorstep with fast, reliable shipping and a 30-day satisfaction guarantee."
+            }
+          }
+        },
+        "block_order": ["link_list_1", "link_list_2", "text"],
+        "settings": {
+          "color_scheme": "scheme-1",
+          "show_social": true,
+          "show_payment": true,
+          "margin_top": 0,
+          "padding_bottom": 20
+        }
+      }
+    },
+    "content_for_index": [
+      "hero-banner",
+      "featured-collection",
+      "trust-badges",
+      "new-arrivals",
+      "testimonials",
+      "newsletter"
+    ],
+    "blocks_order": [
+      "announcement-bar",
+      "header",
+      "hero-banner",
+      "featured-collection",
+      "trust-badges",
+      "new-arrivals",
+      "testimonials",
+      "newsletter",
+      "footer"
+    ]
+  },
+  "presets": {
+    "Dropship Starter": {
+      "_comment": "Clean, conversion-focused layout for dropshipping stores",
+      "colors": {
+        "scheme-1": {
+          "background": "#FFFFFF",
+          "text": "#1A1A2E",
+          "button": "#1A1A2E",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#1A1A2E",
+          "shadow": "#1A1A2E"
+        },
+        "scheme-2": {
+          "background": "#F7F7F7",
+          "text": "#1A1A2E",
+          "button": "#E94560",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#E94560",
+          "shadow": "#1A1A2E"
+        },
+        "scheme-3": {
+          "background": "#1A1A2E",
+          "text": "#FFFFFF",
+          "button": "#E94560",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#000000"
+        },
+        "scheme-4": {
+          "background": "#E94560",
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
+          "button_label": "#E94560",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#000000"
+        }
+      },
+      "typography": {
+        "heading_font_family": "Assistant",
+        "heading_font_weight": "700",
+        "heading_font_style": "normal",
+        "heading_font_size_scale": 100,
+        "body_font_family": "Assistant",
+        "body_font_weight": "400",
+        "body_font_style": "normal",
+        "body_font_size_scale": 100
+      }
+    }
+  }
+}
