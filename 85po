@@ -1,0 +1,355 @@
+#!/usr/bin/env python3
+"""
+85po — List videos from 85po.com with direct MP4 URLs (like filtradas_videos.py).
+
+Parses listing HTML for watch-page links, then fetches each page and picks the best
+playable get_file URL. **Bare** ``?br=…`` links (no ``download=true`` / ``embed=true``)
+return 404 if pasted into the address bar; this script only emits URLs that 302 to
+the CDN when requested like a browser would (same pattern as the site's player).
+
+Usage:
+    ./85po latest --limit 30
+    ./85po popular --limit 10
+    python3 85po search "台灣" --limit 20
+    ./85po latest --limit 10 --pages 2
+
+Output: markdown table with Title, Watch page, and a **Play URL**. Default mode picks a
+verified **embed=true** MP4 when possible (plays inline). If every embed MP4 fails
+HEAD (stale token), it emits the **embed player page** ``/embed/{id}`` so the browser
+still plays in-page — it does **not** fall back to ``download=true`` (those save as a
+file). Use ``--download`` for **download=true** CDN links (1080p file / attachment).
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import re
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+
+BASE = "https://www.85po.com"
+UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+)
+TIMEOUT = 25
+WORKERS = 8
+
+# Watch links from thumbs: <a href="https://www.85po.com/v/12345/slug/" title="...">
+WATCH_LINK_RE = re.compile(
+    r'<a\s+href="(https://www\.85po\.com/v/(\d+)/[^"]+/)"\s+title="([^"]*)"',
+    re.I,
+)
+
+# Signed MP4 paths: real file is always .../NNNNN/ID/…name.mp4 — avoid matching
+# ``download_filename=….mp4`` in the query string (second ``.mp4`` broke older regex).
+MP4_RE = re.compile(
+    r"https://www\.85po\.com/(?:[a-z]{2}/)?get_file/3/[a-f0-9]{32}/\d+/\d+/"
+    r"[a-zA-Z0-9_.-]+\.mp4(?:\?[^\"'\s<>]*|/\?[^\"'\s<>]*)",
+    re.I,
+)
+
+VID_FROM_WATCH_RE = re.compile(r"/v/(\d+)/", re.I)
+
+
+def is_playable_get_file(url: str) -> bool:
+    """85po returns 404 on naked stream URLs; player uses embed=true or download=true."""
+    u = url.lower()
+    if "get_file/3/" not in u:
+        return False
+    return "embed=true" in u or "download=true" in u
+
+_TRANSLATE_CACHE: dict[str, str] = {}
+
+
+def fetch_text(url: str) -> str:
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": UA,
+            "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.8",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+        return r.read().decode("utf-8", errors="replace")
+
+
+def cache_bust(url: str) -> str:
+    sep = "&" if "?" in url else "?"
+    return f"{url}{sep}_={int(dt.datetime.now().timestamp())}"
+
+
+def parse_watch_links(html: str) -> list[tuple[str, str, str]]:
+    """Return list of (watch_url, video_id, title), deduped by video_id (first wins)."""
+    seen: set[str] = set()
+    out: list[tuple[str, str, str]] = []
+    for m in WATCH_LINK_RE.finditer(html):
+        watch_url, vid, title = m.group(1), m.group(2), m.group(3)
+        if vid in seen:
+            continue
+        seen.add(vid)
+        out.append((watch_url, vid, title))
+    return out
+
+
+def score_mp4(url: str) -> int:
+    u = url.lower()
+    if "_2160" in u or "_4k" in u or "3840" in u:
+        return 400
+    if "_1440" in u:
+        return 350
+    if "_1080" in u:
+        return 300
+    if "_720" in u:
+        return 200
+    if "_480" in u:
+        return 100
+    if "_360" in u:
+        return 50
+    # base …/29637.mp4 without _NNNp — usually lowest progressive file
+    if re.search(r"/\d+\.mp4", u) and not re.search(r"_\d+p\.mp4", u):
+        return 25
+    return 10
+
+
+def pick_best_playable(urls: list[str], *, prefer_download: bool) -> str:
+    """Prefer download= (attachment) or embed= (inline playback), then best resolution."""
+    uniq = list(dict.fromkeys(urls))
+    if prefer_download:
+        preferred = [u for u in uniq if "download=true" in u.lower()]
+    else:
+        preferred = [u for u in uniq if "embed=true" in u.lower()]
+    pool = preferred if preferred else uniq
+    pool.sort(key=score_mp4, reverse=True)
+    return pool[0]
+
+
+def head_url_ok(url: str, referer: str) -> bool:
+    """True if GET_FILE responds with something other than 404 (follows redirects)."""
+    req = urllib.request.Request(
+        url,
+        method="HEAD",
+        headers={"User-Agent": UA, "Referer": referer},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=min(TIMEOUT, 20)) as r:
+            return r.getcode() < 400
+    except urllib.error.HTTPError as e:
+        return e.code in (301, 302, 303, 307, 308)
+    except Exception:
+        return False
+
+
+def fetch_best_mp4(watch_url: str, *, prefer_download: bool = False) -> str:
+    """Merge watch page + /embed/ HTML; verify embed URLs — stale embed tokens often 404."""
+    parts: list[str] = []
+    try:
+        parts.append(fetch_text(cache_bust(watch_url)))
+    except Exception as e:
+        return f"ERROR: {e}"
+    m = VID_FROM_WATCH_RE.search(watch_url)
+    vid = m.group(1) if m else ""
+    if vid:
+        try:
+            parts.append(fetch_text(cache_bust(f"{BASE}/embed/{vid}")))
+        except Exception:
+            pass
+    playable: list[str] = []
+    for html in parts:
+        playable.extend(u for u in MP4_RE.findall(html) if is_playable_get_file(u))
+    if not playable:
+        return "(no playable mp4 found)"
+
+    if prefer_download:
+        return pick_best_playable(playable, prefer_download=True)
+
+    uniq = list(dict.fromkeys(playable))
+    embed_urls = sorted(
+        [u for u in uniq if "embed=true" in u.lower()],
+        key=score_mp4,
+        reverse=True,
+    )
+    ref_embed = f"{BASE}/embed/{vid}" if vid else BASE + "/"
+    for u in embed_urls:
+        if head_url_ok(u, ref_embed):
+            return u
+    # download=true URLs force Content-Disposition: attachment — do not use for "play" mode
+    if vid:
+        return f"{BASE}/embed/{vid}"
+    if embed_urls:
+        return embed_urls[0]
+    return watch_url.rstrip("/")
+
+
+def translate_to_en(text: str) -> str:
+    if not text.strip():
+        return text
+    if text in _TRANSLATE_CACHE:
+        return _TRANSLATE_CACHE[text]
+    q = urllib.parse.quote(text)
+    url = (
+        "https://translate.googleapis.com/translate_a/single"
+        f"?client=gtx&sl=auto&tl=en&dt=t&q={q}"
+    )
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+            data = json.load(r)
+        en = "".join(seg[0] for seg in (data[0] or []) if seg and seg[0])
+        en = en.strip() or text
+    except Exception:
+        en = text
+    _TRANSLATE_CACHE[text] = en
+    return en
+
+
+def gather_watch_links(pages: list[str], limit: int | None) -> list[tuple[str, str, str]]:
+    combined: list[tuple[str, str, str]] = []
+    seen: set[str] = set()
+    for page_url in pages:
+        try:
+            html = fetch_text(cache_bust(page_url))
+        except Exception as e:
+            print(f"<!-- warning: failed {page_url}: {e} -->", file=sys.stderr)
+            continue
+        for watch_url, vid, title in parse_watch_links(html):
+            if vid in seen:
+                continue
+            seen.add(vid)
+            combined.append((watch_url, vid, title))
+            if limit is not None and len(combined) >= limit:
+                return combined
+    return combined
+
+
+def cmd_latest(args: argparse.Namespace) -> None:
+    pages_urls = []
+    for p in range(1, args.pages + 1):
+        if p == 1:
+            pages_urls.append(f"{BASE}/latest-updates/")
+        else:
+            pages_urls.append(f"{BASE}/latest-updates/{p}/")
+    rows = gather_watch_links(pages_urls, args.limit)
+    _emit_table(rows, args.translate, args.jobs, args.download)
+
+
+def cmd_popular(args: argparse.Namespace) -> None:
+    pages_urls = []
+    for p in range(1, args.pages + 1):
+        if p == 1:
+            pages_urls.append(f"{BASE}/most-popular/")
+        else:
+            pages_urls.append(f"{BASE}/most-popular/{p}/")
+    rows = gather_watch_links(pages_urls, args.limit)
+    _emit_table(rows, args.translate, args.jobs, args.download)
+
+
+def cmd_search(args: argparse.Namespace) -> None:
+    q = urllib.parse.quote(args.query, safe="")
+    pages_urls = [f"{BASE}/search/?q={q}"]
+    for p in range(2, args.pages + 1):
+        pages_urls.append(f"{BASE}/search/{p}/?q={q}")
+    rows = gather_watch_links(pages_urls, args.limit)
+    _emit_table(rows, args.translate, args.jobs, args.download)
+
+
+def _emit_table(
+    rows: list[tuple[str, str, str]],
+    do_translate: bool,
+    jobs: int,
+    prefer_download: bool,
+) -> None:
+    if not rows:
+        print("(no videos matched)")
+        return
+
+    def work(item: tuple[str, str, str]) -> tuple[str, str, str, str]:
+        watch_url, _vid, title = item
+        mp4 = fetch_best_mp4(watch_url, prefer_download=prefer_download)
+        title_esc = title.replace("|", "\\|")
+        en = translate_to_en(title) if do_translate else ""
+        w = watch_url.replace("|", "\\|")
+        m = mp4.replace("|", "\\|")
+        return (title_esc, en, w, m)
+
+    with ThreadPoolExecutor(max_workers=jobs) as ex:
+        results = list(ex.map(work, rows))
+
+    col = "Download MP4" if prefer_download else "Play URL"
+    if do_translate:
+        print(f"| Title | Title (EN) | Watch | {col} |")
+        print("|---|---|---|---|")
+        for title_esc, en, w, m in results:
+            print(f"| {title_esc} | {en.replace('|', '\\|')} | {w} | {m} |")
+    else:
+        print(f"| Title | Watch | {col} |")
+        print("|---|---|---|")
+        for title_esc, _en, w, m in results:
+            print(f"| {title_esc} | {w} | {m} |")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    p_lat = sub.add_parser("latest", help="videos from latest-updates listing")
+    p_lat.add_argument("--limit", type=int, default=30, help="max videos (default 30)")
+    p_lat.add_argument("--pages", type=int, default=1, help="how many listing pages to scan (default 1)")
+    p_lat.add_argument("--translate", action="store_true", help="add English title column via Google Translate")
+    p_lat.add_argument(
+        "--jobs",
+        type=int,
+        default=WORKERS,
+        help=f"parallel HTTP workers (default {WORKERS})",
+    )
+    p_lat.add_argument(
+        "--download",
+        action="store_true",
+        help="prefer download=true links (attachment); default prefers embed=true for in-browser playback",
+    )
+
+    p_pop = sub.add_parser("popular", help="videos from most-popular listing")
+    p_pop.add_argument("--limit", type=int, default=30, help="max videos (default 30)")
+    p_pop.add_argument("--pages", type=int, default=1, help="how many listing pages to scan (default 1)")
+    p_pop.add_argument("--translate", action="store_true", help="add English title column via Google Translate")
+    p_pop.add_argument("--jobs", type=int, default=WORKERS, help=f"parallel HTTP workers (default {WORKERS})")
+    p_pop.add_argument(
+        "--download",
+        action="store_true",
+        help="prefer download=true links (attachment); default prefers embed=true for in-browser playback",
+    )
+
+    p_se = sub.add_parser("search", help="site search (?q=)")
+    p_se.add_argument("query", help="search keywords")
+    p_se.add_argument("--limit", type=int, default=20)
+    p_se.add_argument("--pages", type=int, default=1)
+    p_se.add_argument("--translate", action="store_true")
+    p_se.add_argument("--jobs", type=int, default=WORKERS)
+    p_se.add_argument(
+        "--download",
+        action="store_true",
+        help="prefer download=true links (attachment); default prefers embed=true for in-browser playback",
+    )
+
+    args = ap.parse_args()
+    if args.cmd == "latest":
+        cmd_latest(args)
+    elif args.cmd == "popular":
+        cmd_popular(args)
+    else:
+        cmd_search(args)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(130)

@@ -21,10 +21,16 @@ One-time setup:
        VK_ACCESS_TOKEN=vk1.a.XXXXXX
 
 Usage:
+    python vk_videos.py search "query" --sort date --days 30 --sort-by-views
+    python vk_videos.py search "интервью" --days 30 --sort-by-views --count 20
+    python vk_videos.py search "музыка" --sort date --days 30 --sort-by-views
     python vk_videos.py search "casting hairy" --count 30
-    python vk_videos.py search "asmr" --sort date --hd --adult
-    python vk_videos.py get <owner_id>_<video_id>      # e.g. -12345_67890
-    python vk_videos.py user_videos <owner_id> --count 50
+    python vk_videos.py get <owner_id>_<video_id>
+
+New options for finding popular recent videos:
+    --days N          Only include videos uploaded in last N days
+    --sort-by-views   Sort results by view count (highest first)
+    trending          New command: best-effort "most popular in last N days"
 
 Output: a markdown table with columns Date, Duration, Views, Title, Page URL, Player URL.
 """
@@ -37,6 +43,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -89,6 +96,23 @@ def call(method: str, **params) -> dict:
         err = body["error"]
         sys.exit(f"VK API error {err.get('error_code')}: {err.get('error_msg')}")
     return body.get("response", {})
+
+
+def try_vk_call(method: str, **params) -> dict:
+    """Same as `call` but return {} on API error (no sys.exit) — for `trending` fan-out."""
+    try:
+        params.setdefault("v", API_VERSION)
+        params.setdefault("access_token", get_token())
+        url = f"{API_BASE}/{method}"
+        data = urllib.parse.urlencode(params).encode()
+        req = urllib.request.Request(url, data=data, headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+            body = json.load(r)
+        if "error" in body:
+            return {}
+        return body.get("response", {}) or {}
+    except (OSError, json.JSONDecodeError, ValueError, urllib.error.HTTPError):
+        return {}
 
 
 def fmt_duration(secs: int) -> str:
@@ -183,6 +207,44 @@ def filter_by_quality(items: list[dict], min_q: int) -> list[dict]:
     return [it for it in items if video_quality(it) >= min_q]
 
 
+def filter_by_days(items: list[dict], days: int) -> list[dict]:
+    """Filter videos to only those uploaded within the last N days."""
+    if not days or days <= 0:
+        return items
+    cutoff = int((dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=days)).timestamp())
+    return [item for item in items if item.get("date", 0) >= cutoff]
+
+
+def paginate_owner_videos(owner_id: int, max_pages: int) -> list[dict]:
+    """Return recent videos for one owner (community or user) via video.get.
+
+    See cmd_user: VK may return ~90-100 items per call; advance offset by
+    len(page_items). Stops at empty page or max_pages.
+    """
+    out: list[dict] = []
+    seen: set[tuple[int, int]] = set()
+    offset = 0
+    for _ in range(max_pages):
+        resp = try_vk_call(
+            "video.get",
+            owner_id=owner_id,
+            count=200,
+            offset=offset,
+            extended=1,
+        )
+        page_items = resp.get("items", []) or []
+        if not page_items:
+            break
+        for it in page_items:
+            key = (it.get("owner_id", 0), it.get("id", 0))
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(it)
+        offset += len(page_items)
+    return out
+
+
 def render(items: list[dict], verbose: bool = False) -> None:
     """Render markdown table.
 
@@ -247,15 +309,159 @@ def cmd_search(args) -> None:
     if args.count_only:
         print(resp.get("count", 0))
         return
+
     raw = len(items)
     items = filter_by_quality(items, args.min_quality)
-    if getattr(args, "sort_by_quality", False):
+    items = filter_by_days(items, getattr(args, "days", 0))
+
+    # Sort by views if requested (after date/quality filtering)
+    if getattr(args, "sort_by_views", False):
+        items.sort(key=lambda x: x.get("views", 0), reverse=True)
+    elif getattr(args, "sort_by_quality", False):
         items.sort(key=lambda x: video_quality(x), reverse=True)
+
     print(
         f"<!-- {resp.get('count', 0)} total results, "
-        f"{raw} returned, {len(items)} pass min_quality={args.min_quality} -->"
+        f"{raw} returned, {len(items)} after filters "
+        f"(days={getattr(args, 'days', 0)}, min_quality={args.min_quality}) -->"
     )
     render(items)
+
+
+def cmd_trending(args) -> None:
+    """Best-effort: most popular uploads in a time window.
+
+    1) video.search — multiple queries with date and relevance sorts + offsets.
+    2) groups.search — large public pages, then video.get per owner (like a
+       channel's "Videos" tab) — this is how 500k+ recent hits surface.
+    3) discover — Brave-indexed VK URLs, enriched via video.get.
+    """
+    days = args.days
+    min_views = args.min_views
+    target_count = args.count
+    min_q = getattr(args, "min_quality", 0) or 0
+    max_groups = getattr(args, "max_groups", 15)
+    max_pages = getattr(args, "max_pages", 6)
+    no_groups = getattr(args, "no_groups", False)
+
+    print(
+        f"<!-- trending: last {days}d, min {min_views} views, "
+        f"max_groups={max_groups} max_pages/owner={max_pages} -->"
+    )
+
+    queries = [
+        "",
+        "интервью OR сатир OR мизулина",
+        "КВН OR пародия",
+        "новости OR политика",
+        "токшоу OR подкаст",
+    ]
+
+    all_items: list[dict] = []
+    seen: set[tuple[object, object]] = set()
+
+    def _merge(items: list[dict]) -> None:
+        for item in items:
+            item = filter_by_quality([item], min_q)
+            if not item:
+                continue
+            item = item[0]
+            key = (item.get("owner_id"), item.get("id"))
+            if key in seen:
+                continue
+            if int(item.get("views", 0) or 0) < min_views:
+                continue
+            seen.add(key)
+            all_items.append(item)
+
+    # --- Path A: global search (date + relevance, paginated) ---
+    for q in queries:
+        for sort_key in (0, 2):  # 0=date, 2=relevance/popularity
+            for offset in (0, 100):
+                resp = try_vk_call(
+                    "video.search",
+                    q=q,
+                    sort=sort_key,
+                    count=100,
+                    offset=offset,
+                    adult=1,
+                    extended=1,
+                )
+                items = resp.get("items", []) or []
+                if not items:
+                    break
+                for it in items:
+                    if not filter_by_days([it], days):
+                        continue
+                    _merge([it])
+
+    # --- Path B: high-subscriber group pages = channel-scale views ---
+    if not no_groups and max_groups > 0:
+        group_phrases = [
+            "осторожно",
+            "собчак",
+            "интервью",
+            "телеканал",
+            "дудь",
+            "страна",
+            "новости",
+        ]
+        group_meta: dict[int, tuple[str, int]] = {}
+        for phrase in group_phrases:
+            resp = try_vk_call("groups.search", q=phrase, count=20, type="page")
+            if not resp:
+                continue
+            for it in resp.get("items", []) or []:
+                gid = -int(it.get("id", 0) or 0)
+                if not gid:
+                    continue
+                mcount = int(it.get("members_count", 0) or 0)
+                name = (it.get("name") or "")[:80]
+                if gid not in group_meta or mcount > group_meta[gid][1]:
+                    group_meta[gid] = (name, mcount)
+
+        for owner_id, (gname, members) in sorted(
+            group_meta.items(),
+            key=lambda x: -x[1][1],
+        )[:max_groups]:
+            raw = paginate_owner_videos(owner_id, max_pages)
+            if not raw and members > 0:
+                print(
+                    f"<!-- group {owner_id} {gname[:30]!r}: no video list (private/blocked) -->"
+                )
+            kept = 0
+            for it in raw:
+                if not filter_by_days([it], days):
+                    continue
+                _merge([it])
+                kept += 1
+            print(
+                f"<!-- group {owner_id} {gname[:40]!r} ~{members} members: "
+                f"scanned {len(raw)} videos, {kept} in window -->"
+            )
+
+    # --- Path C: Brave discover (optional coverage) ---
+    try:
+        pairs = brave_search_vk(
+            "интервью site:vkvideo.ru OR site:vk.com/video",
+            max_pages=3,
+        )
+        if pairs:
+            videos_arg = ",".join(f"{o}_{v}" for o, v in pairs[:50])
+            resp = try_vk_call("video.get", videos=videos_arg, extended=1)
+            for it in resp.get("items", []) or []:
+                if not filter_by_days([it], days):
+                    continue
+                _merge([it])
+    except (OSError, Exception) as e:
+        print(f"<!-- discover: {e} -->")
+
+    all_items.sort(
+        key=lambda x: (int(x.get("views", 0) or 0), int(x.get("date", 0) or 0)),
+        reverse=True,
+    )
+    print(f"<!-- after merge: {len(all_items)} qualifying, showing {target_count} -->")
+    render(all_items[: target_count])
 
 
 def cmd_get(args) -> None:
@@ -733,6 +939,17 @@ def main() -> None:
     p_s.add_argument(
         "--count-only", action="store_true", help="only print total result count"
     )
+    p_s.add_argument(
+        "--days",
+        type=int,
+        default=0,
+        help="only include videos uploaded in the last N days (client-side filter)",
+    )
+    p_s.add_argument(
+        "--sort-by-views",
+        action="store_true",
+        help="sort results by view count descending (after date filtering)",
+    )
     add_quality_args(p_s)
     p_s.set_defaults(func=cmd_search)
 
@@ -830,6 +1047,35 @@ def main() -> None:
     )
     add_quality_args(p_r)
     p_r.set_defaults(func=cmd_resolve)
+
+    p_t = sub.add_parser(
+        "trending",
+        help="best-effort most popular videos in last N days (tries multiple strategies)",
+    )
+    p_t.add_argument("--days", type=int, default=30, help="number of days to look back")
+    p_t.add_argument("--count", type=int, default=15, help="max results to return")
+    p_t.add_argument(
+        "--min-views", type=int, default=1000, help="minimum views to include"
+    )
+    p_t.add_argument(
+        "--max-groups",
+        type=int,
+        default=15,
+        help="top N communities by members to scan (group library path)",
+    )
+    p_t.add_argument(
+        "--max-pages",
+        type=int,
+        default=6,
+        help="max video.get pages per group (~100 videos/page on VK)",
+    )
+    p_t.add_argument(
+        "--no-groups",
+        action="store_true",
+        help="skip groups.search + owner library scan (search + discover only)",
+    )
+    add_quality_args(p_t)
+    p_t.set_defaults(func=cmd_trending)
 
     args = ap.parse_args()
     args.func(args)
