@@ -28,9 +28,22 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReveal);
-  } else {
+  function initDecorativePhotos() {
+    document.querySelectorAll('.editorial-features__photo').forEach(function (el) {
+      el.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+      });
+    });
+  }
+
+  function init() {
     initReveal();
+    initDecorativePhotos();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
