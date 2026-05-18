@@ -42,7 +42,8 @@
           eyebrow: 'Что входит',
           title: 'Вино, природа и Австралия — в одном дне',
           lead:
-            'Каждый тур — это не набор остановок, а цельный сценарий: дорога, дегустации, обед, пейзажи и спокойный ритм без спешки.'
+            'Каждый тур — это не набор остановок, а цельный сценарий: дорога, дегустации, обед, пейзажи и спокойный ритм без спешки.',
+          imgAlt: 'Гости на винной дегустации среди виноградников'
         }
       },
       divider: {
@@ -237,7 +238,8 @@
           eyebrow: "What's included",
           title: 'Wine, landscape, and Australia — in one day',
           lead:
-            'Each tour is a single narrative: the drive, tastings, lunch, scenery, and an unhurried pace — never a checklist of stops.'
+            'Each tour is a single narrative: the drive, tastings, lunch, scenery, and an unhurried pace — never a checklist of stops.',
+          imgAlt: 'Guests enjoying a wine tasting among the vines'
         }
       },
       divider: {
