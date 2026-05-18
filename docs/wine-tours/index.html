@@ -5,189 +5,171 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Alex Trips Wine Tours — авторские винные туры по винодельням Австралии. Русскоязычное сопровождение из Мельбурна.">
 <meta property="og:title" content="Alex Trips Wine Tours">
-<meta property="og:description" content="Туры по винодельням Австралии — Yarra Valley, Barossa, Hunter Valley и другие.">
-<meta property="og:image" content="img/hero-landscape.jpg">
+<meta property="og:image" content="img/hero-bg.jpg">
 <title>Alex Trips Wine Tours — Туры по винодельням Австралии</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2313251C'/><path d='M11 22c0-3.5 1.5-7 5-9 0 2.5 1 5 2.5 6.5-1.5.8-3 .8-5 1.5 1.5-2 3-3.5 5.5-4.5-1 1.5-2 3-2 5zm10 0c0-3.5-1.5-7-5-9 0 2.5-1 5-2.5 6.5 1.5.8 3 .8 5 1.5-1.5-2-3-3.5-5.5-4.5 1 1.5 2 3 2 5z' fill='%23C9A35A'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%2313251C'/><path d='M11 22c0-3 1.2-6 5-7.5 0 2 .8 4 1.8 5.5-1.2.6-2.5.6-4 1.2 1.2-2 2.5-3.5 4.5-3.8-1 1.2-1.8 2.5-1.8 4.3zm10 0c0-3-1.2-6-5-7.5 0 2-.8 4-1.8 5.5 1.2.6 2.5.6 4 1.2-1.2-2-2.5-3.5-4.5-3.8 1 1.2 1.8 2.5 1.8 4.3z' fill='%23C9A35A'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --g950:#0B1A11;--g900:#13251C;--g850:#172B20;--g800:#1e3829;
+  --g900:#0f1813;--g850:#1a2e22;--g800:#243a2c;
   --gold:#C9A35A;--gold-hi:#D8B66A;--gold-dk:#9A7B3A;
-  --cream:#F7F1E7;--card:#FFFCF6;--white:#fff;
-  --text:#1c1814;--muted:#5c5348;
-  --nav:76px;--max:1240px;--r:14px;
+  --cream:#F7F1E7;--card:#FFFDF9;--white:#fff;
+  --text:#1a1612;--muted:#5a5349;
+  --nav-h:76px;--max:1180px;--radius:12px;
 }
 html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
-img{display:block;max-width:100%;height:auto}
+body{font-family:Inter,system-ui,sans-serif;color:var(--text);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none}
-.eyebrow{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-/* Content always visible; animation is enhancement only */
-.reveal{opacity:1;transform:none}
-html.js .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-html.js .reveal.on{opacity:1;transform:none}
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.6rem;border-radius:999px;font-family:Manrope,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:transform .25s,box-shadow .25s}
-.btn-gold{background:linear-gradient(180deg,var(--gold-hi),var(--gold) 50%,var(--gold-dk));color:var(--g900);box-shadow:0 4px 20px rgba(201,163,90,.45)}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,163,90,.55)}
-.btn-ghost{border:1.5px solid var(--gold);color:var(--gold-dk);background:transparent;padding:.55rem 1.1rem;font-size:.62rem}
-.btn-ghost:hover{background:rgba(201,163,90,.12)}
-.btn-white{background:var(--white);color:var(--g900)}
+.container{max-width:var(--max);margin:0 auto;padding:0 1.25rem}
+.eyebrow{font-size:.62rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
 
-/* HEADER */
-.hdr{position:fixed;inset:0 0 auto;z-index:100;height:var(--nav);background:linear-gradient(180deg,rgba(11,26,17,.75),transparent)}
-.hdr.solid{background:rgba(19,37,28,.96);backdrop-filter:blur(16px);box-shadow:0 2px 20px rgba(0,0,0,.2)}
-.hdr-in{max-width:1380px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;gap:.75rem}
-.logo{display:flex;align-items:center;gap:.6rem;color:var(--white)}
-.logo svg{width:34px;height:34px;flex-shrink:0}
-.logo-t strong{display:block;font-family:Manrope,sans-serif;font-size:.58rem;letter-spacing:.2em}
-.logo-t span{font-size:.5rem;letter-spacing:.24em;opacity:.9}
-.nav{display:flex;gap:clamp(.5rem,1.2vw,1.1rem);list-style:none}
-.nav a{color:rgba(255,255,255,.9);font-size:.62rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
-.nav a:hover,.nav a.on{color:var(--gold-hi)}
-.hdr .btn-gold{padding:.65rem 1.2rem;font-size:.62rem}
-.burger{display:none;width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.burger i{display:block;width:20px;height:2px;background:#fff;transition:.3s}
-.burger.open i:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger.open i:nth-child(2){opacity:0}
-.burger.open i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.drawer{display:none;position:fixed;inset:var(--nav) 0 0;background:rgba(11,26,17,.98);padding:1.25rem;z-index:99;flex-direction:column}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.75rem 1.5rem;border-radius:4px;font-family:Manrope,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:filter .25s,transform .25s}
+.btn-gold{background:linear-gradient(180deg,#dcc07a 0%,var(--gold) 45%,#a8863f 100%);color:var(--g900);box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.btn-gold:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn-outline{border:1.5px solid var(--gold);color:var(--gold-dk);background:transparent;padding:.5rem 1rem;font-size:.6rem}
+.btn-outline:hover{background:rgba(201,163,90,.1)}
+.btn-chat{background:linear-gradient(180deg,#dcc07a,var(--gold),#a8863f);color:var(--g900);padding:1rem 2rem;font-size:.72rem;gap:.5rem}
+
+/* Header */
+.site-header{position:fixed;inset:0 0 auto;z-index:100;height:var(--nav-h)}
+.site-header .bar{max-width:1320px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;gap:1rem}
+.logo{display:flex;align-items:center;gap:.65rem;color:var(--white)}
+.logo svg{width:36px;height:36px;flex-shrink:0}
+.logo-text strong{display:block;font-family:Manrope,sans-serif;font-size:.58rem;letter-spacing:.2em;line-height:1.3}
+.logo-text span{font-size:.5rem;letter-spacing:.24em;opacity:.92}
+.nav{display:flex;gap:clamp(.4rem,1.2vw,1.15rem);list-style:none}
+.nav a{color:rgba(255,255,255,.92);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.nav a:hover{color:var(--gold-hi)}
+.header-cta .btn{padding:.6rem 1.1rem;font-size:.6rem}
+.menu-btn{display:none;width:44px;height:44px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(0,0,0,.2);flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.menu-btn span{display:block;width:20px;height:2px;background:#fff;transition:.3s}
+.menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drawer{display:none;position:fixed;inset:var(--nav-h) 0 0;z-index:99;background:rgba(15,24,19,.97);padding:1.25rem;flex-direction:column}
 .drawer.open{display:flex}
-.drawer a{color:#fff;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.95rem}
+.drawer a{color:#fff;padding:.8rem 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:.95rem}
 .drawer .btn{margin-top:1rem;width:100%}
 
-/* HERO — split from user mockup (848d69bf): vineyard | wine panel */
-.hero-wrap{background:var(--g950)}
-.hero-main{display:grid;grid-template-columns:1.22fr .78fr;min-height:min(78vh,720px);max-height:720px}
-.hero-left{position:relative;overflow:hidden;min-height:380px}
-.hero-left img{width:100%;height:100%;object-fit:cover;object-position:55% center}
-.hero-left .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,26,17,.82) 0%,rgba(11,26,17,.5) 38%,rgba(11,26,17,.12) 62%,transparent 78%),linear-gradient(0deg,rgba(11,26,17,.45) 0%,transparent 30%)}
-.hero-copy{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav) + 1.25rem) clamp(1.25rem,4vw,2.75rem) 2rem;max-width:min(560px,92%)}
-.hero-copy .eyebrow{color:var(--gold-hi);margin-bottom:1rem}
-.hero-copy h1{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,4.2vw,3.2rem);font-weight:700;color:#fff;line-height:1.1;letter-spacing:.03em;text-transform:uppercase;margin-bottom:.6rem}
-.hero-copy .script{font-family:'Great Vibes',cursive;font-size:clamp(1.35rem,2.8vw,2rem);color:var(--gold-hi);margin-bottom:1rem;line-height:1.3}
-.hero-copy p{color:rgba(255,255,255,.85);font-size:clamp(.88rem,1.3vw,.98rem);font-weight:300;line-height:1.7;margin-bottom:1.75rem;max-width:460px}
-.hero-right{position:relative;overflow:hidden;min-height:280px}
-.hero-right img{width:100%;height:100%;object-fit:cover;object-position:center top}
+/* HERO — single user background image */
+.hero{position:relative;min-height:min(88vh,780px);display:flex;align-items:stretch;overflow:hidden;background:var(--g900)}
+.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% center}
+.hero__shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(15,24,19,.93) 0%,rgba(15,24,19,.78) 32%,rgba(15,24,19,.35) 52%,rgba(15,24,19,.08) 68%,transparent 85%),
+  linear-gradient(0deg,rgba(15,24,19,.55) 0%,transparent 22%,transparent 78%,rgba(15,24,19,.4) 100%)}
+.hero__body{position:relative;z-index:2;display:flex;align-items:center;flex:1;padding:calc(var(--nav-h) + 2rem) 1.5rem 2.5rem;width:100%;max-width:1320px;margin:0 auto}
+.hero__copy{max-width:520px}
+.hero__copy .eyebrow{color:var(--gold-hi);margin-bottom:1rem}
+.hero__copy h1{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3.35rem);font-weight:700;color:#fff;line-height:1.08;letter-spacing:.02em;text-transform:uppercase;margin-bottom:.65rem}
+.hero__copy .script{font-family:'Great Vibes',cursive;font-size:clamp(1.4rem,3vw,2.1rem);color:var(--gold-hi);margin-bottom:1.1rem;line-height:1.3}
+.hero__copy .lead{color:rgba(255,255,255,.88);font-size:clamp(.88rem,1.35vw,1rem);font-weight:300;line-height:1.75;margin-bottom:1.75rem;max-width:460px}
 
-/* BENEFITS */
-.perks{background:var(--g850);padding:1.4rem 1rem;border-top:1px solid rgba(201,163,90,.12)}
-.perks-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
-.perk{display:flex;align-items:center;gap:.7rem;color:#fff}
-.perk svg{width:32px;height:32px;flex-shrink:0;color:var(--gold)}
-.perk span{font-size:.68rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;line-height:1.35}
+/* Features bar */
+.features{background:var(--g850);border-top:1px solid rgba(201,163,90,.15)}
+.features__grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;padding:1.35rem 1.25rem}
+.feature{display:flex;align-items:center;gap:.65rem;color:#fff}
+.feature svg{width:30px;height:30px;flex-shrink:0;color:var(--gold)}
+.feature span{font-size:.62rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;line-height:1.35}
 
-/* REGIONS */
-.regions{padding:4.5rem 1.25rem 5rem;background:var(--cream)}
-.reg-head{text-align:center;margin-bottom:2.5rem}
-.reg-head .eyebrow{display:block;margin-bottom:.6rem;color:var(--gold-dk)}
-.reg-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.5vw,2.5rem);color:var(--g900);font-weight:600}
-.reg-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
-.rcard{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:0 6px 28px rgba(19,37,28,.08);border:1px solid rgba(0,0,0,.04);transition:transform .35s,box-shadow .35s;display:flex;flex-direction:column}
-.rcard:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(19,37,28,.14)}
-.rcard .pic{aspect-ratio:4/3;overflow:hidden}
-.rcard .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.rcard:hover .pic img{transform:scale(1.05)}
-.rcard .body{padding:1rem .9rem 1.15rem;text-align:center;flex:1;display:flex;flex-direction:column}
-.rcard h3{font-family:'Playfair Display',serif;font-size:.92rem;letter-spacing:.07em;text-transform:uppercase;color:var(--g900);margin-bottom:.45rem}
-.rcard .tease{font-size:.76rem;color:var(--muted);line-height:1.5;margin-bottom:.75rem;flex:1}
-.rcard .more{font-size:.74rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .4s;text-align:left;line-height:1.5}
-.rcard.open .more{max-height:160px;margin-bottom:.75rem;padding-top:.4rem;border-top:1px solid var(--cream)}
-.rcard .btn-ghost{align-self:center}
+/* Regions */
+.regions{padding:4rem 0 4.5rem;background:var(--cream)}
+.regions__head{text-align:center;margin-bottom:2.25rem;padding:0 1.25rem}
+.regions__head .eyebrow{color:var(--gold-dk);margin-bottom:.55rem}
+.regions__head h2{font-family:'Playfair Display',serif;font-size:clamp(1.65rem,3.2vw,2.35rem);font-weight:600;color:var(--g900)}
+.regions__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.85rem;padding:0 1.25rem;max-width:calc(var(--max) + 2.5rem);margin:0 auto}
+.card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
+.card__img{aspect-ratio:3/4;overflow:hidden}
+.card__img img{width:100%;height:100%;object-fit:cover}
+.card__body{padding:.9rem .75rem 1rem;text-align:center;flex:1;display:flex;flex-direction:column}
+.card__body h3{font-family:'Playfair Display',serif;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--g900);margin-bottom:.4rem}
+.card__body p{font-size:.72rem;color:var(--muted);line-height:1.5;margin-bottom:.7rem;flex:1}
+.card__more{font-size:.7rem;color:var(--muted);max-height:0;overflow:hidden;transition:max-height .35s;text-align:left}
+.card.is-open .card__more{max-height:140px;margin-bottom:.6rem;padding-top:.4rem;border-top:1px solid #eee}
+.card .btn-outline{align-self:center}
 
-/* STORY SPLIT */
-.story{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
-.story img{width:100%;height:100%;object-fit:cover;min-height:300px}
-.story-txt{background:var(--g900);display:flex;flex-direction:column;justify-content:center;padding:clamp(2rem,4vw,3.5rem);border-left:4px solid var(--gold)}
-.story-txt h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:#fff;line-height:1.2;margin-bottom:1rem;font-weight:600}
-.story-txt p{color:rgba(255,255,255,.78);font-weight:300;margin-bottom:1.5rem;max-width:420px}
-.tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.tags span{padding:.4rem .9rem;border:1px solid rgba(201,163,90,.35);border-radius:999px;font-size:.65rem;color:var(--gold-hi);letter-spacing:.06em;text-transform:uppercase}
-
-/* WHY */
-.why{position:relative;padding:5rem 1.25rem}
-.why-bg{position:absolute;inset:0;background:url('img/why-bg.jpg') center/cover}
-.why-bg::after{content:'';position:absolute;inset:0;background:rgba(19,37,28,.9)}
-.why-in{position:relative;z-index:1;max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr auto;gap:1.75rem;align-items:start}
-.why h2{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.8vw,2rem);color:#fff;margin-bottom:.75rem}
-.why>p{color:rgba(255,255,255,.75);font-size:.92rem;font-weight:300;margin-bottom:1.25rem;max-width:380px}
-.why ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
-.why li{display:flex;gap:.65rem;color:rgba(255,255,255,.92);font-size:.9rem}
-.chk{width:20px;height:20px;border-radius:50%;background:var(--gold);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:.15rem}
-.chk svg{width:10px;height:10px;stroke:var(--g900);fill:none;stroke-width:3}
-.glass{background:rgba(255,255,255,.1);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:var(--r);padding:1.5rem}
-.glass h3{font-family:'Playfair Display',serif;color:#fff;font-size:1.15rem;margin-bottom:1rem}
-.glass li{display:flex;gap:.5rem;color:rgba(255,255,255,.9);font-size:.86rem;margin-bottom:.6rem;list-style:none}
-.glass .ico{color:var(--gold-hi);width:1.2rem;text-align:center}
-.polaroid{background:#fff;padding:8px 8px 24px;box-shadow:0 16px 40px rgba(0,0,0,.35);transform:rotate(3deg);width:190px}
+/* Why */
+.why{position:relative;padding:4.5rem 0}
+.why__bg{position:absolute;inset:0;background:url('img/why-bg.jpg') center/cover}
+.why__bg::after{content:'';position:absolute;inset:0;background:rgba(15,24,19,.88)}
+.why__grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr auto;gap:1.5rem;align-items:start}
+.why__left h2{font-family:'Playfair Display',serif;font-size:clamp(1.45rem,2.6vw,1.9rem);color:#fff;margin-bottom:.65rem;font-weight:600}
+.why__left>p{color:rgba(255,255,255,.72);font-size:.88rem;font-weight:300;margin-bottom:1.1rem;max-width:360px}
+.why__list{list-style:none}
+.why__list li{display:flex;gap:.6rem;color:rgba(255,255,255,.9);font-size:.86rem;margin-bottom:.55rem}
+.check{width:18px;height:18px;border-radius:50%;background:var(--gold);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:.15rem}
+.check svg{width:9px;height:9px;stroke:var(--g900);fill:none;stroke-width:3}
+.panel{background:rgba(255,255,255,.12);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:1.35rem 1.2rem}
+.panel h3{font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;margin-bottom:.9rem;font-weight:600}
+.panel ul{list-style:none}
+.panel li{display:flex;gap:.5rem;color:rgba(255,255,255,.9);font-size:.82rem;margin-bottom:.5rem}
+.panel .ico{color:var(--gold-hi);width:1.15rem;text-align:center;flex-shrink:0}
+.polaroid{background:#fff;padding:7px 7px 22px;box-shadow:0 14px 36px rgba(0,0,0,.35);transform:rotate(4deg);width:175px}
 .polaroid img{width:100%;aspect-ratio:4/5;object-fit:cover}
-.polaroid figcaption{font-family:'Great Vibes',cursive;text-align:center;color:var(--g800);font-size:1rem;margin-top:.35rem}
+.polaroid figcaption{font-family:'Great Vibes',cursive;text-align:center;color:var(--g800);font-size:.95rem;margin-top:.3rem}
 
-/* ABOUT */
-.about{padding:5rem 1.25rem;background:linear-gradient(180deg,#fff,var(--cream))}
-.about-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1.05fr;gap:3rem;align-items:center}
-.about .photo{border-radius:var(--r);overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.15)}
-.about .photo img{width:100%;aspect-ratio:4/5;object-fit:cover}
-.about h2{font-family:'Playfair Display',serif;font-size:clamp(1.65rem,3vw,2.2rem);color:var(--g900);margin-bottom:1rem}
-.about p{color:var(--muted);margin-bottom:.9rem;font-weight:300;line-height:1.75}
-.about strong{color:var(--text)}
-.badge{display:inline-block;margin-top:.25rem;padding:.45rem 1rem;border:1px solid rgba(201,163,90,.35);border-radius:999px;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dk)}
+/* About */
+.about{padding:4.5rem 0;background:linear-gradient(180deg,#fff 0%,var(--cream) 100%)}
+.about__grid{display:grid;grid-template-columns:1fr 1.05fr;gap:2.75rem;align-items:center}
+.about__photo{border-radius:var(--radius);overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.12)}
+.about__photo img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.about h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.1rem);color:var(--g900);margin-bottom:1rem;font-weight:600}
+.about p{color:var(--muted);font-size:.95rem;font-weight:300;margin-bottom:.85rem;line-height:1.75}
+.about strong{color:var(--text);font-weight:500}
 
-/* CONTACT */
-.contact{position:relative;background:var(--g900);padding:4rem 1.25rem 2rem}
-.contact-bg{position:absolute;inset:0;background:url('img/hero-landscape.jpg') center/cover;opacity:.2}
-.contact-bg::after{content:'';position:absolute;inset:0;background:rgba(19,37,28,.92)}
-.contact-in{position:relative;z-index:1;max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center}
-.contact h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2rem);color:#fff;margin-bottom:.4rem}
-.contact .sub{color:rgba(255,255,255,.6);font-size:.92rem;font-weight:300;margin-bottom:2rem}
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:1.75rem}
-.citem{display:flex;gap:.85rem}
-.citem svg{width:38px;height:38px;color:var(--gold);flex-shrink:0}
-.citem h4{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:.3rem}
-.citem p,.citem a{font-size:.88rem;color:rgba(255,255,255,.88);line-height:1.5}
-.citem a:hover{color:var(--gold-hi)}
-.note{font-size:.7rem;color:rgba(255,255,255,.45)}
-.ctas{display:flex;flex-wrap:wrap;gap:.75rem}
-.deco{max-width:240px;border-radius:var(--r);overflow:hidden;border:2px solid rgba(201,163,90,.25);box-shadow:0 12px 32px rgba(0,0,0,.3)}
-.deco img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.foot{text-align:center;padding:1.5rem;color:rgba(255,255,255,.35);font-size:.7rem;position:relative;z-index:1}
+/* Contact */
+.contact{background:var(--g900);padding:3.5rem 0 0;position:relative;overflow:hidden}
+.contact__inner{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:end;padding-bottom:2rem}
+.contact h2{font-family:'Playfair Display',serif;font-size:clamp(1.55rem,2.8vw,1.95rem);color:#fff;margin-bottom:.35rem;font-weight:600}
+.contact .sub{color:rgba(255,255,255,.55);font-size:.88rem;font-weight:300;margin-bottom:1.75rem}
+.contact__cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:1.5rem}
+.c-item{display:flex;gap:.75rem;align-items:flex-start}
+.c-item svg{width:36px;height:36px;color:var(--gold);flex-shrink:0}
+.c-item h4{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:.25rem;font-weight:600}
+.c-item p,.c-item a{font-size:.84rem;color:rgba(255,255,255,.85);line-height:1.5}
+.c-item a:hover{color:var(--gold-hi)}
+.c-note{font-size:.68rem;color:rgba(255,255,255,.4);margin-top:.15rem}
+.contact__deco{width:220px;border-radius:var(--radius);overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.4);margin-bottom:-1px}
+.contact__deco img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.copyright{text-align:center;padding:1rem;color:rgba(255,255,255,.3);font-size:.68rem;border-top:1px solid rgba(255,255,255,.06)}
 
-@media(max-width:1024px){
-  .reg-grid{grid-template-columns:repeat(3,1fr)}
-  .perks-in{grid-template-columns:repeat(3,1fr)}
-  .why-in{grid-template-columns:1fr 1fr}
+/* Responsive */
+@media(max-width:1100px){
+  .regions__grid{grid-template-columns:repeat(3,1fr)}
+  .features__grid{grid-template-columns:repeat(3,1fr)}
+  .why__grid{grid-template-columns:1fr 1fr}
   .polaroid{grid-column:1/-1;justify-self:center;margin-top:.5rem}
 }
-@media(max-width:860px){
-  .hero-main{grid-template-columns:1fr;max-height:none;min-height:auto}
-  .hero-left{min-height:min(68vh,560px)}
-  .hero-right{min-height:220px;max-height:280px}
-  .hero-copy{max-width:100%;padding:calc(var(--nav)+1rem) 1.25rem 1.5rem}
-  .nav,.hdr .btn-gold{display:none}
-  .burger{display:flex}
-  .story{grid-template-columns:1fr}
-  .why-in,.about-in,.contact-in{grid-template-columns:1fr}
-  .deco{display:none}
-  .cgrid{grid-template-columns:1fr}
+@media(max-width:820px){
+  .nav,.header-cta{display:none}
+  .menu-btn{display:flex}
+  .hero__bg{object-position:65% center}
+  .hero__copy{max-width:100%}
+  .why__grid,.about__grid,.contact__inner{grid-template-columns:1fr}
+  .contact__deco{display:none}
+  .contact__cols{grid-template-columns:1fr}
 }
-@media(max-width:600px){
-  .reg-grid{grid-template-columns:1fr;max-width:360px;margin:0 auto}
-  .perks-in{grid-template-columns:1fr}
-  .perk{justify-content:center}
+@media(max-width:560px){
+  .regions__grid{grid-template-columns:1fr;max-width:340px}
+  .features__grid{grid-template-columns:1fr}
+  .feature{justify-content:flex-start}
+  .hero{min-height:min(92vh,680px)}
 }
 </style>
 </head>
 <body>
 
-<header class="hdr" id="hdr">
-  <div class="hdr-in">
+<header class="site-header">
+  <div class="bar">
     <a href="#top" class="logo">
-      <svg viewBox="0 0 34 34" fill="none" aria-hidden="true"><circle cx="17" cy="17" r="16" stroke="#D8B66A"/><path d="M12 24c0-2.8 1-5.5 5-7 0 2 .7 4 1.8 5.5-1.2.6-2.5.6-4 1 1-1.6 2.2-2.8 4-3.8-1 1-1.6 2.2-1.6 3.8zm10 0c0-2.8-1-5.5-5-7 0 2-.7 4-1.8 5.5 1.2.6 2.5.6 4 1-1-1.6-2.2-2.8-4-3.8 1 1 1.6 2.2 1.6 3.8z" fill="#D8B66A"/></svg>
-      <div class="logo-t"><strong>ALEX TRIPS</strong><span>WINE TOURS</span></div>
+      <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#D8B66A" stroke-width="1"/><path d="M12 25c0-2.8 1-5.5 6-7.5 0 2 .7 4 1.7 5.4-1.3.6-2.6.6-4.2 1.1 1.1-1.7 2.4-3 4.4-3.9-1 1.1-1.7 2.4-1.7 4.1zm12 0c0-2.8-1-5.5-6-7.5 0 2-.7 4-1.7 5.4 1.3.6 2.6.6 4.2 1.1-1.1-1.7-2.4-3-4.4-3.9 1 1.1 1.7 2.4 1.7 4.1z" fill="#D8B66A"/></svg>
+      <div class="logo-text"><strong>ALEX TRIPS</strong><span>WINE TOURS</span></div>
     </a>
     <nav aria-label="Навигация">
       <ul class="nav">
@@ -196,211 +178,227 @@ html.js .reveal.on{opacity:1;transform:none}
         <li><a href="#regions">Туры и цены</a></li>
         <li><a href="#included">Что входит</a></li>
         <li><a href="#about">О нас</a></li>
+        <li><a href="#about">Отзывы</a></li>
         <li><a href="#contact">Контакты</a></li>
       </ul>
     </nav>
-    <a class="btn btn-gold" href="#contact">Забронировать тур</a>
-    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><i></i><i></i><i></i></button>
+    <div class="header-cta"><a class="btn btn-gold" href="#contact">Забронировать тур</a></div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<div class="drawer" id="drawer" aria-hidden="true">
-  <a href="#top">Главная</a><a href="#regions">Регионы</a><a href="#regions">Туры и цены</a>
-  <a href="#included">Что входит</a><a href="#about">О нас</a><a href="#contact">Контакты</a>
+<div class="drawer" id="drawer" hidden>
+  <a href="#top">Главная</a>
+  <a href="#regions">Регионы</a>
+  <a href="#regions">Туры и цены</a>
+  <a href="#included">Что входит</a>
+  <a href="#about">О нас</a>
+  <a href="#contact">Контакты</a>
   <a class="btn btn-gold" href="#contact">Забронировать тур</a>
 </div>
 
-<div class="hero-wrap" id="top">
-  <section class="hero-main">
-    <div class="hero-left">
-      <img src="img/hero-landscape.jpg" alt="Виноградники Австралии на закате" width="1920" height="1040">
-      <div class="shade" aria-hidden="true"></div>
-      <div class="hero-copy">
+<main>
+  <section class="hero" id="top">
+    <img class="hero__bg" src="img/hero-bg.jpg" alt="Винный тур в виноградниках Австралии на закате" width="1024" height="500" fetchpriority="high">
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__body">
+      <div class="hero__copy">
         <p class="eyebrow">Вино · Природа · Атмосфера</p>
         <h1>Туры по<br>винодельням<br>Австралии</h1>
         <p class="script">Откройте Австралию через вкус, пейзажи и вино</p>
-        <p>Авторские винные туры по лучшим регионам Австралии: Yarra Valley, Mornington Peninsula, Barossa Valley, Hunter Valley и Margaret River. Дегустации, красивые маршруты, локальная кухня и незабываемые впечатления.</p>
+        <p class="lead">Авторские винные туры по лучшим регионам Австралии: Yarra Valley, Mornington Peninsula, Barossa Valley, Hunter Valley и Margaret River. Дегустации, красивые маршруты, локальная кухня и незабываемые впечатления.</p>
         <a class="btn btn-gold" href="#regions">Посмотреть туры</a>
       </div>
     </div>
-    <div class="hero-right">
-      <img src="img/hero-wine-panel.jpg" alt="Дегустация вин на закате" width="1200" height="949">
+  </section>
+
+  <section class="features" id="included" aria-label="Что входит в тур">
+    <div class="features__grid">
+      <div class="feature">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 24h20l-3-9H7l-3 9z"/><circle cx="9" cy="26" r="2"/><circle cx="19" cy="26" r="2"/></svg>
+        <span>Комфортный трансфер</span>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M16 4v18M11 26h10"/><path d="M13 16c2-4 6-4 8 0"/></svg>
+        <span>Дегустации вин</span>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><ellipse cx="16" cy="22" rx="9" ry="4"/><path d="M9 22h14M12 14h8l-1.5-5h-5z"/></svg>
+        <span>Обед на винодельне</span>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="16" cy="11" r="4"/><path d="M7 28c0-5 4-8 9-8s9 3 9 8"/></svg>
+        <span>Русскоязычное сопровождение</span>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 26l10-15 5 6 9-11 4 20H4z"/></svg>
+        <span>Индивидуальный маршрут</span>
+      </div>
     </div>
   </section>
-</div>
 
-<section class="perks" id="included" aria-label="Что входит в тур">
-  <div class="perks-in">
-    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 24h18l-3-8H8l-3 8z"/><circle cx="10" cy="26" r="2"/><circle cx="20" cy="26" r="2"/></svg><span>Комфортный трансфер</span></div>
-    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M16 5v18M11 26h10"/><ellipse cx="16" cy="16" rx="6" ry="7"/></svg><span>Дегустации вин</span></div>
-    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="16" cy="22" rx="9" ry="4"/><path d="M9 22h14M12 15h8l-1-4h-6z"/></svg><span>Обед на винодельне</span></div>
-    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="16" cy="12" r="4"/><path d="M7 28c0-5 4-8 9-8s9 3 9 8"/></svg><span>Русскоязычное сопровождение</span></div>
-    <div class="perk"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 26l9-14 5 6 8-10 5 18H5z"/></svg><span>Индивидуальный маршрут</span></div>
-  </div>
-</section>
-
-<section class="regions" id="regions">
-  <div class="reg-head reveal">
-    <span class="eyebrow">Популярные регионы</span>
-    <h2>Лучшие винные регионы Австралии</h2>
-  </div>
-  <div class="reg-grid">
-    <article class="rcard reveal">
-      <div class="pic"><img src="img/region-yarra.jpg" alt="Yarra Valley" loading="lazy"></div>
-      <div class="body">
-        <h3>Yarra Valley</h3>
-        <p class="tease">В часе от Мельбурна — шампанское, пинот и золотые холмы на рассвете.</p>
-        <p class="more">Премиальные винодельни, сырные дегустации и виды, ради которых едут фотографы.</p>
-        <button type="button" class="btn btn-ghost rc-toggle">Подробнее</button>
-      </div>
-    </article>
-    <article class="rcard reveal">
-      <div class="pic"><img src="img/region-mornington.jpg" alt="Mornington Peninsula" loading="lazy"></div>
-      <div class="body">
-        <h3>Mornington Peninsula</h3>
-        <p class="tease">Побережье, морской бриз и пинот нуар у воды.</p>
-        <p class="more">Дегустации с видом на океан и свежие морепродукты — идеально для пары.</p>
-        <button type="button" class="btn btn-ghost rc-toggle">Подробнее</button>
-      </div>
-    </article>
-    <article class="rcard reveal">
-      <div class="pic"><img src="img/region-barossa.jpg" alt="Barossa Valley" loading="lazy"></div>
-      <div class="body">
-        <h3>Barossa Valley</h3>
-        <p class="tease">Легендарные ширазы и ряды лоз в золотом закате.</p>
-        <p class="more">Культовые производители и гастрономия мирового уровня.</p>
-        <button type="button" class="btn btn-ghost rc-toggle">Подробнее</button>
-      </div>
-    </article>
-    <article class="rcard reveal">
-      <div class="pic"><img src="img/region-hunter.jpg" alt="Hunter Valley" loading="lazy"></div>
-      <div class="body">
-        <h3>Hunter Valley</h3>
-        <p class="tease">Старейший регион NSW — зелёные холмы и семейные винодельни.</p>
-        <p class="more">Semillon мирового класса и однодневные поездки из Сиднея.</p>
-        <button type="button" class="btn btn-ghost rc-toggle">Подробнее</button>
-      </div>
-    </article>
-    <article class="rcard reveal">
-      <div class="pic"><img src="img/region-margaret.jpg" alt="Margaret River" loading="lazy"></div>
-      <div class="body">
-        <h3>Margaret River</h3>
-        <p class="tease">Каберне и совиньон среди скал и океана.</p>
-        <p class="more">Премиальные вина, крафтовые сыры и уединённые винодельни.</p>
-        <button type="button" class="btn btn-ghost rc-toggle">Подробнее</button>
-      </div>
-    </article>
-  </div>
-</section>
-
-<section class="story">
-  <img class="reveal" src="img/story-cheers.jpg" alt="Дегустация вин" loading="lazy">
-  <div class="story-txt reveal">
-    <h2>Идеальный день<br>среди виноградников</h2>
-    <p>Романтика, день рождения, корпоратив, девичник или просто идеальный день за городом — мы создадим тур под ваш вкус и настроение.</p>
-    <div class="tags">
-      <span>Для пар</span><span>Для компаний</span><span>Для особых дат</span><span>Для туристов</span>
+  <section class="regions" id="regions">
+    <div class="regions__head">
+      <p class="eyebrow">Популярные регионы</p>
+      <h2>Лучшие винные регионы Австралии</h2>
     </div>
-  </div>
-</section>
-
-<section class="why" id="why">
-  <div class="why-bg" aria-hidden="true"></div>
-  <div class="why-in">
-    <div class="reveal">
-      <h2>Почему выбирают нас</h2>
-      <p>Мы создаём персональный винный день — не шаблонную экскурсию в автобусе.</p>
-      <ul>
-        <li><span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Индивидуальный подход</li>
-        <li><span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Проверенные винодельни</li>
-        <li><span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Комфорт и безопасность</li>
-        <li><span class="chk"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Незабываемые впечатления</li>
-      </ul>
-    </div>
-    <div class="glass reveal">
-      <h3>Для кого наши туры</h3>
-      <ul>
-        <li><span class="ico">&#9825;</span>Для пар</li>
-        <li><span class="ico">&#9733;</span>Для компаний друзей</li>
-        <li><span class="ico">&#9992;</span>Для туристов из СНГ</li>
-        <li><span class="ico">&#9878;</span>Для корпоративных групп</li>
-        <li><span class="ico">&#127881;</span>Для праздников и особых дат</li>
-      </ul>
-    </div>
-    <figure class="polaroid reveal">
-      <img src="img/polaroid-owners.jpg" alt="Основатели Alex Trips" loading="lazy">
-      <figcaption>Alex Trips</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="about-in">
-    <div class="photo reveal"><img src="img/about-owners.jpg" alt="Основатели Alex Trips Wine Tours" loading="lazy"></div>
-    <div class="reveal">
-      <h2>О нас</h2>
-      <p><strong>Alex Trips Wine Tours</strong> — семейный бизнес из Мельбурна. Мы любим австралийское вино и создаём туры с душой: от первой дегустации до бокала на закате.</p>
-      <p>Рассказываем о винах понятно на русском языке. Вы — дорогие гости, а не туристы в автобусе.</p>
-      <span class="badge">Premium · Family-owned · Melbourne</span>
-    </div>
-  </div>
-</section>
-
-<footer class="contact" id="contact">
-  <div class="contact-bg" aria-hidden="true"></div>
-  <div class="contact-in">
-    <div class="reveal">
-      <h2>Свяжитесь с нами</h2>
-      <p class="sub">Мы с радостью подберём идеальный тур для вас.</p>
-      <div class="cgrid">
-        <div class="citem">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 4C12 4 6 11 6 18c0 10 14 19 14 19s14-9 14-19c0-7-6-14-14-14z"/><circle cx="20" cy="18" r="4"/></svg>
-          <div><h4>Адрес</h4><p>Avoca Street,<br>Highett, Melbourne<br>VIC 3190</p></div>
+    <div class="regions__grid">
+      <article class="card">
+        <div class="card__img"><img src="img/region-yarra.jpg" alt="Yarra Valley" loading="lazy"></div>
+        <div class="card__body">
+          <h3>Yarra Valley</h3>
+          <p>В часе от Мельбурна — шампанское, элегантный пинот и живописные холмы.</p>
+          <p class="card__more">Премиальные винодельни, сырные дегустации и виды на долину.</p>
+          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
-        <div class="citem">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="10" width="30" height="20" rx="2"/><path d="M5 12l15 11 15-11"/></svg>
-          <div><h4>Email</h4><p><a href="mailto:AlexTrips@hotmail.com">AlexTrips@hotmail.com</a></p></div>
+      </article>
+      <article class="card">
+        <div class="card__img"><img src="img/region-mornington.jpg" alt="Mornington Peninsula" loading="lazy"></div>
+        <div class="card__body">
+          <h3>Mornington Peninsula</h3>
+          <p>Побережье, морской бриз и утончённый пинот нуар у воды.</p>
+          <p class="card__more">Дегустации с видом на океан и свежие морепродукты.</p>
+          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
-        <div class="citem">
-          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 8h4l2 6-4 3c2 5 5 8 10 10l3-4 6 2v4c0 2-2 4-4 4C18 33 7 22 8 12c0-2 2-4 4-4z"/></svg>
-          <div><h4>Телефон</h4><p><a href="sms:+61421047915">0421-047-915</a></p><p class="note">text messages only</p></div>
+      </article>
+      <article class="card">
+        <div class="card__img"><img src="img/region-barossa.jpg" alt="Barossa Valley" loading="lazy"></div>
+        <div class="card__body">
+          <h3>Barossa Valley</h3>
+          <p>Легендарные ширазы, немецкое наследие и золотые ряды лоз.</p>
+          <p class="card__more">Культовые производители и гастрономия мирового уровня.</p>
+          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
+      </article>
+      <article class="card">
+        <div class="card__img"><img src="img/region-hunter.jpg" alt="Hunter Valley" loading="lazy"></div>
+        <div class="card__body">
+          <h3>Hunter Valley</h3>
+          <p>Старейший регион NSW — зелёные холмы и семейные винодельни.</p>
+          <p class="card__more">Semillon мирового класса и поездки из Сиднея.</p>
+          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card__img"><img src="img/region-margaret.jpg" alt="Margaret River" loading="lazy"></div>
+        <div class="card__body">
+          <h3>Margaret River</h3>
+          <p>Каберне и совиньон на фоне скал и океана.</p>
+          <p class="card__more">Премиальные вина и уединённые винодельни.</p>
+          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="why" id="why">
+    <div class="why__bg" aria-hidden="true"></div>
+    <div class="container why__grid">
+      <div class="why__left">
+        <h2>Почему выбирают нас</h2>
+        <p>Мы создаём персональный винный день — не шаблонную экскурсию в автобусе.</p>
+        <ul class="why__list">
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Индивидуальный подход</li>
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Проверенные винодельни</li>
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Комфорт и безопасность</li>
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Незабываемые впечатления</li>
+        </ul>
       </div>
-      <div class="ctas">
-        <a class="btn btn-gold" href="mailto:AlexTrips@hotmail.com?subject=Бронирование%20винного%20тура">Забронировать тур</a>
-        <a class="btn btn-white" href="sms:+61421047915">Написать нам</a>
+      <div class="panel">
+        <h3>Для кого наши туры</h3>
+        <ul>
+          <li><span class="ico">&#9825;</span>Для пар</li>
+          <li><span class="ico">&#9733;</span>Для компаний друзей</li>
+          <li><span class="ico">&#9992;</span>Для туристов из СНГ</li>
+          <li><span class="ico">&#9878;</span>Для корпоративных групп</li>
+          <li><span class="ico">&#127881;</span>Для праздников и особых дат</li>
+        </ul>
+      </div>
+      <figure class="polaroid">
+        <img src="img/polaroid-owners.jpg" alt="Основатели Alex Trips" loading="lazy">
+        <figcaption>Alex Trips</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about__grid">
+      <div class="about__photo">
+        <img src="img/about-owners.jpg" alt="Основатели Alex Trips Wine Tours" loading="lazy">
+      </div>
+      <div>
+        <h2>О нас</h2>
+        <p><strong>Alex Trips Wine Tours</strong> — семейный бизнес из Мельбурна. Мы любим австралийское вино и создаём туры с душой: от первой дегустации до бокала на закате.</p>
+        <p>Рассказываем о винах понятно на русском языке. Вы — дорогие гости, а не туристы в автобусе.</p>
       </div>
     </div>
-    <div class="deco reveal"><img src="img/footer-wine.jpg" alt="" loading="lazy"></div>
-  </div>
-  <p class="foot">&copy; 2026 Alex Trips Wine Tours</p>
-</footer>
+  </section>
+
+  <footer class="contact" id="contact">
+    <div class="container contact__inner">
+      <div>
+        <h2>Свяжитесь с нами</h2>
+        <p class="sub">Мы с радостью подберём идеальный тур для вас</p>
+        <div class="contact__cols">
+          <div class="c-item">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 4C12 4 6 11 6 18c0 10 14 19 14 19s14-9 14-19c0-7-6-14-14-14z"/><circle cx="20" cy="18" r="3.5"/></svg>
+            <div>
+              <h4>Адрес</h4>
+              <p>Avoca Street,<br>Highett, Melbourne<br>VIC 3190</p>
+            </div>
+          </div>
+          <div class="c-item">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5" y="10" width="30" height="20" rx="2"/><path d="M5 12l15 11 15-11"/></svg>
+            <div>
+              <h4>Email</h4>
+              <p><a href="mailto:AlexTrips@hotmail.com">AlexTrips@hotmail.com</a></p>
+            </div>
+          </div>
+          <div class="c-item">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 8h4l2 6-4 3c2 5 5 8 10 10l3-4 6 2v4c0 2-2 4-4 4C18 33 7 22 8 12c0-2 2-4 4-4z"/></svg>
+            <div>
+              <h4>Телефон</h4>
+              <p><a href="sms:+61421047915">0421-047-915</a></p>
+              <p class="c-note">text messages only</p>
+            </div>
+          </div>
+        </div>
+        <a class="btn btn-chat" href="sms:+61421047915">Написать нам</a>
+      </div>
+      <div class="contact__deco">
+        <img src="img/footer-wine.jpg" alt="" loading="lazy">
+      </div>
+    </div>
+    <p class="copyright">&copy; 2026 Alex Trips Wine Tours</p>
+  </footer>
+</main>
 
 <script>
-document.documentElement.classList.add('js');
-const hdr=document.getElementById('hdr');
-const burger=document.getElementById('burger');
-const drawer=document.getElementById('drawer');
-addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40),{passive:true});
-burger.addEventListener('click',()=>{
-  const o=burger.classList.toggle('open');
-  drawer.classList.toggle('open',o);
-  burger.setAttribute('aria-expanded',o);
-  drawer.setAttribute('aria-hidden',!o);
-  document.body.style.overflow=o?'hidden':'';
-});
-drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-  burger.classList.remove('open');drawer.classList.remove('open');document.body.style.overflow='';
-}));
-document.querySelectorAll('.rc-toggle').forEach(b=>b.addEventListener('click',()=>{
-  const c=b.closest('.rcard');const o=c.classList.toggle('open');
-  b.textContent=o?'Свернуть':'Подробнее';
-}));
-if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-}else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('on'));
-/* Hero copy always visible — no reveal on hero-copy */
+(function(){
+  var menuBtn=document.getElementById('menuBtn');
+  var drawer=document.getElementById('drawer');
+  menuBtn.addEventListener('click',function(){
+    var open=menuBtn.classList.toggle('open');
+    drawer.classList.toggle('open',open);
+    drawer.hidden=!open;
+    menuBtn.setAttribute('aria-expanded',open);
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      menuBtn.classList.remove('open');
+      drawer.classList.remove('open');
+      drawer.hidden=true;
+      menuBtn.setAttribute('aria-expanded','false');
+    });
+  });
+  document.querySelectorAll('.card-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card=btn.closest('.card');
+      var open=card.classList.toggle('is-open');
+      btn.textContent=open?'Свернуть':'Подробнее';
+    });
+  });
+})();
 </script>
 </body>
 </html>
