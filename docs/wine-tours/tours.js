@@ -85,6 +85,17 @@
     return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
   }
 
+  function formatTourDateMobile(isoDate) {
+    if (!isoDate) return null;
+    var parts = isoDate.split('-');
+    if (parts.length !== 3) return null;
+    return parts[2] + '.' + parts[1] + '.' + parts[0];
+  }
+
+  function isMobileViewport() {
+    return window.matchMedia('(max-width: 768px)').matches;
+  }
+
   function generateBookingMessage(tourName, selectedDate, wineries) {
     var wineryBlock =
       wineries && wineries.length
@@ -122,6 +133,63 @@
     panel.querySelectorAll('[data-booking="email"]').forEach(function (a) {
       a.href = links.mailto;
     });
+    updateMobileBookingBar(tour, picked);
+  }
+
+  function updateMobileBookingBar(tour, picked) {
+    var bar = document.getElementById('mobileBookingBar');
+    if (!bar) return;
+    picked = picked || [];
+    var active = tour && selectedTourId && isMobileViewport();
+
+    document.body.classList.toggle('booking-flow-active', !!(active && selectedTourId));
+
+    if (!active) {
+      bar.hidden = true;
+      bar.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('has-mobile-booking-bar');
+      return;
+    }
+
+    var countEl = document.getElementById('mbCount');
+    var dateEl = document.getElementById('mbDate');
+    var btn = document.getElementById('mbWhatsApp');
+    var links = buildBookingLinks(tour, picked);
+    var hasWineries = picked.length > 0;
+    var iso = selectedDates[tour.id];
+
+    bar.hidden = false;
+    bar.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('has-mobile-booking-bar');
+
+    if (countEl) countEl.textContent = 'Выбрано: ' + picked.length + '/4';
+    if (dateEl) {
+      if (iso) {
+        dateEl.hidden = false;
+        dateEl.textContent = 'Дата: ' + formatTourDateMobile(iso);
+      } else {
+        dateEl.hidden = true;
+        dateEl.textContent = '';
+      }
+    }
+
+    if (btn) {
+      if (hasWineries) {
+        btn.href = links.whatsapp;
+        btn.target = '_blank';
+        btn.rel = 'noopener noreferrer';
+        btn.classList.remove('is-disabled');
+        btn.removeAttribute('aria-disabled');
+        btn.innerHTML = WHATSAPP_ICON + 'Написать в WhatsApp';
+      } else {
+        btn.href = '#';
+        btn.removeAttribute('target');
+        btn.removeAttribute('rel');
+        btn.classList.add('is-disabled');
+        btn.setAttribute('aria-disabled', 'true');
+        btn.textContent = 'Выберите винодельни';
+      }
+    }
   }
 
   function bindBookingControls(tour, picked) {
@@ -135,6 +203,22 @@
       });
     }
     refreshBookingLinks(tour, picked);
+  }
+
+  function renderSelectedSummary(tour, picked, links) {
+    if (!picked.length) return '';
+    return (
+      '<div class="route-selected route-selected--compact" id="routeSelectedSummary">' +
+        '<p class="route-selected__label">Выбрано в маршрут (' + picked.length + '/' + MAX_WINERIES + '):</p>' +
+        '<div class="route-selected__chips">' +
+          picked.map(function (n) { return '<span class="route-chip">' + n + '</span>'; }).join('') +
+        '</div>' +
+        (selectedDates[tour.id]
+          ? '<p class="route-selected__date">Дата: ' + formatTourDateMobile(selectedDates[tour.id]) + '</p>'
+          : '') +
+        '<a class="btn btn-email btn-sm" data-booking="email" href="' + links.mailto + '">Отправить выбранный маршрут</a>' +
+      '</div>'
+    );
   }
 
   function iconSvg(name) {
@@ -195,6 +279,7 @@
     if (!selectedTourId) {
       panel.hidden = true;
       panel.innerHTML = '';
+      updateMobileBookingBar(null, []);
       return;
     }
 
@@ -203,37 +288,30 @@
 
     var picked = selectedWineries[tour.id] || [];
     var links = buildBookingLinks(tour, picked);
-    var limitMsg = document.getElementById('routeLimitMsg');
 
     panel.hidden = false;
     panel.innerHTML =
       '<div class="route-panel" id="' + tour.routeId + '">' +
         '<header class="route-panel__head">' +
           '<h3>' + tour.detailHeading + '</h3>' +
-          '<p class="route-panel__intro">' + tour.detailIntro + '</p>' +
+          '<p class="route-panel__intro route-panel__intro--desk">' + tour.detailIntro + '</p>' +
           '<p class="route-panel__note"><strong>До 4 виноделен за поездку.</strong> Вы можете выбрать предпочитаемые винодельни, но маршрут ограничен 4 винодельнями за одну поездку.</p>' +
-          '<div class="route-date">' +
-            '<label class="route-date__label" for="tourDateInput">Желаемая дата тура</label>' +
-            '<input type="date" class="route-date__input" id="tourDateInput" min="' + minTourDateISO() + '" value="' + (selectedDates[tour.id] || '') + '">' +
-          '</div>' +
-          '<div class="route-panel__ctas">' +
-            '<a class="btn btn-whatsapp" data-booking="whatsapp" href="' + links.whatsapp + '" target="_blank" rel="noopener noreferrer">' + WHATSAPP_ICON + 'Написать в WhatsApp</a>' +
-            '<a class="btn btn-email" data-booking="email" href="' + links.mailto + '">Отправить Email</a>' +
-            '<!-- TODO: add Telegram username/link -->' +
-            '<a class="btn btn-telegram" href="#" tabindex="-1" aria-disabled="true">Написать в Telegram</a>' +
-          '</div>' +
         '</header>' +
-        (picked.length ? (
-          '<div class="route-selected">' +
-            '<p class="route-selected__label">Выбрано в маршрут (' + picked.length + '/' + MAX_WINERIES + '):</p>' +
-            '<div class="route-selected__chips">' +
-              picked.map(function (n) { return '<span class="route-chip">' + n + '</span>'; }).join('') +
+        renderSelectedSummary(tour, picked, links) +
+        '<div class="route-flow">' +
+          '<section class="route-step route-step--date" aria-labelledby="routeStepDateLabel">' +
+            '<p class="route-step__heading" id="routeStepDateLabel"><span class="route-step__num">1</span> Дата тура</p>' +
+            '<p class="route-step__title route-step__title--mobile">Выберите дату</p>' +
+            '<div class="route-date">' +
+              '<label class="route-date__label" for="tourDateInput">Желаемая дата тура</label>' +
+              '<input type="date" class="route-date__input" id="tourDateInput" min="' + minTourDateISO() + '" value="' + (selectedDates[tour.id] || '') + '">' +
             '</div>' +
-            '<a class="btn btn-email btn-sm" data-booking="email" href="' + links.mailto + '">Отправить выбранный маршрут</a>' +
-          '</div>'
-        ) : '') +
-        '<p class="route-limit" id="routeLimitMsg" hidden>За одну поездку можно выбрать до 4 виноделен.</p>' +
-        '<div class="route-wineries">' +
+          '</section>' +
+          '<section class="route-step route-step--wineries" aria-labelledby="routeStepWineriesLabel">' +
+            '<p class="route-step__heading" id="routeStepWineriesLabel"><span class="route-step__num">2</span> Винодельни</p>' +
+            '<p class="route-step__title route-step__title--mobile">Выберите до 4 виноделен</p>' +
+            '<p class="route-limit" id="routeLimitMsg" hidden role="alert">За одну поездку можно выбрать до 4 виноделен.</p>' +
+            '<div class="route-wineries">' +
           tour.wineries.map(function (w, i) {
             var isOn = picked.indexOf(w.name) !== -1;
             return (
@@ -245,11 +323,22 @@
                 '<p>' + w.desc + '</p>' +
                 '<p class="winery-card__hours"><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l2.5 1.5"/></svg> ' + w.hours + '</p>' +
                 '<button type="button" class="btn winery-add' + (isOn ? ' is-on' : '') + '" data-tour="' + tour.id + '" data-winery="' + i + '">' +
-                  (isOn ? 'В маршруте' : 'Добавить в маршрут') +
+                  (isOn ? 'В маршруте' : 'Добавить') +
                 '</button>' +
               '</article>'
             );
           }).join('') +
+            '</div>' +
+          '</section>' +
+          '<section class="route-step route-step--submit" aria-labelledby="routeStepSubmitLabel">' +
+            '<p class="route-step__heading" id="routeStepSubmitLabel"><span class="route-step__num">3</span> Отправить заявку</p>' +
+            '<div class="route-panel__ctas contact-actions">' +
+              '<a class="btn btn-whatsapp" data-booking="whatsapp" href="' + links.whatsapp + '" target="_blank" rel="noopener noreferrer">' + WHATSAPP_ICON + 'Написать в WhatsApp</a>' +
+              '<a class="btn btn-email" data-booking="email" href="' + links.mailto + '">Отправить Email</a>' +
+              '<!-- TODO: add Telegram username/link -->' +
+              '<a class="btn btn-telegram" href="#" tabindex="-1" aria-disabled="true">Написать в Telegram</a>' +
+            '</div>' +
+          '</section>' +
         '</div>' +
       '</div>';
 
@@ -260,8 +349,6 @@
     });
 
     bindBookingControls(tour, picked);
-
-    if (limitMsg) limitMsg.hidden = true;
   }
 
   function toggleWinery(tourId, wineryIndex) {
@@ -278,6 +365,9 @@
         var msg = document.getElementById('routeLimitMsg');
         if (msg) {
           msg.hidden = false;
+          if (isMobileViewport()) {
+            msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
           setTimeout(function () { msg.hidden = true; }, 3500);
         }
         return;
@@ -288,23 +378,34 @@
     renderRoutePanel();
   }
 
+  function scrollToRoutePanel() {
+    var panel = document.getElementById('routePanel');
+    if (!panel || panel.hidden) return;
+    requestAnimationFrame(function () {
+      var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 76;
+      var top = panel.getBoundingClientRect().top + window.scrollY - navH - 10;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    });
+  }
+
   function openRoute(tourId) {
     selectedTourId = tourId;
     if (!selectedWineries[tourId]) selectedWineries[tourId] = [];
     renderTourCards();
     renderRoutePanel();
-    var panel = document.getElementById('routePanel');
-    if (panel) {
-      requestAnimationFrame(function () {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    }
+    scrollToRoutePanel();
   }
 
   window.openTourRoute = openRoute;
 
   renderTourCards();
   renderRoutePanel();
+
+  window.addEventListener('resize', function () {
+    if (!selectedTourId) return;
+    var tour = getTour(selectedTourId);
+    if (tour) updateMobileBookingBar(tour, selectedWineries[selectedTourId] || []);
+  });
 
   if (location.hash === '#yarra-route') openRoute('yarra');
   if (location.hash === '#mornington-route') openRoute('mornington');
