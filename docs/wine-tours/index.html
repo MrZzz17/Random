@@ -112,13 +112,14 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 .tours__head h2{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);font-weight:600;color:var(--text-dark);margin-bottom:.65rem}
 .tours__head .sub{color:var(--text-muted);font-size:clamp(.95rem,1.4vw,1.1rem);font-weight:300;max-width:36rem;margin:0 auto}
 .tours__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.25rem,2.2vw,2.25rem);margin-bottom:2rem}
-.tour-card{position:relative;border-radius:22px;overflow:hidden;min-height:min(680px,88vh);box-shadow:0 24px 60px rgba(19,37,28,.18);transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
+.tour-card{position:relative;border-radius:22px;overflow:hidden;min-height:min(680px,88vh);box-shadow:0 24px 60px rgba(19,37,28,.18);transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column;isolation:isolate}
 .tour-card:hover{transform:translateY(-6px);box-shadow:0 32px 70px rgba(19,37,28,.28)}
 .tour-card.is-active{outline:2px solid var(--light-gold);outline-offset:3px}
-.tour-card__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.tour-card:hover .tour-card__bg{transform:scale(1.04)}
-.tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%)}
-.tour-card__content{position:relative;z-index:2;margin-top:auto;padding:clamp(1.5rem,3vw,2.25rem);color:#fff}
+.tour-card__visual{position:absolute;inset:0;overflow:hidden;z-index:0}
+.tour-card__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;transition:transform .5s ease;will-change:transform}
+.tour-card:hover .tour-card__visual .tour-card__bg{transform:scale(1.04)}
+.tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%);pointer-events:none}
+.tour-card__content{position:relative;z-index:2;margin-top:auto;padding:clamp(1.5rem,3vw,2.25rem);color:#fff;transform:translateZ(0)}
 .tour-card__title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,4.25rem);font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;margin-bottom:.35rem}
 .tour-card__subtitle{font-family:'Playfair Display',serif;font-style:italic;color:var(--light-gold);font-size:clamp(1.25rem,2.2vw,2rem);margin-bottom:.75rem}
 .tour-card__desc{font-size:clamp(.9rem,1.2vw,1.05rem);line-height:1.55;color:rgba(255,255,255,.92);max-width:28rem;margin-bottom:1.1rem}
@@ -532,6 +533,6 @@ button{font:inherit;cursor:pointer;border:none;background:none}
   }
 })();
 </script>
-<script src="tours.js"></script>
+<script src="tours.js?v=3"></script>
 </body>
 </html>

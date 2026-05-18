@@ -9,8 +9,8 @@
       routeId: 'yarra-route',
       title: 'YARRA VALLEY',
       subtitle: 'Private Winery Tour',
-      image: 'img/tour-yarra.jpg',
-      imagePosition: 'center',
+      image: 'img/tour-yarra.jpg?v=3',
+      imagePosition: 'center 35%',
       description: 'Классический винный регион недалеко от Мельбурна с лучшими Pinot Noir и Chardonnay Австралии.',
       details: [
         { icon: 'clock', text: '6–8 часов' },
@@ -83,8 +83,10 @@
     grid.innerHTML = tours.map(function (t) {
       return (
         '<article class="tour-card' + (selectedTourId === t.id ? ' is-active' : '') + '" data-tour-id="' + t.id + '">' +
-          '<img class="tour-card__bg" src="' + t.image + '" alt="" loading="lazy" style="object-position:' + t.imagePosition + '">' +
-          '<div class="tour-card__overlay" aria-hidden="true"></div>' +
+          '<div class="tour-card__visual">' +
+            '<img class="tour-card__bg" src="' + t.image + '" alt="" loading="lazy" style="object-position:' + t.imagePosition + '">' +
+            '<div class="tour-card__overlay" aria-hidden="true"></div>' +
+          '</div>' +
           '<div class="tour-card__content">' +
             '<h3 class="tour-card__title">' + t.title + '</h3>' +
             '<p class="tour-card__subtitle">' + t.subtitle + '</p>' +
