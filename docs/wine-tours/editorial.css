@@ -32,7 +32,7 @@
 
 /* —— Features —— */
 .editorial-features{
-  padding:clamp(4rem,10vw,7.5rem) clamp(1.25rem,6vw,6rem);
+  padding:clamp(3.6rem,9vw,6.75rem) clamp(1.25rem,5.4vw,5.4rem) clamp(3.2rem,6.3vw,4.5rem);
   background:var(--cream)
 }
 .editorial-features__inner{max-width:1280px;margin:0 auto}
@@ -41,7 +41,7 @@
   grid-template-columns:minmax(260px,.88fr) 1.12fr;
   gap:clamp(2rem,5vw,4rem);
   align-items:center;
-  margin-bottom:clamp(3rem,7vw,5.5rem)
+  margin-bottom:clamp(2.7rem,6.3vw,4.95rem)
 }
 .editorial-features__photo{
   margin:0;
@@ -100,39 +100,41 @@
 .editorial-feature-grid{
   display:grid;
   grid-template-columns:repeat(12,1fr);
-  gap:clamp(1.5rem,3vw,3rem);
-  align-items:start
+  gap:clamp(1.35rem,2.7vw,2.7rem);
+  align-items:start;
+  margin-bottom:-.5rem
 }
 .feature-item{
   grid-column:span 4;
   display:flex;
   flex-direction:column;
-  gap:1rem;
+  gap:.85rem;
   padding:0;
   border:none;
   background:transparent;
   box-shadow:none
 }
 .feature-item:nth-child(1){grid-column:1/span 4}
-.feature-item:nth-child(2){grid-column:5/span 4;margin-top:3rem}
-.feature-item:nth-child(3){grid-column:9/span 4;margin-top:.5rem}
-.feature-item:nth-child(4){grid-column:2/span 4;margin-top:-1.5rem}
-.feature-item:nth-child(5){grid-column:7/span 5;margin-top:2rem}
+.feature-item:nth-child(2){grid-column:5/span 4;margin-top:2.7rem}
+.feature-item:nth-child(3){grid-column:9/span 4;margin-top:.45rem}
+.feature-item:nth-child(4){grid-column:2/span 4;margin-top:-1.35rem}
+.feature-item:nth-child(5){grid-column:7/span 5;margin-top:1.8rem}
 .feature-item__icon{
-  width:2px;
-  height:2.5rem;
-  background:linear-gradient(180deg,var(--gold),transparent);
-  flex-shrink:0
+  width:3px;
+  height:2.15rem;
+  background:linear-gradient(180deg,var(--gold-dk),var(--gold) 55%,transparent);
+  flex-shrink:0;
+  border-radius:1px
 }
 .feature-item__icon svg{display:none}
 .feature-item__label{
   font-family:Manrope,sans-serif;
-  font-size:clamp(.72rem,1vw,.82rem);
-  font-weight:600;
-  letter-spacing:.14em;
+  font-size:clamp(.78rem,1.05vw,.9rem);
+  font-weight:800;
+  letter-spacing:.11em;
   text-transform:uppercase;
-  color:var(--text-dark);
-  line-height:1.45;
+  color:var(--dark-green);
+  line-height:1.35;
   max-width:16rem
 }
 
