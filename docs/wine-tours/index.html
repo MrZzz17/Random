@@ -59,10 +59,11 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 
 /* HERO — single user background image */
 .hero{position:relative;min-height:min(88vh,780px);display:flex;align-items:stretch;overflow:hidden;background:var(--g900)}
+.hero picture{position:absolute;inset:0;display:block}
 .hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% center}
 .hero__shade{position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(15,24,19,.93) 0%,rgba(15,24,19,.78) 32%,rgba(15,24,19,.35) 52%,rgba(15,24,19,.08) 68%,transparent 85%),
-  linear-gradient(0deg,rgba(15,24,19,.55) 0%,transparent 22%,transparent 78%,rgba(15,24,19,.4) 100%)}
+  linear-gradient(90deg,rgba(15,24,19,.88) 0%,rgba(15,24,19,.68) 30%,rgba(15,24,19,.22) 50%,transparent 72%),
+  linear-gradient(0deg,rgba(15,24,19,.35) 0%,transparent 18%,transparent 82%,rgba(15,24,19,.25) 100%)}
 .hero__body{position:relative;z-index:2;display:flex;align-items:center;flex:1;padding:calc(var(--nav-h) + 2rem) 1.5rem 2.5rem;width:100%;max-width:1320px;margin:0 auto}
 .hero__copy{max-width:520px}
 .hero__copy .eyebrow{color:var(--gold-hi);margin-bottom:1rem}
@@ -199,7 +200,10 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 
 <main>
   <section class="hero" id="top">
-    <img class="hero__bg" src="img/hero-bg.jpg" alt="Винный тур в виноградниках Австралии на закате" width="1024" height="500" fetchpriority="high">
+    <picture>
+      <source type="image/webp" srcset="img/hero-bg.webp">
+      <img class="hero__bg" src="img/hero-bg.jpg" alt="Винный тур в виноградниках Австралии на закате" width="1024" height="500" fetchpriority="high" decoding="async">
+    </picture>
     <div class="hero__shade" aria-hidden="true"></div>
     <div class="hero__body">
       <div class="hero__copy">
