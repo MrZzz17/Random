@@ -10,7 +10,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%2313251C'/><path d='M11 22c0-3 1.2-6 5-7.5 0 2 .8 4 1.8 5.5-1.2.6-2.5.6-4 1.2 1.2-2 2.5-3.5 4.5-3.8-1 1.2-1.8 2.5-1.8 4.3zm10 0c0-3-1.2-6-5-7.5 0 2-.8 4-1.8 5.5 1.2.6 2.5.6 4 1.2-1.2-2-2.5-3.5-4.5-3.8 1 1.2 1.8 2.5 1.8 4.3z' fill='%23C9A35A'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Manrope:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -431,6 +431,7 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   body.has-mobile-booking-bar{padding-bottom:0}
 }
 </style>
+<link rel="stylesheet" href="editorial.css?v=2">
 </head>
 <body>
 
@@ -494,47 +495,47 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
     </div>
   </section>
 
-  <section class="features" id="included" aria-label="Что входит в тур" data-i18n-attr="features.sectionAria|aria-label">
-    <div class="features__grid">
-      <div class="feature">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 24h20l-3-9H7l-3 9z"/><circle cx="9" cy="26" r="2"/><circle cx="19" cy="26" r="2"/></svg>
-        <span data-i18n="features.items.0">Комфортный трансфер</span>
+  <section class="editorial-features reveal-on-scroll" id="included" aria-label="Что входит в тур" data-i18n-attr="features.sectionAria|aria-label">
+    <div class="editorial-features__inner">
+      <div class="editorial-features__intro">
+        <p class="eyebrow editorial-eyebrow" data-i18n="features.editorial.eyebrow">Что входит</p>
+        <h2 class="section-title" data-i18n="features.editorial.title">Вино, природа и Австралия — в одном дне</h2>
+        <p class="editorial-lead" data-i18n="features.editorial.lead">Каждый тур — это не набор остановок, а цельный сценарий: дорога, дегустации, обед, пейзажи и спокойный ритм без спешки.</p>
       </div>
-      <div class="feature">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M16 4v18M11 26h10"/><path d="M13 16c2-4 6-4 8 0"/></svg>
-        <span data-i18n="features.items.1">Дегустации вин</span>
-      </div>
-      <div class="feature">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><ellipse cx="16" cy="22" rx="9" ry="4"/><path d="M9 22h14M12 14h8l-1.5-5h-5z"/></svg>
-        <span data-i18n="features.items.2">Обед на винодельне</span>
-      </div>
-      <div class="feature">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="16" cy="11" r="4"/><path d="M7 28c0-5 4-8 9-8s9 3 9 8"/></svg>
-        <span data-i18n="features.items.3">Русскоязычное сопровождение</span>
-      </div>
-      <div class="feature">
-        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 26l10-15 5 6 9-11 4 20H4z"/></svg>
-        <span data-i18n="features.items.4">Индивидуальный маршрут</span>
+      <div class="editorial-feature-grid">
+        <div class="feature-item reveal-on-scroll"><span class="feature-item__icon" aria-hidden="true"></span><span class="feature-item__label" data-i18n="features.items.0">Комфортный трансфер</span></div>
+        <div class="feature-item reveal-on-scroll"><span class="feature-item__icon" aria-hidden="true"></span><span class="feature-item__label" data-i18n="features.items.1">Дегустации вин</span></div>
+        <div class="feature-item reveal-on-scroll"><span class="feature-item__icon" aria-hidden="true"></span><span class="feature-item__label" data-i18n="features.items.2">Обед на винодельне</span></div>
+        <div class="feature-item reveal-on-scroll"><span class="feature-item__icon" aria-hidden="true"></span><span class="feature-item__label" data-i18n="features.items.3">Русскоязычное сопровождение</span></div>
+        <div class="feature-item reveal-on-scroll"><span class="feature-item__icon" aria-hidden="true"></span><span class="feature-item__label" data-i18n="features.items.4">Индивидуальный маршрут</span></div>
       </div>
     </div>
   </section>
 
-  <section class="regions" id="regions">
+  <section class="regions reveal-on-scroll" id="regions">
     <div class="regions__head">
-      <p class="eyebrow" data-i18n="regions.eyebrow">Популярные регионы</p>
-      <h2 data-i18n="regions.title">Лучшие винные регионы Австралии</h2>
+      <p class="eyebrow editorial-eyebrow" data-i18n="regions.eyebrow">Популярные регионы</p>
+      <h2 class="section-title" data-i18n="regions.title">Лучшие винные регионы Австралии</h2>
     </div>
-    <div class="regions__grid" id="regionsGrid"></div>
+    <div class="regions-masonry regions__grid" id="regionsGrid"></div>
   </section>
 
-  <section class="tours" id="tours">
+  <section class="cinematic-divider reveal-on-scroll">
+    <div class="cinematic-divider__bg" role="img" aria-hidden="true"></div>
+    <div class="cinematic-divider__content">
+      <h2 class="section-title section-title--light" data-i18n="divider.title">Идеальный день среди виноградников</h2>
+      <p class="editorial-lead" data-i18n="divider.lead">Мы продумываем маршрут, темп, дегустации и атмосферу — вам остаётся только наслаждаться.</p>
+    </div>
+  </section>
+
+  <section class="tours reveal-on-scroll" id="tours">
     <div class="tours__inner">
-      <header class="tours__head">
+      <header class="tours__head reveal-on-scroll">
         <p class="eyebrow" data-i18n="tours.eyebrow">Private Wine Experiences</p>
-        <h2 data-i18n="tours.title">Выберите ваш винный тур</h2>
+        <h2 class="section-title" data-i18n="tours.title">Выберите ваш винный тур</h2>
         <p class="sub" data-i18n="tours.sub">Каждый маршрут создаётся индивидуально под ваш вкус, темп и предпочтения.</p>
       </header>
-      <div class="tours__grid" id="toursGrid"></div>
+      <div id="toursGrid" class="tours__grid tour-offerings-grid"></div>
       <div id="routePanel" hidden></div>
       <div id="mobileBookingBar" class="mobile-booking-bar" hidden aria-hidden="true">
         <div class="mobile-booking-bar__inner">
@@ -570,11 +571,11 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
     </div>
   </section>
 
-  <section class="why" id="why">
+  <section class="why reveal-on-scroll" id="why">
     <div class="why__bg" aria-hidden="true"></div>
     <div class="container why__grid">
       <div class="why__left">
-        <h2 data-i18n="why.title">Почему выбирают нас</h2>
+        <h2 class="section-title section-title--light" data-i18n="why.title">Почему выбирают нас</h2>
         <p data-i18n="why.lead">Мы создаём персональный винный день — не шаблонную экскурсию в автобусе.</p>
         <ul class="why__list">
           <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="why.items.0">Индивидуальный подход</span></li>
@@ -600,22 +601,41 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
     </div>
   </section>
 
-  <section class="about" id="about">
+  <section class="about reveal-on-scroll" id="about">
     <div class="container about__grid">
       <div class="about__photo">
         <img src="img/about-owners.jpg" alt="Основатели Alex Trips Wine Tours" data-i18n-alt="about.imgAlt" loading="lazy">
       </div>
       <div>
-        <h2 data-i18n="about.title">О нас</h2>
+        <h2 class="section-title" data-i18n="about.title">О нас</h2>
         <p data-i18n="about.p1">Alex Trips Wine Tours — семейный бизнес из Мельбурна. Мы любим австралийское вино и создаём туры с душой: от первой дегустации до бокала на закате.</p>
         <p data-i18n="about.p2">Рассказываем о винах понятно на русском языке. Вы — дорогие гости, а не туристы в автобусе.</p>
       </div>
     </div>
   </section>
 
+
+  <section class="day-timeline reveal-on-scroll" id="day">
+    <div class="day-timeline__inner">
+      <div class="day-timeline__intro">
+        <p class="eyebrow editorial-eyebrow" data-i18n="timeline.eyebrow">Маршрут дня</p>
+        <h2 class="section-title section-title--light" data-i18n="timeline.title">Как проходит день</h2>
+        <p class="editorial-lead" data-i18n="timeline.lead">От выезда из Мельбурна до бокала на закате — каждый этап выстроен так, чтобы день ощущался лёгким и запоминающимся.</p>
+      </div>
+      <ol class="day-timeline__list">
+        <li class="day-timeline__item reveal-on-scroll"><span class="day-timeline__num">01</span><p class="day-timeline__text" data-i18n="timeline.steps.0">Утренний выезд из Мельбурна</p></li>
+        <li class="day-timeline__item reveal-on-scroll"><span class="day-timeline__num">02</span><p class="day-timeline__text" data-i18n="timeline.steps.1">Первая дегустация</p></li>
+        <li class="day-timeline__item reveal-on-scroll"><span class="day-timeline__num">03</span><p class="day-timeline__text" data-i18n="timeline.steps.2">Обед на винодельне</p></li>
+        <li class="day-timeline__item reveal-on-scroll"><span class="day-timeline__num">04</span><p class="day-timeline__text" data-i18n="timeline.steps.3">Ещё 2–3 остановки по маршруту</p></li>
+        <li class="day-timeline__item reveal-on-scroll"><span class="day-timeline__num">05</span><p class="day-timeline__text" data-i18n="timeline.steps.4">Возвращение вечером</p></li>
+      </ol>
+    </div>
+  </section>
+
   <footer class="contact" id="contact">
-    <div class="container contact__inner">
-      <div>
+    <div class="contact__stage">
+      <div class="contact__bg" role="img" aria-hidden="true"></div>
+      <div class="contact__card reveal-on-scroll">
         <h2 data-i18n="contact.title">Свяжитесь с нами</h2>
         <p class="sub" data-i18n="contact.sub">Мы с радостью подберём идеальный тур для вас</p>
         <div class="contact__cols">
@@ -642,10 +662,10 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
             </div>
           </div>
         </div>
-        <a class="btn btn-chat" data-i18n-wa-href href="https://wa.me/61421047915" target="_blank" rel="noopener noreferrer" data-i18n="contact.writeUs">Написать нам</a>
-      </div>
-      <div class="contact__deco">
-        <img src="img/footer-wine.jpg" alt="" loading="lazy">
+        <div class="contact__actions">
+          <a class="btn btn-chat" data-i18n-wa-href href="https://wa.me/61421047915" target="_blank" rel="noopener noreferrer" data-i18n="contact.writeUs">Написать нам</a>
+          <a class="btn-email-secondary" href="mailto:AlexTrips@hotmail.com" data-i18n="booking.email">Отправить Email</a>
+        </div>
       </div>
     </div>
     <p class="copyright" data-i18n="footer.copyright">&copy; 2026 Alex Trips Wine Tours</p>
@@ -672,8 +692,9 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   });
 })();
 </script>
-<script src="translations.js?v=2"></script>
-<script src="i18n.js?v=1"></script>
-<script src="tours.js?v=7"></script>
+<script src="translations.js?v=3"></script>
+<script src="i18n.js?v=2"></script>
+<script src="tours.js?v=8"></script>
+<script src="editorial.js?v=1"></script>
 </body>
 </html>

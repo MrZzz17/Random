@@ -37,7 +37,30 @@
           'Русскоязычное сопровождение',
           'Индивидуальный маршрут'
         ],
-        sectionAria: 'Что входит в тур'
+        sectionAria: 'Что входит в тур',
+        editorial: {
+          eyebrow: 'Что входит',
+          title: 'Вино, природа и Австралия — в одном дне',
+          lead:
+            'Каждый тур — это не набор остановок, а цельный сценарий: дорога, дегустации, обед, пейзажи и спокойный ритм без спешки.'
+        }
+      },
+      divider: {
+        title: 'Идеальный день среди виноградников',
+        lead:
+          'Мы продумываем маршрут, темп, дегустации и атмосферу — вам остаётся только наслаждаться.'
+      },
+      timeline: {
+        eyebrow: 'Маршрут дня',
+        title: 'Как проходит день',
+        lead: 'От выезда из Мельбурна до бокала на закате — каждый этап выстроен так, чтобы день ощущался лёгким и запоминающимся.',
+        steps: [
+          'Утренний выезд из Мельбурна',
+          'Первая дегустация',
+          'Обед на винодельне',
+          'Ещё 2–3 остановки по маршруту',
+          'Возвращение вечером'
+        ]
       },
       regions: {
         eyebrow: 'Популярные регионы',
@@ -179,7 +202,30 @@
           'Experienced guides',
           'Custom itinerary'
         ],
-        sectionAria: "What's included in the tour"
+        sectionAria: "What's included in the tour",
+        editorial: {
+          eyebrow: "What's included",
+          title: 'Wine, landscape, and Australia — in one day',
+          lead:
+            'Each tour is a single narrative: the drive, tastings, lunch, scenery, and an unhurried pace — never a checklist of stops.'
+        }
+      },
+      divider: {
+        title: 'The perfect day among the vines',
+        lead:
+          'We shape the route, pace, tastings, and atmosphere — you simply arrive and enjoy.'
+      },
+      timeline: {
+        eyebrow: 'Your day',
+        title: 'How the day unfolds',
+        lead: 'From leaving Melbourne to a glass at sunset — every moment is paced to feel effortless and memorable.',
+        steps: [
+          'Morning departure from Melbourne',
+          'First tasting',
+          'Winery lunch',
+          'Two or three more stops on your route',
+          'Evening return'
+        ]
       },
       regions: {
         eyebrow: 'Popular regions',

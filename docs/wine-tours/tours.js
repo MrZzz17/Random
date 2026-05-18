@@ -249,7 +249,7 @@
     if (!grid) return;
     grid.innerHTML = getTours().map(function (tour) {
       return (
-        '<article class="tour-card' + (selectedTourId === tour.id ? ' is-active' : '') + '" data-tour-id="' + tour.id + '">' +
+        '<article class="tour-card tour-card--' + tour.id + (selectedTourId === tour.id ? ' is-active' : '') + '" data-tour-id="' + tour.id + '">' +
           '<div class="tour-card__visual">' +
             '<img class="tour-card__bg" src="' + tour.image + '" alt="" loading="lazy" style="object-position:' + tour.imagePosition + '">' +
             '<div class="tour-card__overlay" aria-hidden="true"></div>' +
@@ -299,31 +299,44 @@
 
     panel.hidden = false;
     panel.innerHTML =
-      '<div class="route-panel" id="' + tour.routeId + '">' +
-        '<header class="route-panel__head">' +
-          '<h3>' + tour.detailHeading + '</h3>' +
-          '<p class="route-panel__intro route-panel__intro--desk">' + tour.detailIntro + '</p>' +
-          '<p class="route-panel__note"><strong>' + t('booking.routeNoteBold') + '</strong> ' + t('booking.routeNote') + '</p>' +
-        '</header>' +
-        renderSelectedSummary(tour, picked, links) +
-        '<div class="route-flow">' +
-          '<section class="route-step route-step--date" aria-labelledby="routeStepDateLabel">' +
-            '<p class="route-step__heading" id="routeStepDateLabel"><span class="route-step__num">1</span> ' + t('booking.stepDate') + '</p>' +
-            '<p class="route-step__title route-step__title--mobile">' + t('booking.selectDate') + '</p>' +
-            '<div class="route-date">' +
-              '<label class="route-date__label" for="tourDateInput">' + t('booking.dateLabel') + '</label>' +
-              '<input type="date" class="route-date__input" id="tourDateInput" min="' + minTourDateISO() + '" value="' + (selectedDates[tour.id] || '') + '">' +
-            '</div>' +
-          '</section>' +
-          '<section class="route-step route-step--wineries" aria-labelledby="routeStepWineriesLabel">' +
-            '<p class="route-step__heading" id="routeStepWineriesLabel"><span class="route-step__num">2</span> ' + t('booking.stepWineries') + '</p>' +
-            '<p class="route-step__title route-step__title--mobile">' + t('booking.selectWineries') + '</p>' +
-            '<p class="route-limit" id="routeLimitMsg" hidden role="alert">' + t('booking.limitWarning') + '</p>' +
-            '<div class="route-wineries">' +
+      '<div class="route-panel route-panel--editorial" id="' + tour.routeId + '">' +
+        '<div class="route-panel__layout">' +
+          '<aside class="route-sidebar">' +
+            '<header class="route-panel__head">' +
+              '<h3>' + tour.detailHeading + '</h3>' +
+              '<p class="route-panel__intro route-panel__intro--desk">' + tour.detailIntro + '</p>' +
+              '<p class="route-panel__note"><strong>' + t('booking.routeNoteBold') + '</strong> ' + t('booking.routeNote') + '</p>' +
+            '</header>' +
+            renderSelectedSummary(tour, picked, links) +
+            '<section class="route-step route-step--date" aria-labelledby="routeStepDateLabel">' +
+              '<p class="route-step__heading" id="routeStepDateLabel"><span class="route-step__num">1</span> ' + t('booking.stepDate') + '</p>' +
+              '<p class="route-step__title route-step__title--mobile">' + t('booking.selectDate') + '</p>' +
+              '<div class="route-date">' +
+                '<label class="route-date__label" for="tourDateInput">' + t('booking.dateLabel') + '</label>' +
+                '<input type="date" class="route-date__input" id="tourDateInput" min="' + minTourDateISO() + '" value="' + (selectedDates[tour.id] || '') + '">' +
+              '</div>' +
+            '</section>' +
+            '<section class="route-step route-step--submit" aria-labelledby="routeStepSubmitLabel">' +
+              '<p class="route-step__heading" id="routeStepSubmitLabel"><span class="route-step__num">3</span> ' + t('booking.stepSubmit') + '</p>' +
+              '<div class="route-panel__ctas contact-actions">' +
+                '<a class="btn btn-whatsapp" data-booking="whatsapp" href="' + links.whatsapp + '" target="_blank" rel="noopener noreferrer">' + WHATSAPP_ICON + t('booking.whatsapp') + '</a>' +
+                '<a class="btn btn-telegram" href="#" tabindex="-1" aria-disabled="true">' + t('booking.telegram') + '</a>' +
+                '<a class="btn btn-email" data-booking="email" href="' + links.mailto + '">' + t('booking.email') + '</a>' +
+              '</div>' +
+            '</section>' +
+          '</aside>' +
+          '<div class="route-main">' +
+            '<section class="route-step route-step--wineries" aria-labelledby="routeStepWineriesLabel">' +
+              '<p class="route-step__heading" id="routeStepWineriesLabel"><span class="route-step__num">2</span> ' + t('booking.stepWineries') + '</p>' +
+              '<p class="route-step__title route-step__title--mobile">' + t('booking.selectWineries') + '</p>' +
+              '<p class="route-limit" id="routeLimitMsg" hidden role="alert">' + t('booking.limitWarning') + '</p>' +
+              '<div class="route-wineries">' +
           tour.wineries.map(function (w, i) {
             var isOn = picked.indexOf(w.name) !== -1;
+            var num = String(i + 1).padStart(2, '0');
             return (
               '<article class="winery-card' + (isOn ? ' is-selected' : '') + '">' +
+                '<span class="winery-card__num" aria-hidden="true">' + num + '</span>' +
                 '<div class="winery-card__top">' +
                   '<h4>' + w.name + '</h4>' +
                   '<span class="winery-card__type">' + wineryTypeLabel(w.type) + '</span>' +
@@ -336,17 +349,9 @@
               '</article>'
             );
           }).join('') +
-            '</div>' +
-          '</section>' +
-          '<section class="route-step route-step--submit" aria-labelledby="routeStepSubmitLabel">' +
-            '<p class="route-step__heading" id="routeStepSubmitLabel"><span class="route-step__num">3</span> ' + t('booking.stepSubmit') + '</p>' +
-            '<div class="route-panel__ctas contact-actions">' +
-              '<a class="btn btn-whatsapp" data-booking="whatsapp" href="' + links.whatsapp + '" target="_blank" rel="noopener noreferrer">' + WHATSAPP_ICON + t('booking.whatsapp') + '</a>' +
-              '<!-- TODO: add Telegram username/link -->' +
-              '<a class="btn btn-telegram" href="#" tabindex="-1" aria-disabled="true">' + t('booking.telegram') + '</a>' +
-              '<a class="btn btn-email" data-booking="email" href="' + links.mailto + '">' + t('booking.email') + '</a>' +
-            '</div>' +
-          '</section>' +
+              '</div>' +
+            '</section>' +
+          '</div>' +
         '</div>' +
       '</div>';
 

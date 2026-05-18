@@ -177,16 +177,35 @@
     var moreHtml = regionMoreHtml(region);
 
     return (
-      '<article class="card" data-region="' + escapeHtml(id) + '">' +
-        '<div class="card__img"><img src="' + escapeHtml(imgSrc) + '" alt="' + escapeHtml(alt) + '" loading="lazy"></div>' +
-        '<div class="card__body">' +
-          '<h3>' + (region.title || '') + '</h3>' +
-          '<p>' + (region.teaser || '') + '</p>' +
-          '<div class="card__more">' + moreHtml + '</div>' +
-          '<button type="button" class="btn btn-outline card-toggle">' + t('regions.more') + '</button>' +
+      '<article class="region-card region-card--' +
+        escapeHtml(id) +
+        ' card" data-region="' +
+        escapeHtml(id) +
+        '">' +
+        '<div class="region-card__media">' +
+        '<img src="' +
+        escapeHtml(imgSrc) +
+        '" alt="' +
+        escapeHtml(alt) +
+        '" loading="lazy">' +
+        '<div class="region-card__shade" aria-hidden="true"></div>' +
+        '</div>' +
+        '<div class="region-card__body">' +
+        '<h3 class="region-card__title">' +
+        (region.title || '') +
+        '</h3>' +
+        '<p class="region-card__teaser">' +
+        (region.teaser || '') +
+        '</p>' +
+        '<div class="card__more region-card__more">' +
+        moreHtml +
+        '</div>' +
+        '<button type="button" class="region-card__link card-toggle">' +
+        t('regions.more') +
+        '</button>' +
         '</div>' +
       '</article>'
-    );
+    )
   }
 
   function bindRegionCardToggles(grid) {
