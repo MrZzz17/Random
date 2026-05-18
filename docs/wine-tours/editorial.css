@@ -370,10 +370,10 @@
   border-radius:16px;
   background:rgba(255,255,255,.55);
   box-shadow:0 10px 28px rgba(19,37,28,.07);
-  padding:1rem 1rem .95rem 3.1rem;
+  padding:1.1rem 1rem 1.05rem 3.1rem;
   display:flex;
   flex-direction:column;
-  min-height:0;
+  min-height:11.75rem;
   transform:none!important
 }
 .winery-card:nth-child(even){transform:none}
@@ -401,14 +401,11 @@
   margin-bottom:.4rem;
   font-size:.58rem
 }
-.winery-card p{
+.winery-card > p:not(.winery-card__hours){
   font-size:.74rem;
-  line-height:1.45;
-  margin-bottom:.4rem;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden
+  line-height:1.5;
+  margin-bottom:.45rem;
+  flex:1
 }
 .winery-card__hours{
   font-size:.66rem;
