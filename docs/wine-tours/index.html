@@ -48,6 +48,16 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 .nav{display:flex;gap:clamp(.4rem,1.2vw,1.15rem);list-style:none}
 .nav a{color:rgba(255,255,255,.92);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 .nav a:hover{color:var(--gold-hi)}
+.header-actions{display:flex;align-items:center;gap:clamp(.5rem,1.2vw,1.15rem);flex-shrink:0}
+.language-switcher{display:flex;align-items:center;gap:.3rem;font-family:Manrope,sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.1em}
+.lang-btn{color:rgba(255,255,255,.42);padding:.2rem .4rem;transition:color .2s}
+.lang-btn:hover{color:rgba(255,255,255,.88)}
+.lang-btn.active{color:var(--gold-hi);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.lang-sep{color:rgba(255,255,255,.22);user-select:none;font-weight:400}
+.drawer .language-switcher{margin:.25rem 0 1rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.drawer .lang-btn{font-size:.9rem;padding:.35rem .5rem}
+.drawer .lang-sep{font-size:.9rem}
+main.lang-fade{opacity:.55;transition:opacity .2s ease}
 .header-cta .btn{padding:.6rem 1.1rem;font-size:.6rem;min-height:44px}
 .cta-short{display:none}
 .cta-long{display:inline}
@@ -267,6 +277,7 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
 /* Responsive — mobile / booking app */
 @media(max-width:820px){
   .nav{display:none}
+  .header-actions .language-switcher{display:none}
   .header-cta{display:flex}
   .header-cta .btn{padding:.55rem .85rem;font-size:.58rem}
   .cta-long{display:none}
@@ -371,150 +382,101 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
       <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="16.5" stroke="#D8B66A" stroke-width="1"/><path d="M12 25c0-2.8 1-5.5 6-7.5 0 2 .7 4 1.7 5.4-1.3.6-2.6.6-4.2 1.1 1.1-1.7 2.4-3 4.4-3.9-1 1.1-1.7 2.4-1.7 4.1zm12 0c0-2.8-1-5.5-6-7.5 0 2-.7 4-1.7 5.4 1.3.6 2.6.6 4.2 1.1-1.1-1.7-2.4-3-4.4-3.9 1 1.1 1.7 2.4 1.7 4.1z" fill="#D8B66A"/></svg>
       <div class="logo-text"><strong>ALEX TRIPS</strong><span>WINE TOURS</span></div>
     </a>
-    <nav aria-label="Навигация">
+    <nav aria-label="Навигация" data-i18n-attr="nav.ariaLabel|aria-label">
       <ul class="nav">
-        <li><a href="#top">Главная</a></li>
-        <li><a href="#regions">Регионы</a></li>
-        <li><a href="#tours">Туры и цены</a></li>
-        <li><a href="#included">Что входит</a></li>
-        <li><a href="#about">О нас</a></li>
-        <li><a href="#about">Отзывы</a></li>
-        <li><a href="#contact">Контакты</a></li>
+        <li><a href="#top" data-i18n="nav.home">Главная</a></li>
+        <li><a href="#regions" data-i18n="nav.regions">Регионы</a></li>
+        <li><a href="#tours" data-i18n="nav.tours">Туры и цены</a></li>
+        <li><a href="#included" data-i18n="nav.included">Что входит</a></li>
+        <li><a href="#about" data-i18n="nav.about">О нас</a></li>
+        <li><a href="#about" data-i18n="nav.reviews">Отзывы</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Контакты</a></li>
       </ul>
     </nav>
-    <div class="header-cta"><a class="btn btn-gold" href="#tours"><span class="cta-long">Забронировать тур</span><span class="cta-short">Забронировать</span></a></div>
-    <button class="menu-btn" id="menuBtn" type="button" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="header-actions">
+      <div class="language-switcher" role="group" aria-label="Language">
+        <button type="button" class="lang-btn active" data-lang="ru">RU</button>
+        <span class="lang-sep" aria-hidden="true">|</span>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <div class="header-cta"><a class="btn btn-gold" href="#tours"><span class="cta-long" data-i18n="nav.bookTour">Забронировать тур</span><span class="cta-short" data-i18n="nav.bookShort">Забронировать</span></a></div>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Меню" data-i18n-attr="nav.menuLabel|aria-label" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <div class="drawer" id="drawer" hidden>
-  <a href="#top">Главная</a>
-  <a href="#regions">Регионы</a>
-  <a href="#tours">Туры и цены</a>
-  <a href="#included">Что входит</a>
-  <a href="#about">О нас</a>
-  <a href="#contact">Контакты</a>
-  <a class="btn btn-gold" href="#tours">Забронировать тур</a>
+  <div class="language-switcher drawer-lang" role="group" aria-label="Language">
+    <button type="button" class="lang-btn active" data-lang="ru">RU</button>
+    <span class="lang-sep" aria-hidden="true">|</span>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+  </div>
+  <a href="#top" data-i18n="nav.home">Главная</a>
+  <a href="#regions" data-i18n="nav.regions">Регионы</a>
+  <a href="#tours" data-i18n="nav.tours">Туры и цены</a>
+  <a href="#included" data-i18n="nav.included">Что входит</a>
+  <a href="#about" data-i18n="nav.about">О нас</a>
+  <a href="#contact" data-i18n="nav.contact">Контакты</a>
+  <a class="btn btn-gold" href="#tours" data-i18n="nav.bookTour">Забронировать тур</a>
 </div>
 
 <main>
   <section class="hero" id="top">
     <picture>
       <source type="image/webp" srcset="img/hero-bg.webp">
-      <img class="hero__bg" src="img/hero-bg.png" alt="Винный тур в виноградниках Австралии на закате" width="1794" height="876" fetchpriority="high" decoding="async">
+      <img class="hero__bg" src="img/hero-bg.png" alt="Винный тур в виноградниках Австралии на закате" data-i18n-alt="hero.imgAlt" width="1794" height="876" fetchpriority="high" decoding="async">
     </picture>
     <div class="hero__shade" aria-hidden="true"></div>
     <div class="hero__body">
       <div class="hero__copy">
-        <p class="eyebrow">Вино · Природа · Атмосфера</p>
-        <h1>Туры по<br>винодельням<br>Австралии</h1>
-        <p class="script">Откройте Австралию через вкус, пейзажи и вино</p>
-        <p class="lead">Авторские винные туры по лучшим регионам Австралии: Yarra Valley, Mornington Peninsula, Macedon Ranges и Geelong / Bellarine. Дегустации, красивые маршруты, локальная кухня и незабываемые впечатления.</p>
-        <a class="btn btn-gold" href="#tours">Посмотреть туры</a>
+        <p class="eyebrow" data-i18n="hero.eyebrow">Вино · Природа · Атмосфера</p>
+        <h1 data-i18n-html="hero.titleHtml">Туры по<br>винодельням<br>Австралии</h1>
+        <p class="script" data-i18n="hero.script">Откройте Австралию через вкус, пейзажи и вино</p>
+        <p class="lead" data-i18n="hero.lead">Авторские винные туры по лучшим регионам Австралии: Yarra Valley, Mornington Peninsula, Macedon Ranges и Geelong / Bellarine. Дегустации, красивые маршруты, локальная кухня и незабываемые впечатления.</p>
+        <a class="btn btn-gold" href="#tours" data-i18n="hero.cta">Посмотреть туры</a>
       </div>
     </div>
   </section>
 
-  <section class="features" id="included" aria-label="Что входит в тур">
+  <section class="features" id="included" aria-label="Что входит в тур" data-i18n-attr="features.sectionAria|aria-label">
     <div class="features__grid">
       <div class="feature">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 24h20l-3-9H7l-3 9z"/><circle cx="9" cy="26" r="2"/><circle cx="19" cy="26" r="2"/></svg>
-        <span>Комфортный трансфер</span>
+        <span data-i18n="features.items.0">Комфортный трансфер</span>
       </div>
       <div class="feature">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M16 4v18M11 26h10"/><path d="M13 16c2-4 6-4 8 0"/></svg>
-        <span>Дегустации вин</span>
+        <span data-i18n="features.items.1">Дегустации вин</span>
       </div>
       <div class="feature">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><ellipse cx="16" cy="22" rx="9" ry="4"/><path d="M9 22h14M12 14h8l-1.5-5h-5z"/></svg>
-        <span>Обед на винодельне</span>
+        <span data-i18n="features.items.2">Обед на винодельне</span>
       </div>
       <div class="feature">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="16" cy="11" r="4"/><path d="M7 28c0-5 4-8 9-8s9 3 9 8"/></svg>
-        <span>Русскоязычное сопровождение</span>
+        <span data-i18n="features.items.3">Русскоязычное сопровождение</span>
       </div>
       <div class="feature">
         <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 26l10-15 5 6 9-11 4 20H4z"/></svg>
-        <span>Индивидуальный маршрут</span>
+        <span data-i18n="features.items.4">Индивидуальный маршрут</span>
       </div>
     </div>
   </section>
 
   <section class="regions" id="regions">
     <div class="regions__head">
-      <p class="eyebrow">Популярные регионы</p>
-      <h2>Лучшие винные регионы Австралии</h2>
+      <p class="eyebrow" data-i18n="regions.eyebrow">Популярные регионы</p>
+      <h2 data-i18n="regions.title">Лучшие винные регионы Австралии</h2>
     </div>
-    <div class="regions__grid">
-      <article class="card">
-        <div class="card__img"><img src="img/region-yarra.jpg" alt="Yarra Valley" loading="lazy"></div>
-        <div class="card__body">
-          <h3>Yarra Valley</h3>
-          <p>В часе от Мельбурна — шампанское, элегантный пинот и живописные холмы.</p>
-          <div class="card__more">
-            <p>Всего в часе езды от Мельбурна — один из самых известных винных регионов Австралии. Yarra Valley славится прохладным климатом, утренними туманами и холмистыми пейзажами, благодаря которым здесь рождаются одни из лучших Pinot Noir и Chardonnay в стране. Регион сочетает премиальные винодельни, уютные семейные estate, гастрономию мирового уровня и расслабленную атмосферу австралийской countryside.</p>
-            <p>Среди самых рекомендуемых виноделен — <a href="https://www.domainechandon.com.au/" target="_blank" rel="noopener noreferrer">Domaine Chandon</a> для игристых в стиле Champagne, <a href="https://www.yeringstation.com/" target="_blank" rel="noopener noreferrer">Yering Station</a> — старейшая винодельня региона с красивым рестораном и мощными Cabernet Sauvignon, <a href="https://www.oakridgewines.com.au/" target="_blank" rel="noopener noreferrer">Oakridge Wines</a> с одним из лучших дегустационных меню в долине, а также <a href="https://www.levantinehill.com.au/" target="_blank" rel="noopener noreferrer">Levantine Hill</a> — роскошное estate с архитектурным рестораном и выдающимися Shiraz и Chardonnay.</p>
-            <p>Обязательно стоит попробовать местные Pinot Noir — элегантные, с нотами вишни, лесных ягод и специй, прохладноклиматный Chardonnay с минеральностью и цитрусом, а также игристые вина méthode traditionnelle. Любителям более насыщенных вин стоит обратить внимание на Shiraz из северной части долины и выдержанные Cabernet blends.</p>
-            <p>Помимо вина, Yarra Valley известна сырными фермами, artisan chocolate, локальными рынками и панорамными ресторанами с видами на виноградники. Лучшее время для поездки — март–май, когда начинается австралийская осень: виноградники окрашиваются в золотые и бордовые оттенки, а погода идеально подходит для долгих дегустаций и неспешных обедов на террасах.</p>
-          </div>
-          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card__img"><img src="img/region-mornington.jpg" alt="Mornington Peninsula" loading="lazy"></div>
-        <div class="card__body">
-          <h3>Mornington Peninsula</h3>
-          <p>Побережье, морской бриз и утончённый пинот нуар у воды.</p>
-          <div class="card__more">
-            <p>Mornington Peninsula — один из самых живописных винных регионов Виктории, расположенный между заливом Port Phillip Bay и открытым океаном. Благодаря прохладному морскому климату здесь создаются изящные вина с яркой кислотностью, а сама атмосфера сочетает luxury retreat, coastal lifestyle и расслабленный австралийский шик.</p>
-            <p>Регион особенно знаменит своими Pinot Noir и Chardonnay — свежими, минеральными и очень гастрономичными. Здесь также производят отличные Pinot Gris, Syrah и игристые вина. Винодельни часто расположены среди холмов с видом на океан, а многие estate объединяют cellar door, рестораны и дизайнерские пространства для отдыха.</p>
-            <p>Среди самых рекомендуемых виноделен — <a href="https://www.montalto.com.au/" target="_blank" rel="noopener noreferrer">Montalto</a> с красивыми садами и современной австралийской кухней, <a href="https://www.tenminutesbytractor.com.au/" target="_blank" rel="noopener noreferrer">Ten Minutes by Tractor</a> — культовая winery с fine dining рестораном, <a href="https://www.ptleoestate.com.au/" target="_blank" rel="noopener noreferrer">Pt. Leo Estate</a> с масштабным sculpture park и панорамными видами на залив, а также <a href="https://polperro.com.au/" target="_blank" rel="noopener noreferrer">Polperro Winery</a> — уютное boutique estate с выдающимся Pinot Noir.</p>
-            <p>Помимо виноделен, Mornington Peninsula известен термальными источниками <a href="https://www.peninsulahotsprings.com/" target="_blank" rel="noopener noreferrer">Peninsula Hot Springs</a>, прибрежными ресторанами, пляжами и живописными coastal drives. Это идеальное направление для тех, кто хочет совместить премиальные дегустации с отдыхом у моря, долгими обедами на террасах и атмосферой спокойной роскоши.</p>
-            <p>Лучшее время для поездки — с ноября по апрель, когда полуостров особенно красив: солнечные виноградники, свежий океанский воздух и мягкие вечера создают идеальные условия для wine tasting и отдыха на побережье.</p>
-          </div>
-          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card__img"><img src="img/region-macedon.jpg" alt="Macedon Ranges" loading="lazy"></div>
-        <div class="card__body">
-          <h3>Macedon Ranges</h3>
-          <p>Прохладный климат, туманные холмы и элегантные Pinot Noir и Chardonnay.</p>
-          <div class="card__more">
-            <p>Прохладный климат, туманные холмы и элегантные Pinot Noir и Chardonnay. Macedon Ranges — один из самых высокогорных и прохладных винных регионов Австралии, расположенный менее чем в часе от Мельбурна. Здесь виноградники разбросаны среди эвкалиптовых лесов, старинных деревень и зелёных холмов, создавая атмосферу спокойного countryside retreat вдали от городской суеты.</p>
-            <p>Регион особенно известен своими утончёнными Pinot Noir, минеральными Chardonnay и одними из лучших игристых вин в Виктории. Благодаря прохладным ночам вина получаются свежими, структурными и очень европейскими по стилю. Здесь меньше крупных коммерческих winery и больше boutique estate с камерной атмосферой и персональными дегустациями.</p>
-            <p>Среди самых рекомендуемых виноделен — <a href="https://bindiwines.com.au/" target="_blank" rel="noopener noreferrer">Bindi Wines</a> — культовое небольшое хозяйство с выдающимся Chardonnay и Pinot Noir, <a href="https://curlyflat.com/" target="_blank" rel="noopener noreferrer">Curly Flat</a> — одно из самых уважаемых Pinot Noir estate Австралии, <a href="https://www.hangingrock.com.au/" target="_blank" rel="noopener noreferrer">Hanging Rock Winery</a> с красивыми видами на вулканические холмы, а также <a href="https://cobawridge.com.au/" target="_blank" rel="noopener noreferrer">Cobaw Ridge</a> — biodynamic winery, известная своими Syrah и натуральным подходом к виноделию.</p>
-            <p>Обязательно стоит попробовать местные méthode traditionnelle sparkling wines, прохладноклиматный Chardonnay с цитрусовой минеральностью и тонкие Pinot Noir с нотами лесных ягод, специй и землистости. Любителям необычных вин также понравятся Syrah в северно-роданском стиле и небольшие партии натуральных вин от независимых производителей.</p>
-            <p>Помимо виноделен, Macedon Ranges славится фермерскими рынками, историческими пабами, гастрономическими ресторанами и природными достопримечательностями вроде <a href="https://www.mrsc.vic.gov.au/See-Do/Our-Region/Natural-Attractions/Hanging-Rock" target="_blank" rel="noopener noreferrer">Hanging Rock</a>. Осенью регион особенно красив: золотые виноградники, прохладный воздух и туманные утра делают поездку невероятно атмосферной и идеально подходящей для неспешных дегустаций и weekend getaway.</p>
-          </div>
-          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card__img"><img src="img/region-geelong.jpg" alt="Geelong / Bellarine" loading="lazy"></div>
-        <div class="card__body">
-          <h3>Geelong / Bellarine</h3>
-          <p>Побережье Port Phillip Bay, прибрежные вина и relaxed wine weekend у воды.</p>
-          <div class="card__more">
-            <p>Этот регион, расположенный вдоль побережья Port Phillip Bay к юго-западу от Мельбурна, сочетает морские пейзажи, relaxed coastal atmosphere и одни из самых недооценённых вин Австралии. Здесь виноградники соседствуют с пляжами, яхтенными маринами и небольшими прибрежными городками, создавая идеальное направление для неспешного wine weekend у воды.</p>
-            <p>Прохладный морской климат делает регион особенно сильным в Pinot Noir, Chardonnay и ароматных Pinot Gris. Вина здесь обычно более мягкие и округлые, чем в Yarra Valley, с выраженной минеральностью и свежестью благодаря постоянному океанскому бризу. Bellarine Peninsula также постепенно становится известным благодаря качественным Shiraz и игристым винам.</p>
-            <p>Среди самых рекомендуемых виноделен — <a href="https://www.jackrabbitvineyard.com.au/" target="_blank" rel="noopener noreferrer">Jack Rabbit Vineyard</a> с панорамными видами на залив и одним из самых красивых ресторанов региона, <a href="https://www.scotchmans.com.au/" target="_blank" rel="noopener noreferrer">Scotchmans Hill</a> — одно из ведущих estate Bellarine с отличными Chardonnay и Shiraz, <a href="https://www.oakdene.com.au/" target="_blank" rel="noopener noreferrer">Oakdene Vineyards</a> — стильная boutique winery с арт-пространством и атмосферным cellar door, а также <a href="https://bannockburnvineyards.com/" target="_blank" rel="noopener noreferrer">Bannockburn Vineyards</a> — культовое хозяйство Geelong, известное своими сложными Pinot Noir и Chardonnay.</p>
-            <p>Помимо дегустаций, регион славится coastal drives, свежими морепродуктами, устричными фермами и расслабленной атмосферой приморских townships вроде <a href="https://www.visitgeelongbellarine.com.au/queenscliff-point-lonsdale" target="_blank" rel="noopener noreferrer">Queenscliff</a> и <a href="https://www.visitgeelongbellarine.com.au/the-bellarine/portarlington" target="_blank" rel="noopener noreferrer">Portarlington</a>. Это идеальное направление для тех, кто хочет совместить вино, океан, гастрономию и красивые закаты над заливом.</p>
-            <p>Лучшее время для поездки — с конца лета до середины осени, когда виноградники особенно красивы, а тёплая погода идеально подходит для долгих обедов на террасах с видом на воду и sunset wine tastings у побережья.</p>
-          </div>
-          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
-        </div>
-      </article>
-    </div>
+    <div class="regions__grid" id="regionsGrid"></div>
   </section>
-
 
   <section class="tours" id="tours">
     <div class="tours__inner">
       <header class="tours__head">
-        <p class="eyebrow">Private Wine Experiences</p>
-        <h2>Выберите ваш винный тур</h2>
-        <p class="sub">Каждый маршрут создаётся индивидуально под ваш вкус, темп и предпочтения.</p>
+        <p class="eyebrow" data-i18n="tours.eyebrow">Private Wine Experiences</p>
+        <h2 data-i18n="tours.title">Выберите ваш винный тур</h2>
+        <p class="sub" data-i18n="tours.sub">Каждый маршрут создаётся индивидуально под ваш вкус, темп и предпочтения.</p>
       </header>
       <div class="tours__grid" id="toursGrid"></div>
       <div id="routePanel" hidden></div>
@@ -527,26 +489,26 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
           <a id="mbWhatsApp" class="btn btn-whatsapp mobile-booking-bar__btn is-disabled" href="#" aria-disabled="true">Выберите винодельни</a>
         </div>
       </div>
-      <div class="tours__benefits" aria-label="Преимущества тура">
+      <div class="tours__benefits" aria-label="Преимущества тура" data-i18n-attr="tours.benefitsAria|aria-label">
         <div class="tours__benefit">
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 4C12 4 6 11 6 18c0 10 14 19 14 19s14-9 14-19c0-7-6-14-14-14z"/><circle cx="20" cy="18" r="3"/></svg>
-          <strong>Частный тур</strong>
-          <span>Только для вас и вашей компании</span>
+          <strong data-i18n="tours.benefits.0.strong">Частный тур</strong>
+          <span data-i18n="tours.benefits.0.span">Только для вас и вашей компании</span>
         </div>
         <div class="tours__benefit">
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 32c0-8 6-14 8-20 2 6 8 12 8 20"/><ellipse cx="20" cy="28" rx="8" ry="3"/></svg>
-          <strong>Премиальные винодельни</strong>
-          <span>Только лучшие винодельни региона</span>
+          <strong data-i18n="tours.benefits.1.strong">Премиальные винодельни</strong>
+          <span data-i18n="tours.benefits.1.span">Только лучшие винодельни региона</span>
         </div>
         <div class="tours__benefit">
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><ellipse cx="20" cy="26" rx="10" ry="4"/><path d="M12 18h16l-2-8h-12z"/></svg>
-          <strong>Гастрономические опыты</strong>
-          <span>Рестораны, дегустации и локальные деликатесы</span>
+          <strong data-i18n="tours.benefits.2.strong">Гастрономические опыты</strong>
+          <span data-i18n="tours.benefits.2.span">Рестораны, дегустации и локальные деликатесы</span>
         </div>
         <div class="tours__benefit">
           <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="6" y="10" width="28" height="20" rx="2"/><circle cx="20" cy="20" r="4"/></svg>
-          <strong>Живописные места</strong>
-          <span>Лучшие виды, виноградники и фотолокации</span>
+          <strong data-i18n="tours.benefits.3.strong">Живописные места</strong>
+          <span data-i18n="tours.benefits.3.span">Лучшие виды, виноградники и фотолокации</span>
         </div>
       </div>
     </div>
@@ -556,23 +518,23 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
     <div class="why__bg" aria-hidden="true"></div>
     <div class="container why__grid">
       <div class="why__left">
-        <h2>Почему выбирают нас</h2>
-        <p>Мы создаём персональный винный день — не шаблонную экскурсию в автобусе.</p>
+        <h2 data-i18n="why.title">Почему выбирают нас</h2>
+        <p data-i18n="why.lead">Мы создаём персональный винный день — не шаблонную экскурсию в автобусе.</p>
         <ul class="why__list">
-          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Индивидуальный подход</li>
-          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Проверенные винодельни</li>
-          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Комфорт и безопасность</li>
-          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span>Незабываемые впечатления</li>
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="why.items.0">Индивидуальный подход</span></li>
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="why.items.1">Проверенные винодельни</span></li>
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="why.items.2">Комфорт и безопасность</span></li>
+          <li><span class="check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-6"/></svg></span><span data-i18n="why.items.3">Незабываемые впечатления</span></li>
         </ul>
       </div>
       <div class="panel">
-        <h3>Для кого наши туры</h3>
+        <h3 data-i18n="why.panelTitle">Для кого наши туры</h3>
         <ul>
-          <li><span class="ico">&#9825;</span>Для пар</li>
-          <li><span class="ico">&#9733;</span>Для компаний друзей</li>
-          <li><span class="ico">&#9992;</span>Для туристов из СНГ</li>
-          <li><span class="ico">&#9878;</span>Для корпоративных групп</li>
-          <li><span class="ico">&#127881;</span>Для праздников и особых дат</li>
+          <li><span class="ico">&#9825;</span><span data-i18n="why.panelItems.0">Для пар</span></li>
+          <li><span class="ico">&#9733;</span><span data-i18n="why.panelItems.1">Для компаний друзей</span></li>
+          <li><span class="ico">&#9992;</span><span data-i18n="why.panelItems.2">Для туристов из СНГ</span></li>
+          <li><span class="ico">&#9878;</span><span data-i18n="why.panelItems.3">Для корпоративных групп</span></li>
+          <li><span class="ico">&#127881;</span><span data-i18n="why.panelItems.4">Для праздников и особых дат</span></li>
         </ul>
       </div>
       <figure class="polaroid">
@@ -585,12 +547,12 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   <section class="about" id="about">
     <div class="container about__grid">
       <div class="about__photo">
-        <img src="img/about-owners.jpg" alt="Основатели Alex Trips Wine Tours" loading="lazy">
+        <img src="img/about-owners.jpg" alt="Основатели Alex Trips Wine Tours" data-i18n-alt="about.imgAlt" loading="lazy">
       </div>
       <div>
-        <h2>О нас</h2>
-        <p><strong>Alex Trips Wine Tours</strong> — семейный бизнес из Мельбурна. Мы любим австралийское вино и создаём туры с душой: от первой дегустации до бокала на закате.</p>
-        <p>Рассказываем о винах понятно на русском языке. Вы — дорогие гости, а не туристы в автобусе.</p>
+        <h2 data-i18n="about.title">О нас</h2>
+        <p data-i18n="about.p1">Alex Trips Wine Tours — семейный бизнес из Мельбурна. Мы любим австралийское вино и создаём туры с душой: от первой дегустации до бокала на закате.</p>
+        <p data-i18n="about.p2">Рассказываем о винах понятно на русском языке. Вы — дорогие гости, а не туристы в автобусе.</p>
       </div>
     </div>
   </section>
@@ -598,39 +560,39 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   <footer class="contact" id="contact">
     <div class="container contact__inner">
       <div>
-        <h2>Свяжитесь с нами</h2>
-        <p class="sub">Мы с радостью подберём идеальный тур для вас</p>
+        <h2 data-i18n="contact.title">Свяжитесь с нами</h2>
+        <p class="sub" data-i18n="contact.sub">Мы с радостью подберём идеальный тур для вас</p>
         <div class="contact__cols">
           <div class="c-item">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 4C12 4 6 11 6 18c0 10 14 19 14 19s14-9 14-19c0-7-6-14-14-14z"/><circle cx="20" cy="18" r="3.5"/></svg>
             <div>
-              <h4>Адрес</h4>
+              <h4 data-i18n="contact.address">Адрес</h4>
               <p>Avoca Street,<br>Highett, Melbourne<br>VIC 3190</p>
             </div>
           </div>
           <div class="c-item">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5" y="10" width="30" height="20" rx="2"/><path d="M5 12l15 11 15-11"/></svg>
             <div>
-              <h4>Email</h4>
+              <h4 data-i18n="contact.email">Email</h4>
               <p><a href="mailto:AlexTrips@hotmail.com">AlexTrips@hotmail.com</a></p>
             </div>
           </div>
           <div class="c-item">
             <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 8h4l2 6-4 3c2 5 5 8 10 10l3-4 6 2v4c0 2-2 4-4 4C18 33 7 22 8 12c0-2 2-4 4-4z"/></svg>
             <div>
-              <h4>Телефон</h4>
+              <h4 data-i18n="contact.phone">Телефон</h4>
               <p><a href="https://wa.me/61421047915" target="_blank" rel="noopener noreferrer">0421-047-915</a></p>
-              <p class="c-note">WhatsApp / Telegram</p>
+              <p class="c-note" data-i18n="contact.phoneNote">WhatsApp / Telegram</p>
             </div>
           </div>
         </div>
-        <a class="btn btn-chat" href="https://wa.me/61421047915?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D0%B2%D0%B8%D0%BD%D0%BD%D1%8B%D0%B9%20%D1%82%D1%83%D1%80." target="_blank" rel="noopener noreferrer">Написать нам</a>
+        <a class="btn btn-chat" data-i18n-wa-href href="https://wa.me/61421047915" target="_blank" rel="noopener noreferrer" data-i18n="contact.writeUs">Написать нам</a>
       </div>
       <div class="contact__deco">
         <img src="img/footer-wine.jpg" alt="" loading="lazy">
       </div>
     </div>
-    <p class="copyright">&copy; 2026 Alex Trips Wine Tours</p>
+    <p class="copyright" data-i18n="footer.copyright">&copy; 2026 Alex Trips Wine Tours</p>
   </footer>
 </main>
 
@@ -652,15 +614,10 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
       menuBtn.setAttribute('aria-expanded','false');
     });
   });
-  document.querySelectorAll('.card-toggle').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var card=btn.closest('.card');
-      var open=card.classList.toggle('is-open');
-      btn.textContent=open?'Свернуть':'Подробнее';
-    });
-  });
 })();
 </script>
-<script src="tours.js?v=5"></script>
+<script src="translations.js?v=1"></script>
+<script src="i18n.js?v=1"></script>
+<script src="tours.js?v=7"></script>
 </body>
 </html>
