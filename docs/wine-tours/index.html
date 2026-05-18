@@ -83,7 +83,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 .regions__head{text-align:center;margin-bottom:2.25rem;padding:0 1.25rem}
 .regions__head .eyebrow{color:var(--gold-dk);margin-bottom:.55rem}
 .regions__head h2{font-family:'Playfair Display',serif;font-size:clamp(1.65rem,3.2vw,2.35rem);font-weight:600;color:var(--g900)}
-.regions__grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.85rem;padding:0 1.25rem;max-width:calc(var(--max) + 2.5rem);margin:0 auto}
+.regions__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;padding:0 1.25rem;max-width:calc(var(--max) + 2.5rem);margin:0 auto}
 .card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.06);border:1px solid rgba(0,0,0,.04);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
 .card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.1)}
 .card__img{aspect-ratio:3/4;overflow:hidden}
@@ -142,7 +142,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 
 /* Responsive */
 @media(max-width:1100px){
-  .regions__grid{grid-template-columns:repeat(3,1fr)}
+  .regions__grid{grid-template-columns:repeat(2,1fr)}
   .features__grid{grid-template-columns:repeat(3,1fr)}
   .why__grid{grid-template-columns:1fr 1fr}
   .polaroid{grid-column:1/-1;justify-self:center;margin-top:.5rem}
@@ -210,7 +210,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
         <p class="eyebrow">Вино · Природа · Атмосфера</p>
         <h1>Туры по<br>винодельням<br>Австралии</h1>
         <p class="script">Откройте Австралию через вкус, пейзажи и вино</p>
-        <p class="lead">Авторские винные туры по лучшим регионам Австралии: Yarra Valley, Mornington Peninsula, Barossa Valley, Hunter Valley и Margaret River. Дегустации, красивые маршруты, локальная кухня и незабываемые впечатления.</p>
+        <p class="lead">Авторские винные туры по лучшим регионам Австралии: Yarra Valley, Mornington Peninsula, Macedon Ranges и Geelong / Bellarine. Дегустации, красивые маршруты, локальная кухня и незабываемые впечатления.</p>
         <a class="btn btn-gold" href="#regions">Посмотреть туры</a>
       </div>
     </div>
@@ -266,29 +266,20 @@ button{font:inherit;cursor:pointer;border:none;background:none}
         </div>
       </article>
       <article class="card">
-        <div class="card__img"><img src="img/region-barossa.jpg" alt="Barossa Valley" loading="lazy"></div>
+        <div class="card__img"><img src="img/region-macedon.jpg" alt="Macedon Ranges" loading="lazy"></div>
         <div class="card__body">
-          <h3>Barossa Valley</h3>
-          <p>Легендарные ширазы, немецкое наследие и золотые ряды лоз.</p>
-          <p class="card__more">Культовые производители и гастрономия мирового уровня.</p>
+          <h3>Macedon Ranges</h3>
+          <p>Прохладный климат, холмы и элегантный пино нуар и шардоне.</p>
+          <p class="card__more">Бутиковые винодельни, лесные пейзажи и гастрономия в часе от Мельбурна.</p>
           <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
       </article>
       <article class="card">
-        <div class="card__img"><img src="img/region-hunter.jpg" alt="Hunter Valley" loading="lazy"></div>
+        <div class="card__img"><img src="img/region-geelong.jpg" alt="Geelong / Bellarine" loading="lazy"></div>
         <div class="card__body">
-          <h3>Hunter Valley</h3>
-          <p>Старейший регион NSW — зелёные холмы и семейные винодельни.</p>
-          <p class="card__more">Semillon мирового класса и поездки из Сиднея.</p>
-          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
-        </div>
-      </article>
-      <article class="card">
-        <div class="card__img"><img src="img/region-margaret.jpg" alt="Margaret River" loading="lazy"></div>
-        <div class="card__body">
-          <h3>Margaret River</h3>
-          <p>Каберне и совиньон на фоне скал и океана.</p>
-          <p class="card__more">Премиальные вина и уединённые винодельни.</p>
+          <h3>Geelong / Bellarine</h3>
+          <p>Береговая линия, залив и стильные винодельни полуострова Белларин.</p>
+          <p class="card__more">Пинот нуар, шардоне и морепродукты с видом на залив Порт-Филип.</p>
           <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
       </article>
