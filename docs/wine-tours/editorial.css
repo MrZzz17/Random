@@ -326,8 +326,8 @@
 }
 .route-panel__layout{
   display:grid;
-  grid-template-columns:minmax(280px,360px) 1fr;
-  gap:clamp(2rem,4vw,3.5rem);
+  grid-template-columns:minmax(250px,320px) 1fr;
+  gap:clamp(1.25rem,2.5vw,2rem);
   align-items:start
 }
 .route-sidebar{
@@ -335,13 +335,13 @@
   top:calc(var(--nav-h) + 1.5rem);
   background:rgba(255,253,249,.92);
   backdrop-filter:blur(12px);
-  border-radius:24px;
-  padding:clamp(1.5rem,2.5vw,2rem);
-  box-shadow:0 24px 60px rgba(19,37,28,.1)
+  border-radius:20px;
+  padding:clamp(1.15rem,2vw,1.5rem);
+  box-shadow:0 20px 48px rgba(19,37,28,.1)
 }
 .route-sidebar .route-panel__head{
-  margin-bottom:1.5rem;
-  padding-bottom:1.25rem;
+  margin-bottom:1.1rem;
+  padding-bottom:1rem;
   border-bottom:1px solid rgba(19,37,28,.08)
 }
 .route-sidebar .route-panel__head h3{
@@ -353,38 +353,68 @@
 .route-main .route-step{border:none;margin:0;padding:0}
 .route-main .route-step__heading{display:flex}
 .route-wineries{
-  display:flex;
-  flex-direction:column;
-  gap:1.75rem
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(.75rem,1.4vw,1rem);
+  align-items:stretch
 }
 .winery-card{
   position:relative;
   border:none;
-  border-radius:22px;
+  border-radius:16px;
   background:rgba(255,255,255,.55);
-  box-shadow:0 18px 50px rgba(19,37,28,.08);
-  padding:clamp(1.5rem,2.5vw,2.125rem) clamp(1.5rem,2.5vw,2.125rem) clamp(1.5rem,2.5vw,2.125rem) 4.5rem
+  box-shadow:0 10px 28px rgba(19,37,28,.07);
+  padding:1rem 1rem .95rem 3.1rem;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  transform:none!important
 }
-.winery-card:nth-child(even){transform:translateY(2.25rem)}
+.winery-card:nth-child(even){transform:none}
 .winery-card.is-selected{
-  background:rgba(255,255,255,.85);
-  box-shadow:0 22px 56px rgba(201,163,90,.18)
+  background:rgba(255,255,255,.9);
+  box-shadow:0 14px 36px rgba(201,163,90,.16)
 }
 .winery-card__num{
   position:absolute;
-  left:1.5rem;
-  top:1.5rem;
+  left:.95rem;
+  top:.95rem;
   font-family:'Playfair Display',serif;
-  font-size:clamp(1.75rem,3vw,2.5rem);
+  font-size:clamp(1.25rem,1.8vw,1.65rem);
   font-weight:600;
   color:rgba(201,163,90,.45);
   line-height:1
 }
+.winery-card__top{margin-bottom:.35rem}
 .winery-card h4{
-  font-size:clamp(1.15rem,1.8vw,1.45rem);
-  margin-bottom:.35rem
+  font-size:clamp(.95rem,1.35vw,1.12rem);
+  margin-bottom:.15rem;
+  line-height:1.2
 }
-.winery-card__type{margin-bottom:.75rem}
+.winery-card__type{
+  margin-bottom:.4rem;
+  font-size:.58rem
+}
+.winery-card p{
+  font-size:.74rem;
+  line-height:1.45;
+  margin-bottom:.4rem;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden
+}
+.winery-card__hours{
+  font-size:.66rem;
+  margin-bottom:.5rem;
+  line-height:1.35
+}
+.winery-card__hours svg{width:14px;height:14px}
+.winery-card .winery-add{
+  margin-top:auto;
+  padding:.45rem .6rem;
+  font-size:.56rem
+}
 .route-selected{
   border:none;
   background:rgba(247,241,231,.8);
@@ -806,7 +836,10 @@
   .tour-offerings-grid{grid-template-columns:1fr}
   .route-panel__layout{grid-template-columns:1fr}
   .route-sidebar{position:static}
-  .winery-card:nth-child(even){transform:none}
+  .route-panel--editorial .route-wineries{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:.7rem
+  }
   .day-timeline__inner{grid-template-columns:1fr}
 }
 
@@ -825,6 +858,7 @@
 
 @media(max-width:768px){
   .tours__benefits{grid-template-columns:1fr}
+  .route-panel--editorial .route-wineries{grid-template-columns:1fr;gap:.75rem}
   .route-panel__layout{display:block}
   .route-sidebar .route-panel__intro--desk{display:none}
   .route-main .route-step__heading{display:flex}
