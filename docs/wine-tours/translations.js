@@ -131,6 +131,36 @@
           'Для туристов из СНГ',
           'Для корпоративных групп',
           'Для праздников и особых дат'
+        ],
+        reviewsAria: 'Отзывы гостей (заглушки)',
+        reviewsNote: 'Скоро здесь появятся настоящие отзывы гостей',
+        reviews: [
+          {
+            author: 'Марина К.',
+            meta: 'Google · 2 недели назад',
+            text: 'Лучший винный день в жизни! Подобрали винодельни под наш вкус — Pinot на закате просто магия.'
+          },
+          {
+            text: 'Спасибо за тёплый приём! Обязательно вернёмся в Yarra с друзьями — Оля & Саша'
+          },
+          {
+            label: 'WhatsApp',
+            text: 'Алекс, спасибо за тур! Всё супер организовано, дети тоже в восторге 🍷',
+            meta: 'вчера, 19:42'
+          },
+          {
+            author: 'Дмитрий В.',
+            meta: 'Google · октябрь 2025',
+            text: 'Профессионально, без спешки, отличный гид. Рекомендуем всем, кто любит вино!'
+          },
+          {
+            author: 'Елена и Михаил',
+            text: 'Частный тур мечты: винодельни, обед с видом на виноградники, никакой суеты.'
+          },
+          {
+            tag: 'Газета «Weekend»',
+            text: '«…семейный винный тур из Мельбурна, который чувствуется как приглашение к друзьям, а не экскурсия.»'
+          }
         ]
       },
       about: {
@@ -296,6 +326,36 @@
           'International visitors',
           'Corporate groups',
           'Celebrations and special occasions'
+        ],
+        reviewsAria: 'Guest reviews (placeholders)',
+        reviewsNote: 'Real guest review photos coming soon',
+        reviews: [
+          {
+            author: 'Marina K.',
+            meta: 'Google · 2 weeks ago',
+            text: 'Best wine day of our lives! Wineries matched our taste — sunset Pinot was pure magic.'
+          },
+          {
+            text: 'Thank you for the warm welcome! We will be back to Yarra with friends — Olya & Sasha'
+          },
+          {
+            label: 'WhatsApp',
+            text: 'Alex, thanks for the tour! Everything was seamless — the kids loved it too 🍷',
+            meta: 'yesterday, 7:42 pm'
+          },
+          {
+            author: 'Dmitry V.',
+            meta: 'Google · October 2025',
+            text: 'Professional, unhurried, excellent guide. Highly recommend for wine lovers!'
+          },
+          {
+            author: 'Elena & Mikhail',
+            text: 'A dream private tour: wineries, lunch overlooking the vines, zero rush.'
+          },
+          {
+            tag: 'Weekend Herald',
+            text: '“…a Melbourne family wine tour that feels like an invitation from friends, not a bus excursion.”'
+          }
         ]
       },
       about: {
