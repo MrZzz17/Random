@@ -98,7 +98,9 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 .card__more p:last-child{margin-bottom:0}
 .card__more a{color:var(--gold-dk);text-decoration:underline;text-underline-offset:2px}
 .card__more a:hover{color:var(--gold)}
-.card.is-open .card__more{max-height:1200px;margin-bottom:.6rem;padding-top:.4rem;border-top:1px solid #eee}
+.card.is-open .card__more{max-height:2000px;margin-bottom:.6rem;padding-top:.4rem;border-top:1px solid #eee}
+.card.is-open > .card__body > .card__more,
+.card.is-open .card__body .card__more{overflow:visible}
 .card .btn-outline{align-self:center}
 
 /* Tours catalog */
@@ -337,7 +339,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
             <p>Обязательно стоит попробовать местные Pinot Noir — элегантные, с нотами вишни, лесных ягод и специй, прохладноклиматный Chardonnay с минеральностью и цитрусом, а также игристые вина méthode traditionnelle. Любителям более насыщенных вин стоит обратить внимание на Shiraz из северной части долины и выдержанные Cabernet blends.</p>
             <p>Помимо вина, Yarra Valley известна сырными фермами, artisan chocolate, локальными рынками и панорамными ресторанами с видами на виноградники. Лучшее время для поездки — март–май, когда начинается австралийская осень: виноградники окрашиваются в золотые и бордовые оттенки, а погода идеально подходит для долгих дегустаций и неспешных обедов на террасах.</p>
           </div>
-          <button type="button" class="btn btn-outline card-goto-tour" data-tour="yarra">Подробнее</button>
+          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
       </article>
       <article class="card">
@@ -352,7 +354,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
             <p>Помимо виноделен, Mornington Peninsula известен термальными источниками <a href="https://www.peninsulahotsprings.com/" target="_blank" rel="noopener noreferrer">Peninsula Hot Springs</a>, прибрежными ресторанами, пляжами и живописными coastal drives. Это идеальное направление для тех, кто хочет совместить премиальные дегустации с отдыхом у моря, долгими обедами на террасах и атмосферой спокойной роскоши.</p>
             <p>Лучшее время для поездки — с ноября по апрель, когда полуостров особенно красив: солнечные виноградники, свежий океанский воздух и мягкие вечера создают идеальные условия для wine tasting и отдыха на побережье.</p>
           </div>
-          <button type="button" class="btn btn-outline card-goto-tour" data-tour="mornington">Подробнее</button>
+          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
       </article>
       <article class="card">
@@ -518,19 +520,6 @@ button{font:inherit;cursor:pointer;border:none;background:none}
       btn.textContent=open?'Свернуть':'Подробнее';
     });
   });
-  document.querySelectorAll('.card-goto-tour').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var tourId=btn.getAttribute('data-tour');
-      if(window.openTourRoute){
-        window.openTourRoute(tourId);
-      }else{
-        location.hash='tours';
-      }
-    });
-  });
-  if(location.hash==='#tours'&&window.openTourRoute){
-    setTimeout(function(){ document.getElementById('tours').scrollIntoView({behavior:'smooth'}); },100);
-  }
 })();
 </script>
 <script src="tours.js?v=3"></script>
