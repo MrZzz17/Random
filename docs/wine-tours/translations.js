@@ -147,7 +147,7 @@
       meta: {
         title: 'Alex Trips — Australian Winery Tours',
         description:
-          'Alex Trips Wine Tours — curated private wine tours across Australia. Russian-speaking guides from Melbourne.'
+          'Alex Trips Wine Tours — curated private wine tours across Australia. Experienced guides from Melbourne.'
       },
       nav: {
         home: 'Home',
@@ -176,7 +176,7 @@
           'Comfortable private transfer',
           'Wine tastings',
           'Winery lunch',
-          'Russian-speaking guide',
+          'Experienced guides',
           'Custom itinerary'
         ],
         sectionAria: "What's included in the tour"
@@ -247,7 +247,7 @@
         panelItems: [
           'Couples',
           'Groups of friends',
-          'Russian-speaking visitors',
+          'International visitors',
           'Corporate groups',
           'Celebrations and special occasions'
         ]
@@ -257,7 +257,7 @@
         p1:
           'Alex Trips Wine Tours is a family business based in Melbourne. We love Australian wine and design tours with heart — from your first tasting to a glass at sunset.',
         p2:
-          'We explain wine in clear, friendly Russian. You are our guests, not tourists on a bus.',
+          'We explain wine clearly and personally. You are our guests, not tourists on a bus.',
         imgAlt: 'Founders of Alex Trips Wine Tours'
       },
       contact: {
