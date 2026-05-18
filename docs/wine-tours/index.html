@@ -18,9 +18,11 @@
   --gold:#C9A35A;--gold-hi:#D8B66A;--gold-dk:#9A7B3A;
   --cream:#F7F1E7;--card:#FFFDF9;--white:#fff;
   --text:#1a1612;--muted:#5a5349;
-  --nav-h:76px;--max:1180px;--wide:min(1360px,calc(100vw - 2.5rem));--radius:12px;
+  --nav-h:76px;--max:1180px;--wide:min(1360px,calc(100vw - 2.5rem));--tours-max:min(1480px,calc(100vw - 2.5rem));--radius:12px;
+  --dark-green:#13251C;--deep-green:#1F3A2D;--light-gold:#E0C27A;--soft-cream:#FBF7EF;--text-dark:#2A2118;--text-muted:#6E6255;
 }
 html{scroll-behavior:smooth}
+[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 body{font-family:Inter,system-ui,sans-serif;color:var(--text);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -99,6 +101,70 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 .card.is-open .card__more{max-height:1200px;margin-bottom:.6rem;padding-top:.4rem;border-top:1px solid #eee}
 .card .btn-outline{align-self:center}
 
+/* Tours catalog */
+.tours{padding:5.5rem 0;background:var(--cream);position:relative}
+.tours::before,.tours::after{content:'';position:absolute;width:min(280px,35vw);height:min(280px,35vw);opacity:.12;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath fill='none' stroke='%23C9A35A' stroke-width='1' d='M60 8c-8 20-28 32-28 52 0 14 12 26 28 26s28-12 28-26c0-20-20-32-28-52z'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+.tours::before{top:1rem;left:1rem}
+.tours::after{top:1rem;right:1rem;transform:scaleX(-1)}
+.tours__inner{width:var(--tours-max);max-width:100%;margin:0 auto;padding:0 clamp(1rem,2.5vw,1.75rem)}
+.tours__head{text-align:center;margin-bottom:2.75rem}
+.tours__head .eyebrow{color:var(--gold-dk);margin-bottom:.75rem}
+.tours__head h2{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);font-weight:600;color:var(--text-dark);margin-bottom:.65rem}
+.tours__head .sub{color:var(--text-muted);font-size:clamp(.95rem,1.4vw,1.1rem);font-weight:300;max-width:36rem;margin:0 auto}
+.tours__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.25rem,2.2vw,2.25rem);margin-bottom:2rem}
+.tour-card{position:relative;border-radius:22px;overflow:hidden;min-height:min(680px,88vh);box-shadow:0 24px 60px rgba(19,37,28,.18);transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column}
+.tour-card:hover{transform:translateY(-6px);box-shadow:0 32px 70px rgba(19,37,28,.28)}
+.tour-card.is-active{outline:2px solid var(--light-gold);outline-offset:3px}
+.tour-card__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.tour-card:hover .tour-card__bg{transform:scale(1.04)}
+.tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%)}
+.tour-card__content{position:relative;z-index:2;margin-top:auto;padding:clamp(1.5rem,3vw,2.25rem);color:#fff}
+.tour-card__title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,4.25rem);font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;margin-bottom:.35rem}
+.tour-card__subtitle{font-family:'Playfair Display',serif;font-style:italic;color:var(--light-gold);font-size:clamp(1.25rem,2.2vw,2rem);margin-bottom:.75rem}
+.tour-card__desc{font-size:clamp(.9rem,1.2vw,1.05rem);line-height:1.55;color:rgba(255,255,255,.92);max-width:28rem;margin-bottom:1.1rem}
+.tour-card__meta{display:flex;flex-wrap:wrap;gap:.65rem 1.1rem;list-style:none;margin-bottom:1.1rem}
+.tour-card__meta li{display:flex;align-items:center;gap:.4rem;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.tour-card__meta-icon{display:flex;color:var(--light-gold)}
+.tour-card__meta-icon svg{width:18px;height:18px}
+.tour-card__tags-label{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light-gold);margin-bottom:.5rem}
+.tour-card__tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.25rem}
+.tour-tag{border:1px solid rgba(224,194,122,.65);color:#fff;background:rgba(0,0,0,.22);border-radius:8px;padding:.45rem .75rem;font-size:.62rem;letter-spacing:.03em}
+.tour-card__cta{background:linear-gradient(135deg,#D8B66A,#C9A35A);color:#1A1208;border-radius:10px;padding:1rem 2rem;font-family:Manrope,sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.tour-card__cta:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.tours__benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;background:var(--soft-cream);border-radius:16px;padding:1.75rem 1.5rem;border:1px solid rgba(201,163,90,.15)}
+.tours__benefit{text-align:center}
+.tours__benefit svg{width:36px;height:36px;color:var(--gold);margin:0 auto .65rem}
+.tours__benefit strong{display:block;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dark);margin-bottom:.3rem}
+.tours__benefit span{font-size:.78rem;color:var(--text-muted);line-height:1.45}
+#routePanel{margin-top:2rem}
+#routePanel[hidden]{display:none}
+.route-panel{background:var(--card);border-radius:20px;padding:clamp(1.5rem,3vw,2.5rem);box-shadow:0 16px 48px rgba(19,37,28,.1);border:1px solid rgba(0,0,0,.05);animation:routeIn .45s ease}
+@keyframes routeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.route-panel__head{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(0,0,0,.08)}
+.route-panel__head h3{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.8vw,2rem);color:var(--dark-green);margin-bottom:.75rem;font-weight:600}
+.route-panel__intro{color:var(--text-muted);font-size:.95rem;line-height:1.7;margin-bottom:.75rem;max-width:52rem}
+.route-panel__note{font-size:.88rem;color:var(--text-dark);line-height:1.6;margin-bottom:1.25rem}
+.route-panel__ctas{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn-outline-dark{border:1.5px solid var(--gold-dk);color:var(--gold-dk);padding:.75rem 1.5rem;border-radius:8px;font-family:Manrope,sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.btn-outline-dark:hover{background:rgba(201,163,90,.12)}
+.btn-sm{padding:.6rem 1.1rem;font-size:.62rem}
+.route-selected{background:var(--soft-cream);border-radius:12px;padding:1rem 1.15rem;margin-bottom:1.25rem;border:1px solid rgba(201,163,90,.2)}
+.route-selected__label{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:.5rem}
+.route-selected__chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.75rem}
+.route-chip{background:var(--dark-green);color:#fff;font-size:.7rem;padding:.35rem .65rem;border-radius:6px}
+.route-limit{color:#a33;font-size:.82rem;margin-bottom:1rem}
+.route-wineries{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem}
+.winery-card{background:var(--soft-cream);border:1px solid rgba(0,0,0,.06);border-radius:14px;padding:1.15rem;display:flex;flex-direction:column;transition:border-color .25s,box-shadow .25s}
+.winery-card.is-selected{border-color:var(--gold);box-shadow:0 4px 16px rgba(201,163,90,.2)}
+.winery-card__top{margin-bottom:.5rem}
+.winery-card h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--text-dark);margin-bottom:.2rem}
+.winery-card__type{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dk)}
+.winery-card p{font-size:.82rem;color:var(--text-muted);line-height:1.55;flex:1;margin-bottom:.65rem}
+.winery-card__hours{display:flex;align-items:flex-start;gap:.4rem;font-size:.75rem;color:var(--text-muted);margin-bottom:.75rem}
+.winery-card__hours svg{flex-shrink:0;margin-top:.1rem;color:var(--gold)}
+.winery-add{margin-top:auto;border:1px solid var(--gold);color:var(--gold-dk);padding:.5rem .75rem;border-radius:8px;font-size:.6rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;width:100%}
+.winery-add.is-on,.winery-add:hover{background:var(--gold);color:var(--g900)}
+
 /* Why */
 .why{position:relative;padding:4.5rem 0}
 .why__bg{position:absolute;inset:0;background:url('img/why-bg.jpg') center/cover}
@@ -146,6 +212,10 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 
 /* Responsive */
 @media(max-width:1100px){
+  .tours__grid{grid-template-columns:1fr}
+  .tour-card{min-height:min(560px,75vh)}
+  .route-wineries{grid-template-columns:repeat(2,1fr)}
+  .tours__benefits{grid-template-columns:repeat(2,1fr)}
   .regions__grid{grid-template-columns:repeat(2,1fr);width:min(720px,calc(100vw - 2rem))}
   .features__grid{grid-template-columns:repeat(3,1fr)}
   .why__grid{grid-template-columns:1fr 1fr}
@@ -161,6 +231,10 @@ button{font:inherit;cursor:pointer;border:none;background:none}
   .contact__cols{grid-template-columns:1fr}
 }
 @media(max-width:560px){
+  .tours{padding:3.5rem 0}
+  .route-wineries{grid-template-columns:1fr}
+  .tours__benefits{grid-template-columns:1fr}
+  .route-panel__ctas .btn,.tour-card__cta{width:100%}
   .regions__grid{grid-template-columns:1fr;width:min(400px,calc(100vw - 2rem))}
   .features__grid{grid-template-columns:1fr}
   .feature{justify-content:flex-start}
@@ -180,14 +254,14 @@ button{font:inherit;cursor:pointer;border:none;background:none}
       <ul class="nav">
         <li><a href="#top">Главная</a></li>
         <li><a href="#regions">Регионы</a></li>
-        <li><a href="#regions">Туры и цены</a></li>
+        <li><a href="#tours">Туры и цены</a></li>
         <li><a href="#included">Что входит</a></li>
         <li><a href="#about">О нас</a></li>
         <li><a href="#about">Отзывы</a></li>
         <li><a href="#contact">Контакты</a></li>
       </ul>
     </nav>
-    <div class="header-cta"><a class="btn btn-gold" href="#contact">Забронировать тур</a></div>
+    <div class="header-cta"><a class="btn btn-gold" href="#tours">Забронировать тур</a></div>
     <button class="menu-btn" id="menuBtn" type="button" aria-label="Меню" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -195,11 +269,11 @@ button{font:inherit;cursor:pointer;border:none;background:none}
 <div class="drawer" id="drawer" hidden>
   <a href="#top">Главная</a>
   <a href="#regions">Регионы</a>
-  <a href="#regions">Туры и цены</a>
+  <a href="#tours">Туры и цены</a>
   <a href="#included">Что входит</a>
   <a href="#about">О нас</a>
   <a href="#contact">Контакты</a>
-  <a class="btn btn-gold" href="#contact">Забронировать тур</a>
+  <a class="btn btn-gold" href="#tours">Забронировать тур</a>
 </div>
 
 <main>
@@ -215,7 +289,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
         <h1>Туры по<br>винодельням<br>Австралии</h1>
         <p class="script">Откройте Австралию через вкус, пейзажи и вино</p>
         <p class="lead">Авторские винные туры по лучшим регионам Австралии: Yarra Valley, Mornington Peninsula, Macedon Ranges и Geelong / Bellarine. Дегустации, красивые маршруты, локальная кухня и незабываемые впечатления.</p>
-        <a class="btn btn-gold" href="#regions">Посмотреть туры</a>
+        <a class="btn btn-gold" href="#tours">Посмотреть туры</a>
       </div>
     </div>
   </section>
@@ -262,7 +336,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
             <p>Обязательно стоит попробовать местные Pinot Noir — элегантные, с нотами вишни, лесных ягод и специй, прохладноклиматный Chardonnay с минеральностью и цитрусом, а также игристые вина méthode traditionnelle. Любителям более насыщенных вин стоит обратить внимание на Shiraz из северной части долины и выдержанные Cabernet blends.</p>
             <p>Помимо вина, Yarra Valley известна сырными фермами, artisan chocolate, локальными рынками и панорамными ресторанами с видами на виноградники. Лучшее время для поездки — март–май, когда начинается австралийская осень: виноградники окрашиваются в золотые и бордовые оттенки, а погода идеально подходит для долгих дегустаций и неспешных обедов на террасах.</p>
           </div>
-          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
+          <button type="button" class="btn btn-outline card-goto-tour" data-tour="yarra">Подробнее</button>
         </div>
       </article>
       <article class="card">
@@ -277,7 +351,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
             <p>Помимо виноделен, Mornington Peninsula известен термальными источниками <a href="https://www.peninsulahotsprings.com/" target="_blank" rel="noopener noreferrer">Peninsula Hot Springs</a>, прибрежными ресторанами, пляжами и живописными coastal drives. Это идеальное направление для тех, кто хочет совместить премиальные дегустации с отдыхом у моря, долгими обедами на террасах и атмосферой спокойной роскоши.</p>
             <p>Лучшее время для поездки — с ноября по апрель, когда полуостров особенно красив: солнечные виноградники, свежий океанский воздух и мягкие вечера создают идеальные условия для wine tasting и отдыха на побережье.</p>
           </div>
-          <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
+          <button type="button" class="btn btn-outline card-goto-tour" data-tour="mornington">Подробнее</button>
         </div>
       </article>
       <article class="card">
@@ -298,6 +372,41 @@ button{font:inherit;cursor:pointer;border:none;background:none}
           <button type="button" class="btn btn-outline card-toggle">Подробнее</button>
         </div>
       </article>
+    </div>
+  </section>
+
+
+  <section class="tours" id="tours">
+    <div class="tours__inner">
+      <header class="tours__head">
+        <p class="eyebrow">Private Wine Experiences</p>
+        <h2>Выберите ваш винный тур</h2>
+        <p class="sub">Каждый маршрут создаётся индивидуально под ваш вкус, темп и предпочтения.</p>
+      </header>
+      <div class="tours__grid" id="toursGrid"></div>
+      <div id="routePanel" hidden></div>
+      <div class="tours__benefits" aria-label="Преимущества тура">
+        <div class="tours__benefit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 4C12 4 6 11 6 18c0 10 14 19 14 19s14-9 14-19c0-7-6-14-14-14z"/><circle cx="20" cy="18" r="3"/></svg>
+          <strong>Частный тур</strong>
+          <span>Только для вас и вашей компании</span>
+        </div>
+        <div class="tours__benefit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 32c0-8 6-14 8-20 2 6 8 12 8 20"/><ellipse cx="20" cy="28" rx="8" ry="3"/></svg>
+          <strong>Премиальные винодельни</strong>
+          <span>Только лучшие винодельни региона</span>
+        </div>
+        <div class="tours__benefit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><ellipse cx="20" cy="26" rx="10" ry="4"/><path d="M12 18h16l-2-8h-12z"/></svg>
+          <strong>Гастрономические опыты</strong>
+          <span>Рестораны, дегустации и локальные деликатесы</span>
+        </div>
+        <div class="tours__benefit">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="6" y="10" width="28" height="20" rx="2"/><circle cx="20" cy="20" r="4"/></svg>
+          <strong>Живописные места</strong>
+          <span>Лучшие виды, виноградники и фотолокации</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -408,7 +517,21 @@ button{font:inherit;cursor:pointer;border:none;background:none}
       btn.textContent=open?'Свернуть':'Подробнее';
     });
   });
+  document.querySelectorAll('.card-goto-tour').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var tourId=btn.getAttribute('data-tour');
+      if(window.openTourRoute){
+        window.openTourRoute(tourId);
+      }else{
+        location.hash='tours';
+      }
+    });
+  });
+  if(location.hash==='#tours'&&window.openTourRoute){
+    setTimeout(function(){ document.getElementById('tours').scrollIntoView({behavior:'smooth'}); },100);
+  }
 })();
 </script>
+<script src="tours.js"></script>
 </body>
 </html>
