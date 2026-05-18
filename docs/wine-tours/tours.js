@@ -37,8 +37,8 @@
       routeId: 'mornington-route',
       title: 'MORNINGTON PENINSULA',
       subtitle: 'Private Winery Tour',
-      image: 'img/tour-mornington.jpg',
-      imagePosition: '65% center',
+      image: 'img/tour-mornington.jpg?v=1',
+      imagePosition: 'center 40%',
       description: 'Идеальное сочетание вин, океанских видов, гастрономии и атмосферы побережья.',
       details: [
         { icon: 'clock', text: '6–8 часов' },
