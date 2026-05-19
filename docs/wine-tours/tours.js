@@ -48,7 +48,7 @@
 
   function tourDescriptionMarkup(desc) {
     if (!desc) return '';
-    if (String(desc).indexOf('<br>') !== -1) return desc;
+    if (/<(?:br|span)\b/i.test(desc)) return desc;
     return escapeHtml(desc);
   }
 
