@@ -3,7 +3,7 @@
 
   var PROTECTED_SELECTOR =
     '.hero__media, .about__media, .region-card__media, .tour-card__visual, ' +
-    '.editorial-features__media, .editorial-features__photo, .cinematic-divider, .contact__stage';
+    '.editorial-features__media, .editorial-features__photo, .editorial-features__media--transfer, .cinematic-divider, .contact__stage';
 
   function isProtectedTarget(target) {
     if (!target || !target.closest) return false;

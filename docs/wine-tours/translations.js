@@ -43,7 +43,8 @@
           title: 'Вино, природа и Австралия — в одном дне',
           lead:
             'Каждый тур — это не набор остановок, а цельный сценарий: дорога, дегустации, обед, пейзажи и спокойный ритм без спешки.',
-          imgAlt: 'Гости на винной дегустации среди виноградников'
+          imgAlt: 'Гости на винной дегустации среди виноградников',
+          transferImgAlt: 'Комфортный автомобиль для винного тура'
         }
       },
       divider: {
@@ -243,7 +244,8 @@
           title: 'Wine, nature, and Australia — in one day',
           lead:
             'Each tour is a single narrative: the drive, tastings, lunch, scenery, and an unhurried pace — never a checklist of stops.',
-          imgAlt: 'Guests enjoying a wine tasting among the vines'
+          imgAlt: 'Guests enjoying a wine tasting among the vines',
+          transferImgAlt: 'Comfortable vehicle for a wine tour'
         }
       },
       divider: {
