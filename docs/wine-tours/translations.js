@@ -18,7 +18,10 @@
         bookTour: 'Забронировать тур',
         bookShort: 'Забронировать',
         menuLabel: 'Меню',
-        ariaLabel: 'Навигация'
+        ariaLabel: 'Навигация',
+        mobileAriaLabel: 'Мобильное меню',
+        langAria: 'Выбор языка',
+        closeLabel: 'Закрыть меню'
       },
       hero: {
         eyebrow: 'Вино · Природа · Атмосфера',
@@ -220,7 +223,10 @@
         bookTour: 'Book a tour',
         bookShort: 'Book now',
         menuLabel: 'Menu',
-        ariaLabel: 'Navigation'
+        ariaLabel: 'Navigation',
+        mobileAriaLabel: 'Mobile menu',
+        langAria: 'Language selection',
+        closeLabel: 'Close menu'
       },
       hero: {
         eyebrow: 'Wine · Nature · Atmosphere',
