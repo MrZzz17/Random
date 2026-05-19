@@ -192,9 +192,9 @@ body.nav-open{overflow:hidden;touch-action:none}
 .hero__media{
   position:absolute;
   inset:0;
-  background-image:image-set(url('img/hero-bg.webp') type('image/webp'),url('img/hero-bg.png') type('image/png'));
+  background-image:image-set(url('img/hero-bg.webp?v=2') type('image/webp'),url('img/hero-bg.png?v=2') type('image/png'));
   background-size:cover;
-  background-position:72% center;
+  background-position:58% center;
   background-repeat:no-repeat;
   pointer-events:none;
   -webkit-user-drag:none;
@@ -270,25 +270,35 @@ body.nav-open{overflow:hidden;touch-action:none}
 .tour-card:hover .tour-card__visual{transform:scale(1.04)}
 .tour-card__price{
   position:absolute;
-  top:clamp(.85rem,2.2vw,1.35rem);
-  right:clamp(.85rem,2.2vw,1.35rem);
+  top:clamp(1rem,2.8vw,1.65rem);
+  right:clamp(.65rem,2vw,1.15rem);
   z-index:2;
   pointer-events:none;
   user-select:none;
-  font-family:'Playfair Display',serif;
-  font-size:clamp(.82rem,1.25vw,1rem);
-  font-weight:500;
-  letter-spacing:.06em;
-  color:rgba(255,252,247,.96);
-  padding:.38rem .78rem .42rem;
-  border-radius:999px;
-  background:rgba(22,18,14,.34);
-  backdrop-filter:saturate(115%) blur(10px);
-  -webkit-backdrop-filter:saturate(115%) blur(10px);
-  border:1px solid rgba(255,255,255,.24);
+  transform:rotate(9deg);
+  transform-origin:100% 0;
+  font-family:Manrope,sans-serif;
+  font-size:clamp(1.05rem,1.85vw,1.38rem);
+  font-weight:700;
+  letter-spacing:.03em;
+  line-height:1;
+  color:#1a1208;
+  padding:.55rem 1.05rem .6rem;
+  border-radius:8px;
+  background:linear-gradient(145deg,#f5e4b8 0%,#e0c27a 38%,#c9a35a 72%,#a8863f 100%);
+  border:1.5px solid rgba(255,255,255,.55);
   box-shadow:
- inset 0 1px 0 rgba(255,255,255,.16),
- 0 6px 20px rgba(12,10,8,.22)
+    inset 0 1px 0 rgba(255,255,255,.65),
+    0 3px 0 rgba(120,90,40,.45),
+    0 10px 26px rgba(8,12,10,.42);
+  text-shadow:0 1px 0 rgba(255,255,255,.25)
+}
+.tour-card:hover .tour-card__price{
+  transform:rotate(7deg) scale(1.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7),
+    0 3px 0 rgba(120,90,40,.5),
+    0 14px 32px rgba(8,12,10,.48)
 }
 .tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%);pointer-events:none;z-index:1}
 .tour-card__content{
