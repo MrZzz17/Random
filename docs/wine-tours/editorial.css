@@ -45,7 +45,7 @@
   grid-template-columns:minmax(260px,.88fr) 1.12fr;
   gap:clamp(2rem,5vw,4rem);
   align-items:center;
-  margin-bottom:clamp(2.7rem,6.3vw,4.95rem)
+  margin-bottom:clamp(1.6rem,calc(6.3vw - 1cm),calc(4.95rem - 1cm))
 }
 .editorial-features__photo{
   margin:0;
@@ -111,7 +111,7 @@
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(200px,280px);
   gap:clamp(1.25rem,3.5vw,2.75rem);
-  align-items:end;
+  align-items:start;
   margin-top:-1cm
 }
 .editorial-features__photo--transfer{
@@ -121,6 +121,7 @@
   margin:0;
   justify-self:end;
   align-self:end;
+  margin-top:auto;
   z-index:2
 }
 .editorial-features__frame--transfer{
