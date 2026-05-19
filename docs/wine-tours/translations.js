@@ -50,11 +50,6 @@
           transferImgAlt: 'Комфортный автомобиль для винного тура'
         }
       },
-      divider: {
-        title: 'Идеальный день среди виноградников',
-        lead:
-          'Мы продумываем маршрут, темп, дегустации и атмосферу — вам остаётся только наслаждаться.'
-      },
       timeline: {
         eyebrow: 'Маршрут дня',
         title: 'Как проходит день',
@@ -286,11 +281,6 @@
           imgAlt: 'Guests enjoying a wine tasting among the vines',
           transferImgAlt: 'Comfortable vehicle for a wine tour'
         }
-      },
-      divider: {
-        title: 'The perfect day among the vines',
-        lead:
-          'We shape the route, pace, tastings, and atmosphere — you simply arrive and enjoy.'
       },
       timeline: {
         eyebrow: 'Your day',

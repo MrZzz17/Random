@@ -4,7 +4,7 @@
   var PROTECTED_SELECTOR =
     '.hero__media, .about__media, .region-card__media, .tour-card__visual, ' +
     '.editorial-features__media, .editorial-features__photo, .editorial-features__media--transfer, ' +
-    '.cinematic-divider, .cinematic-end__bg';
+    '.cinematic-end__bg';
 
   function isProtectedTarget(target) {
     if (!target || !target.closest) return false;
