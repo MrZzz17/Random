@@ -317,22 +317,6 @@
   align-items:stretch;
   margin-bottom:2rem
 }
-.tours__benefits{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:2rem 2.5rem;
-  padding:clamp(2rem,4vw,3rem) 0 0;
-  margin-top:1rem;
-  background:transparent;
-  border:none;
-  border-radius:0;
-  border-top:1px solid rgba(19,37,28,.08)
-}
-.tours__benefit{text-align:left}
-.tours__benefit svg{margin:0 0 1rem;color:var(--gold-dk)}
-.tours__benefit strong{font-size:.68rem;margin-bottom:.5rem}
-.tours__benefit span{font-size:.88rem;line-height:1.55}
-
 /* —— Route panel editorial —— */
 .route-panel--editorial{
   background:transparent;
@@ -1345,11 +1329,9 @@
     margin-top:0!important;
     grid-column:auto
   }
-  .tours__benefits{grid-template-columns:1fr 1fr;gap:1.5rem}
 }
 
 @media(max-width:768px){
-  .tours__benefits{grid-template-columns:1fr}
   .route-panel--editorial .route-wineries{grid-template-columns:1fr;gap:.75rem}
   .route-panel__layout{display:block}
   .route-sidebar .route-panel__intro--desk{display:none}

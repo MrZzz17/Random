@@ -75,14 +75,7 @@
         tagsLabel: 'Винодельни, которые могут войти в маршрут',
         cardPrice: 'от USD $500+',
         cardPriceAria: 'Стоимость — от 500 долларов США с человека',
-        viewRoute: 'Посмотреть маршрут →',
-        benefits: [
-          { strong: 'Частный тур', span: 'Только для вас и вашей компании' },
-          { strong: 'Премиальные винодельни', span: 'Только лучшие винодельни региона' },
-          { strong: 'Гастрономические опыты', span: 'Рестораны, дегустации и локальные деликатесы' },
-          { strong: 'Живописные места', span: 'Лучшие виды, виноградники и фотолокации' }
-        ],
-        benefitsAria: 'Преимущества тура'
+        viewRoute: 'Посмотреть маршрут →'
       },
       booking: {
         stepDate: 'Дата тура',
@@ -307,14 +300,7 @@
         tagsLabel: 'Wineries that may be included on your route',
         cardPrice: 'from USD $500+',
         cardPriceAria: 'Pricing from five hundred US dollars per person',
-        viewRoute: 'View itinerary →',
-        benefits: [
-          { strong: 'Private tour', span: 'Just for you and your group' },
-          { strong: 'Premium wineries', span: 'Only the region\'s best estates' },
-          { strong: 'Gastronomic experiences', span: 'Restaurants, tastings, and local delicacies' },
-          { strong: 'Scenic highlights', span: 'Top views, vineyards, and photo spots' }
-        ],
-        benefitsAria: 'Tour highlights'
+        viewRoute: 'View itinerary →'
       },
       booking: {
         stepDate: 'Tour date',
