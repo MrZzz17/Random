@@ -157,10 +157,6 @@
           {
             author: 'Елена и Михаил',
             text: 'Частный тур мечты: винодельни, обед с видом на виноградники, никакой суеты.'
-          },
-          {
-            tag: 'Газета «Weekend»',
-            text: '«…семейный винный тур из Мельбурна, который чувствуется как приглашение к друзьям, а не экскурсия.»'
           }
         ]
       },
@@ -353,10 +349,6 @@
           {
             author: 'Elena & Mikhail',
             text: 'A dream private tour: wineries, lunch overlooking the vines, zero rush.'
-          },
-          {
-            tag: 'Weekend Herald',
-            text: '“…a Melbourne family wine tour that feels like an invitation from friends, not a bus excursion.”'
           }
         ]
       },
