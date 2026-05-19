@@ -78,8 +78,8 @@
         title: 'Выберите ваш винный тур',
         sub: 'Каждый маршрут создаётся индивидуально под ваш вкус, темп и предпочтения.',
         tagsLabel: 'Винодельни, которые могут войти в маршрут',
-        cardPrice: 'от $500+',
-        cardPriceAria: 'Стоимость — от 500 австралийских долларов с человека',
+        cardPrice: 'от USD $500+',
+        cardPriceAria: 'Стоимость — от 500 долларов США с человека',
         viewRoute: 'Посмотреть маршрут →',
         benefits: [
           { strong: 'Частный тур', span: 'Только для вас и вашей компании' },
@@ -283,8 +283,8 @@
         title: 'Choose your wine tour',
         sub: 'Every itinerary is tailored to your taste, pace, and preferences.',
         tagsLabel: 'Wineries that may be included on your route',
-        cardPrice: '$500+',
-        cardPriceAria: 'Pricing from five hundred Australian dollars per person',
+        cardPrice: 'from USD $500+',
+        cardPriceAria: 'Pricing from five hundred US dollars per person',
         viewRoute: 'View itinerary →',
         benefits: [
           { strong: 'Private tour', span: 'Just for you and your group' },
