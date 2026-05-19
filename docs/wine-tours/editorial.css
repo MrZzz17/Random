@@ -754,15 +754,7 @@
   flex-direction:column;
   gap:clamp(1.75rem,4vw,2.75rem)
 }
-.contact__top{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:1.5rem 2rem
-}
 .contact__intro{
-  flex:1 1 280px;
   max-width:36rem
 }
 .contact__intro h2{
@@ -782,7 +774,7 @@
 }
 .contact__spread{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:1fr 1.15fr;
   gap:clamp(1rem,2.5vw,2rem);
   align-items:stretch
 }
@@ -834,38 +826,19 @@
   color:rgba(255,255,255,.55);
   margin-top:.2rem
 }
-.contact__actions{
+.contact-chip--reach .contact-chip__body{
+  flex:1;
   display:flex;
-  flex-wrap:wrap;
-  gap:.75rem;
-  flex:0 0 auto;
-  align-items:center
+  flex-direction:column;
+  justify-content:center;
+  gap:0
 }
-.contact__actions .btn-chat{
-  min-width:11rem;
-  min-height:52px;
-  padding:1rem 1.5rem;
-  box-shadow:0 8px 24px rgba(0,0,0,.25)
+.contact-chip__group--email{
+  margin-top:1rem;
+  padding-top:1rem;
+  border-top:1px solid rgba(255,255,255,.14)
 }
-.contact__actions .btn-email-secondary{
-  border:1.5px solid rgba(224,194,122,.75);
-  color:var(--light-gold);
-  background:rgba(255,255,255,.06);
-  padding:.85rem 1.35rem;
-  min-height:52px;
-  border-radius:8px;
-  font-family:Manrope,sans-serif;
-  font-size:.65rem;
-  font-weight:600;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  transition:background .2s,border-color .2s
-}
-.contact__actions .btn-email-secondary:hover{
-  background:rgba(255,255,255,.12);
-  border-color:var(--light-gold);
-  color:#fff
-}
+.contact-chip__group--email h4{margin-bottom:.35rem}
 .copyright{
   position:relative;
   z-index:2;
@@ -900,7 +873,7 @@
     gap:.7rem
   }
   .day-timeline__inner{grid-template-columns:1fr}
-  .contact__spread{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+  .contact__spread{grid-template-columns:1fr 1.1fr;gap:1rem}
   .contact-chip{padding:1rem 1.1rem;min-height:7rem}
 }
 
@@ -924,10 +897,6 @@
   .route-sidebar .route-panel__intro--desk{display:none}
   .route-main .route-step__heading{display:flex}
   .route-main .route-step__title--mobile{display:block}
-  .contact__top{flex-direction:column;align-items:stretch}
-  .contact__actions{width:100%}
-  .contact__actions .btn-chat,
-  .contact__actions .btn-email-secondary{flex:1;min-width:0}
   .contact__spread{grid-template-columns:1fr;gap:.85rem}
   .contact-chip:nth-child(n){transform:none}
 }
