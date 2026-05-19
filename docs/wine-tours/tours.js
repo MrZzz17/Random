@@ -46,6 +46,12 @@
       .replace(/"/g, '&quot;');
   }
 
+  function tourDescriptionMarkup(desc) {
+    if (!desc) return '';
+    if (String(desc).indexOf('<br>') !== -1) return desc;
+    return escapeHtml(desc);
+  }
+
   function tourCardTitleHtml(tour) {
     if (getLang() === 'ru' && tour.titleEn) {
       var main =
@@ -277,7 +283,7 @@
           '<div class="tour-card__content">' +
             '<h3 class="tour-card__title">' + tourCardTitleHtml(tour) + '</h3>' +
             '<p class="tour-card__subtitle">' + tour.subtitle + '</p>' +
-            '<p class="tour-card__desc">' + tour.description + '</p>' +
+            '<p class="tour-card__desc">' + tourDescriptionMarkup(tour.description) + '</p>' +
             '<ul class="tour-card__meta">' +
               tour.details.map(function (d) {
                 return '<li><span class="tour-card__meta-icon">' + iconSvg(d.icon) + '</span>' + d.text + '</li>';

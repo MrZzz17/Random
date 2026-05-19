@@ -422,7 +422,7 @@
         subtitle: 'Частный винный тур',
         detailHeading: 'Частный винный тур — Долина Ярра',
         description:
-          'Классический винный регион недалеко от Мельбурна с лучшими Pinot Noir и Chardonnay Австралии.',
+          'Классический винный регион недалеко от Мельбурна с лучшими Pinot Noir и Chardonnay<br>Австралии.',
         detailIntro:
           'Всего в часе езды от Мельбурна, Yarra Valley известна зелёными виноградниками, award-winning wines и красивыми видами. Это один из лучших регионов для Pinot Noir, Chardonnay и спокойного винного дня за городом.',
         details: [
@@ -484,7 +484,7 @@
       },
       en: {
         description:
-          'A classic wine region near Melbourne, home to some of Australia\'s finest Pinot Noir and Chardonnay.',
+          'A classic wine region near Melbourne, home to some of Australia\'s finest<br>Pinot Noir and Chardonnay.',
         detailIntro:
           'Just an hour from Melbourne, Yarra Valley is known for green vineyards, award-winning wines, and beautiful views. It is one of the best regions for Pinot Noir, Chardonnay, and a relaxed wine day out of the city.',
         details: [
