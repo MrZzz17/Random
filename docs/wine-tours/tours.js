@@ -38,6 +38,24 @@
     return window.I18n ? window.I18n.t(key) : key;
   }
 
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function tourCardTitleHtml(tour) {
+    if (getLang() === 'ru' && tour.titleEn) {
+      return (
+        '<span class="tour-card__title-main">' + escapeHtml(tour.title) + '</span>' +
+        '<span class="tour-card__title-en">' + escapeHtml(tour.titleEn) + '</span>'
+      );
+    }
+    return escapeHtml(tour.title);
+  }
+
   function getLang() {
     return window.I18n ? window.I18n.getLang() : 'ru';
   }
@@ -254,7 +272,7 @@
             '<div class="tour-card__overlay" aria-hidden="true"></div>' +
           '</div>' +
           '<div class="tour-card__content">' +
-            '<h3 class="tour-card__title">' + tour.title + '</h3>' +
+            '<h3 class="tour-card__title">' + tourCardTitleHtml(tour) + '</h3>' +
             '<p class="tour-card__subtitle">' + tour.subtitle + '</p>' +
             '<p class="tour-card__desc">' + tour.description + '</p>' +
             '<ul class="tour-card__meta">' +

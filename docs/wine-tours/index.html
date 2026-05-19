@@ -209,7 +209,28 @@ main.lang-fade{opacity:.55;transition:opacity .2s ease}
 .tour-card:hover .tour-card__visual{transform:scale(1.04)}
 .tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%);pointer-events:none}
 .tour-card__content{position:relative;z-index:2;margin-top:auto;padding:clamp(1.5rem,3vw,2.25rem);color:#fff;transform:translateZ(0)}
-.tour-card__title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,4.25rem);font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;margin-bottom:.35rem}
+.tour-card__title{
+  display:flex;
+  flex-direction:column;
+  gap:.2rem;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4.5vw,4.25rem);
+  font-weight:600;
+  letter-spacing:.04em;
+  line-height:1.05;
+  margin-bottom:.35rem
+}
+.tour-card__title-main{display:block;text-transform:uppercase}
+.tour-card__title-en{
+  display:block;
+  font-family:Manrope,sans-serif;
+  font-size:clamp(.72rem,1.1vw,.88rem);
+  font-weight:600;
+  font-style:normal;
+  letter-spacing:.14em;
+  text-transform:none;
+  color:rgba(255,255,255,.78)
+}
 .tour-card__subtitle{font-family:'Playfair Display',serif;font-style:italic;color:var(--light-gold);font-size:clamp(1.25rem,2.2vw,2rem);margin-bottom:.75rem}
 .tour-card__desc{font-size:clamp(.9rem,1.2vw,1.05rem);line-height:1.55;color:rgba(255,255,255,.92);max-width:28rem;margin-bottom:1.1rem}
 .tour-card__meta{display:flex;flex-wrap:wrap;gap:.65rem 1.1rem;list-style:none;margin-bottom:1.1rem}
@@ -766,9 +787,9 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   });
 })();
 </script>
-<script src="translations.js?v=10"></script>
+<script src="translations.js?v=11"></script>
 <script src="i18n.js?v=2"></script>
-<script src="tours.js?v=8"></script>
+<script src="tours.js?v=9"></script>
 <script src="editorial.js?v=3"></script>
 </body>
 </html>

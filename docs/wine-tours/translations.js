@@ -408,6 +408,10 @@
   window.TOUR_CONTENT = {
     yarra: {
       ru: {
+        title: 'ДОЛИНА ЯРРА',
+        titleEn: 'Yarra Valley',
+        subtitle: 'Частный винный тур',
+        detailHeading: 'Частный винный тур — Долина Ярра',
         description:
           'Классический винный регион недалеко от Мельбурна с лучшими Pinot Noir и Chardonnay Австралии.',
         detailIntro:
@@ -534,6 +538,10 @@
     },
     mornington: {
       ru: {
+        title: 'ПОЛУОСТРОВ МОРНИНГТОН',
+        titleEn: 'Mornington Peninsula',
+        subtitle: 'Частный винный тур',
+        detailHeading: 'Частный винный тур — Полуостров Морнингтон',
         description:
           'Идеальное сочетание вин, океанских видов, гастрономии и атмосферы побережья.',
         detailIntro:
