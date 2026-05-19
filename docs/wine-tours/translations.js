@@ -123,21 +123,32 @@
         msgThanks: 'Спасибо!'
       },
       why: {
-        title: 'Почему выбирают нас',
-        lead: 'Мы создаём персональный винный день — не шаблонную экскурсию в автобусе.',
-        items: [
-          'Индивидуальный подход',
-          'Проверенные винодельни',
-          'Комфорт и безопасность',
-          'Незабываемые впечатления'
-        ],
-        panelTitle: 'Для кого наши туры',
-        panelItems: [
-          'Для пар',
-          'Для компаний друзей',
-          'Для туристов из СНГ',
-          'Для корпоративных групп',
-          'Для праздников и особых дат'
+        titleHtml: 'Почему выбирают<br>нас',
+        subheadHtml:
+          'Не автобусный тур и не случайный набор виноделен —<br>а спокойный, красивый день, собранный под вас.',
+        quoteHtml:
+          'Мы не продаём стандартный маршрут —<br>мы создаём день, который хочется запомнить.',
+        features: [
+          {
+            title: 'Частный формат',
+            bodyHtml:
+              'Тур проходит только для вас и вашей компании —<br>без незнакомых людей, спешки<br>и ощущения групповой экскурсии.'
+          },
+          {
+            title: 'Маршрут под ваш вкус',
+            bodyHtml:
+              'Мы подбираем винодельни под ваши предпочтения:<br>виды, еда, Pinot Noir, Chardonnay,<br>sparkling, boutique estates<br>или красивые места для фото.'
+          },
+          {
+            title: 'Русскоязычное сопровождение',
+            bodyHtml:
+              'Мы рассказываем о вине<br>и регионе понятно, спокойно<br>и по-человечески —<br>без сложного винного снобизма.'
+          },
+          {
+            titleHtml: 'Красивый день<br>за городом',
+            bodyHtml:
+              '<span class="why-feature__line">Это не просто дегустации.</span><span class="why-feature__line">Это дорога, пейзажи, обед, разговоры, фотографии и ощущение настоящей Австралии.</span>'
+          }
         ],
         reviewsAria: 'Отзывы гостей (заглушки)',
         reviewsNote: 'Скоро здесь появятся настоящие отзывы гостей',
@@ -152,7 +163,7 @@
           },
           {
             label: 'WhatsApp',
-            text: 'Алекс, спасибо за тур! Всё супер организовано, дети тоже в восторге 🍷',
+            text: 'Алекс, спасибо за тур! Всё супер организовано, дети тоже в восторге.',
             meta: 'вчера, 19:42'
           },
           {
@@ -328,24 +339,35 @@
         msgThanks: 'Thank you!'
       },
       why: {
-        title: 'Why guests choose us',
-        lead: 'We craft a personal wine day — not a template bus tour.',
-        items: [
-          'Personalised approach',
-          'Trusted winery partners',
-          'Comfort and safety',
-          'Memorable experiences'
-        ],
-        panelTitle: 'Who our tours are for',
-        panelItems: [
-          'Couples',
-          'Groups of friends',
-          'International visitors',
-          'Corporate groups',
-          'Celebrations and special occasions'
+        titleHtml: 'Why guests<br>choose us',
+        subheadHtml:
+          'Not a bus tour or a random list of wineries —<br>a calm, beautiful day designed around you.',
+        quoteHtml:
+          'We do not sell a standard itinerary —<br>we create a day you will want to remember.',
+        features: [
+          {
+            title: 'Private format',
+            bodyHtml:
+              'The tour is exclusively for you and your party —<br>no strangers, no rushing,<br>and none of the group-tour feeling.'
+          },
+          {
+            title: 'A route for your taste',
+            bodyHtml:
+              'We choose wineries around your preferences:<br>views, food, Pinot Noir, Chardonnay,<br>sparkling, boutique estates,<br>or beautiful photo spots.'
+          },
+          {
+            title: 'Russian-speaking hosts',
+            bodyHtml:
+              'We talk about wine and the region<br>in a clear, calm, human way —<br>without wine-world snobbery.'
+          },
+          {
+            titleHtml: 'A beautiful day<br>out of the city',
+            bodyHtml:
+              '<span class="why-feature__line">This is not tastings alone.</span><span class="why-feature__line">It is the drive, landscapes, lunch, conversation, photos, and the feeling of real Australia.</span>'
+          }
         ],
         reviewsAria: 'Guest reviews (placeholders)',
-        reviewsNote: 'Real guest review photos coming soon',
+        reviewsNote: 'Real guest reviews coming soon',
         reviews: [
           {
             author: 'Marina K.',
@@ -357,7 +379,7 @@
           },
           {
             label: 'WhatsApp',
-            text: 'Alex, thanks for the tour! Everything was seamless — the kids loved it too 🍷',
+            text: 'Alex, thanks for the tour! Everything was seamless — the kids loved it too.',
             meta: 'yesterday, 7:42 pm'
           },
           {
