@@ -490,7 +490,7 @@
 
 /* —— Why / About editorial —— */
 .why{
-  padding:clamp(4rem,8vw,6rem) 0;
+  padding:clamp(4rem,8vw,6rem) 0 clamp(3rem,6vw,4.5rem);
   background:var(--cream)
 }
 .why__bg{display:none}
@@ -526,9 +526,9 @@
 }
 .why-reviews{
   position:relative;
-  min-height:clamp(400px,48vw,540px);
-  margin-top:clamp(2.5rem,6vw,4rem);
-  padding-bottom:2rem
+  min-height:clamp(260px,34vw,360px);
+  margin-top:clamp(1.75rem,4vw,2.5rem);
+  padding-bottom:.5rem
 }
 .why-reviews__note{
   position:absolute;
@@ -565,8 +565,7 @@
 .review-cutout--2{left:22%;top:0;transform:rotate(3deg);z-index:3;width:clamp(200px,22vw,250px)}
 .review-cutout--3{left:48%;top:18%;transform:rotate(-2deg);z-index:5}
 .review-cutout--4{right:18%;top:4%;transform:rotate(5deg);z-index:2}
-.review-cutout--5{right:0;top:38%;transform:rotate(-4deg);z-index:4;width:clamp(200px,21vw,272px)}
-.review-cutout--6{left:12%;bottom:0;transform:rotate(2deg);z-index:3;width:clamp(220px,24vw,300px)}
+.review-cutout--5{right:0;top:28%;transform:rotate(-4deg);z-index:4;width:clamp(200px,21vw,272px)}
 
 .review-cutout--google{
   border-radius:10px;
@@ -670,30 +669,6 @@
 .review-cutout--trip .review-cutout__author{font-size:.74rem;margin-bottom:.35rem}
 .review-cutout--trip .review-cutout__text{font-size:.7rem}
 
-.review-cutout--paper{
-  background:#f3efe6;
-  background-image:
-    repeating-linear-gradient(0deg,transparent,transparent 23px,rgba(0,0,0,.03) 24px);
-  border:1px solid #d4cfc4;
-  padding:1rem 1.1rem;
-  clip-path:polygon(1% 0,99% 2%,100% 98%,0 100%)
-}
-.review-cutout__paper-tag{
-  font-family:'Playfair Display',serif;
-  font-size:.62rem;
-  font-style:italic;
-  color:#5a5349;
-  margin-bottom:.5rem;
-  border-bottom:1px solid rgba(0,0,0,.12);
-  padding-bottom:.35rem
-}
-.review-cutout__text--clip{
-  font-family:'Playfair Display',serif;
-  font-size:.8rem;
-  line-height:1.6;
-  color:#2a2118
-}
-
 @media(max-width:900px){
   .why-reviews{
     min-height:auto;
@@ -701,7 +676,7 @@
     flex-wrap:wrap;
     gap:1.25rem 1rem;
     justify-content:center;
-    padding:2.5rem 0 1rem
+    padding:1.5rem 0 .25rem
   }
   .why-reviews__note{
     position:relative;
@@ -726,7 +701,6 @@
   .review-cutout--3{transform:rotate(-1deg)}
   .review-cutout--4{transform:rotate(3deg)}
   .review-cutout--5{transform:rotate(-3deg)}
-  .review-cutout--6{transform:rotate(1.5deg)}
 }
 
 .about{
