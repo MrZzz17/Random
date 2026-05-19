@@ -828,15 +828,9 @@
   margin:0;
   padding:0;
   border:none;
-  background:transparent;
-  font:inherit;
-  color:inherit
+  background:transparent
 }
-.about__story .about__story-quote p{
-  margin:0;
-  font:inherit;
-  color:inherit
-}
+.about__story .about__story-quote p{margin:0}
 .about__story .about__story-quote p::before{content:'«'}
 .about__story .about__story-quote p::after{content:'»'}
 @media(max-width:900px){
