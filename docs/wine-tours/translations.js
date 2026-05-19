@@ -162,6 +162,9 @@
       },
       about: {
         title: 'О нас',
+        eyebrow: 'Наша история',
+        pullQuote:
+          'Будто вы приехали к друзьям, которые давно живут в Австралии и хотят показать вам её настоящую сторону.',
         paragraphs: [
           'Мы — русскоговорящая пара из Мельбурна, уже много лет живущая в Австралии и по-настоящему влюблённая в эту страну. За это время Австралия стала для нас не просто домом, а местом, которым хочется делиться — через её природу, атмосферу, людей, гастрономию и, конечно, удивительную винную культуру.',
           'Мы сами много путешествуем по миру и всегда особенно ценим не «туристические программы», а тёплые, глубокие впечатления от местных людей — когда тебе показывают страну не по шаблону, а через личный взгляд и любовь к своему региону. Именно такой опыт мы стараемся создавать и для наших гостей.',
@@ -359,6 +362,9 @@
       },
       about: {
         title: 'About us',
+        eyebrow: 'Our story',
+        pullQuote:
+          'As if you have come to friends who have long lived in Australia and want to show you its real side.',
         paragraphs: [
           'We are a Russian-speaking couple based in Melbourne, living in Australia for many years and genuinely in love with this country. Over time, Australia has become more than home for us — it is a place we want to share through its nature, atmosphere, people, food, and remarkable wine culture.',
           'We travel widely ourselves and always value warm, personal experiences with locals — when a country is shown not from a template, but through someone’s own perspective and love for their region. That is the experience we aim to create for our guests.',
