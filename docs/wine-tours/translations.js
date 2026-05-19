@@ -408,7 +408,8 @@
   window.TOUR_CONTENT = {
     yarra: {
       ru: {
-        title: 'ДОЛИНА ЯРРА',
+        title: 'ДОЛИНА',
+        titleLine2: 'ЯРРА',
         titleEn: 'Yarra Valley',
         subtitle: 'Частный винный тур',
         detailHeading: 'Частный винный тур — Долина Ярра',

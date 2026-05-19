@@ -48,10 +48,12 @@
 
   function tourCardTitleHtml(tour) {
     if (getLang() === 'ru' && tour.titleEn) {
-      return (
+      var main =
         '<span class="tour-card__title-main">' + escapeHtml(tour.title) + '</span>' +
-        '<span class="tour-card__title-en">' + escapeHtml(tour.titleEn) + '</span>'
-      );
+        (tour.titleLine2
+          ? '<span class="tour-card__title-main">' + escapeHtml(tour.titleLine2) + '</span>'
+          : '');
+      return main + '<span class="tour-card__title-en">' + escapeHtml(tour.titleEn) + '</span>';
     }
     return escapeHtml(tour.title);
   }
