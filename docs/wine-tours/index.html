@@ -62,12 +62,12 @@ button{font:inherit;cursor:pointer;border:none;background:none}
   display:flex;align-items:center;justify-content:flex-start;
   padding:0 1.5rem;gap:.75rem
 }
-.logo{display:flex;align-items:center;color:var(--white);flex-shrink:0}
+.logo{display:flex;align-items:center;color:var(--white);flex-shrink:0;background:transparent}
 .logo__img{
   display:block;
-  height:clamp(38px,4.8vw,50px);
+  height:clamp(72px,5.2vw,82px);
   width:auto;
-  max-width:min(240px,52vw);
+  max-width:min(340px,58vw);
   object-fit:contain;
   object-position:left center
 }
@@ -537,7 +537,7 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
 @media(max-width:480px){
   :root{--nav-h:72px}
   .site-header .bar{padding:0 1rem}
-  .logo__img{height:34px;max-width:min(200px,58vw)}
+  .logo__img{height:clamp(52px,14vw,68px);max-width:min(260px,72vw)}
   .hero{min-height:680px;max-height:720px}
   .hero__bg{object-position:85% 42%}
   .tours{padding:3rem 0}
@@ -570,8 +570,8 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   <div class="bar">
     <a href="#top" class="logo">
       <picture>
-        <source srcset="img/logo.webp?v=1" type="image/webp">
-        <img class="logo__img" src="img/logo.png?v=1" width="1774" height="887" alt="A &amp; J Wine Journeys">
+        <source srcset="img/logo.webp?v=2" type="image/webp">
+        <img class="logo__img" src="img/logo.png?v=2" width="1484" height="575" alt="A &amp; I Wine Journeys">
       </picture>
     </a>
     <nav class="site-nav site-nav--desktop" aria-label="Навигация" data-i18n-attr="nav.ariaLabel|aria-label">
