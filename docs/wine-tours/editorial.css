@@ -744,48 +744,48 @@
   user-select:none
 }
 .about__heading{
-  margin:0 0 .85rem;
+  margin:0 0 .65rem;
   font-weight:600
 }
 .about__lead{
-  font-size:clamp(.95rem,1.2vw,1.05rem);
-  line-height:1.6;
+  font-size:clamp(.78rem,.95vw,.86rem);
+  line-height:1.52;
   color:var(--text-dark);
   font-weight:400;
-  margin-bottom:1rem;
+  margin-bottom:.7rem;
   max-width:34rem
 }
 .about__body{
   display:flex;
   flex-direction:column;
-  gap:.85rem;
+  gap:.55rem;
   max-width:34rem
 }
 .about__text{
   font-family:Inter,system-ui,sans-serif;
-  font-size:clamp(.88rem,1.05vw,.95rem);
-  line-height:1.62;
+  font-size:clamp(.75rem,.9vw,.82rem);
+  line-height:1.55;
   color:var(--text-muted);
   font-weight:300;
   margin:0
 }
 .about__story{
-  margin-bottom:1rem;
-  padding:0 0 0 1.1rem;
-  border-left:3px solid var(--gold);
+  margin-bottom:.7rem;
+  padding:0 0 0 .95rem;
+  border-left:2px solid var(--gold);
   max-width:34rem
 }
 .about__story-text,
 .about__story-quote p{
   font-family:'Playfair Display',serif;
-  font-size:clamp(1.05rem,1.75vw,1.28rem);
+  font-size:clamp(.82rem,1.25vw,.95rem);
   font-style:italic;
   font-weight:500;
-  line-height:1.4;
+  line-height:1.38;
   color:var(--dark-green)
 }
 .about__story-text{
-  margin:0 0 .75rem;
+  margin:0 0 .5rem;
   max-width:none
 }
 .about__story-quote{

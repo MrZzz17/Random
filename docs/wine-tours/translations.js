@@ -166,10 +166,12 @@
         pullQuote:
           'Будто вы приехали к друзьям, которые давно живут в Австралии и хотят показать вам её настоящую сторону.',
         paragraphs: [
-          'Русскоговорящая пара из Мельбурна. Много лет в Австралии — делимся её природой, гастрономией и винной культурой.',
-          'Мы ценим не шаблонные программы, а тёплый взгляд местных. Именно такой опыт создаём для гостей.',
-          'Без спешки и автобусов: хороший день, винодельни с характером и пейзажи, которые запоминаются.',
-          'О вине говорим просто по-русски, подбираем маршруты по регионам вокруг Мельбурна и, по желанию, советуем места в городе. Так мы показываем Австралию, которую полюбили.'
+          'Мы — русскоговорящая пара из Мельбурна, уже много лет живущая в Австралии и по-настоящему влюблённая в эту страну. За это время Австралия стала для нас не просто домом, а местом, которым хочется делиться — через её природу, атмосферу, людей, гастрономию и, конечно, удивительную винную культуру.',
+          'Мы сами много путешествуем по миру и всегда особенно ценим не «туристические программы», а тёплые, глубокие впечатления от местных людей — когда тебе показывают страну не по шаблону, а через личный взгляд и любовь к своему региону. Именно такой опыт мы стараемся создавать и для наших гостей.',
+          'Наши туры — это не про спешку и автобусы с микрофоном. Это про красивый день, хорошие разговоры, винодельни с характером, потрясающие пейзажи и ощущение, будто вы приехали к друзьям, которые давно живут в Австралии и хотят показать вам её настоящую сторону.',
+          'Мы с удовольствием рассказываем о вине простым и понятным языком на русском, помогаем открыть для себя лучшие винные регионы вокруг Мельбурна и подбираем маршруты так, чтобы они были не только красивыми, но и по-настоящему запоминающимися.',
+          'Помимо винных туров, мы также можем помочь с рекомендациями и организацией отдыха в самом Мельбурне: лучшие рестораны, бары, океанские дороги, природа, скрытые места и любимые уголки местных жителей.',
+          'Для нас это не просто работа. Это возможность знакомить людей с Австралией такой, какой мы сами её полюбили.'
         ],
         imgAlt: 'Основатели Alex Trips Wine Tours'
       },
@@ -364,10 +366,12 @@
         pullQuote:
           'As if you have come to friends who have long lived in Australia and want to show you its real side.',
         paragraphs: [
-          'A Russian-speaking couple based in Melbourne. We have lived in Australia for years and share its nature, food, and wine culture.',
-          'We value warm, personal local insight over template itineraries — and we create that experience for our guests.',
-          'No rush or coach microphones: a beautiful day, characterful wineries, and landscapes worth remembering.',
-          'We talk about wine in clear Russian, plan routes across the regions around Melbourne, and can suggest city favourites too. That is how we share the Australia we love.'
+          'We are a Russian-speaking couple based in Melbourne, living in Australia for many years and genuinely in love with this country. Over time, Australia has become more than home for us — it is a place we want to share through its nature, atmosphere, people, food, and remarkable wine culture.',
+          'We travel widely ourselves and always value warm, personal experiences with locals — when a country is shown not from a template, but through someone’s own perspective and love for their region. That is the experience we aim to create for our guests.',
+          'Our tours are not about rushing or coaches with a microphone. They are about a beautiful day, good conversation, wineries with character, stunning landscapes, and the feeling that you have come to friends who have long lived in Australia and want to show you its real side.',
+          'We are happy to talk about wine in clear, approachable Russian, help you discover the best wine regions around Melbourne, and shape routes that are not only scenic, but truly memorable.',
+          'Beyond wine tours, we can also help with recommendations and planning time in Melbourne itself: restaurants, bars, coastal drives, nature, hidden spots, and favourite local corners.',
+          'For us, this is not just work. It is a chance to introduce people to the Australia we have come to love.'
         ],
         imgAlt: 'Founders of Alex Trips Wine Tours'
       },
