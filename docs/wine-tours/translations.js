@@ -162,9 +162,14 @@
       },
       about: {
         title: 'О нас',
-        p1:
-          'Alex Trips Wine Tours — семейный бизнес из Мельбурна. Мы любим австралийское вино и создаём туры с душой: от первой дегустации до бокала на закате.',
-        p2: 'Рассказываем о винах понятно на русском языке. Вы — дорогие гости, а не туристы в автобусе.',
+        paragraphs: [
+          'Мы — русскоговорящая пара из Мельбурна, уже много лет живущая в Австралии и по-настоящему влюблённая в эту страну. За это время Австралия стала для нас не просто домом, а местом, которым хочется делиться — через её природу, атмосферу, людей, гастрономию и, конечно, удивительную винную культуру.',
+          'Мы сами много путешествуем по миру и всегда особенно ценим не «туристические программы», а тёплые, глубокие впечатления от местных людей — когда тебе показывают страну не по шаблону, а через личный взгляд и любовь к своему региону. Именно такой опыт мы стараемся создавать и для наших гостей.',
+          'Наши туры — это не про спешку и автобусы с микрофоном. Это про красивый день, хорошие разговоры, винодельни с характером, потрясающие пейзажи и ощущение, будто вы приехали к друзьям, которые давно живут в Австралии и хотят показать вам её настоящую сторону.',
+          'Мы с удовольствием рассказываем о вине простым и понятным языком на русском, помогаем открыть для себя лучшие винные регионы вокруг Мельбурна и подбираем маршруты так, чтобы они были не только красивыми, но и по-настоящему запоминающимися.',
+          'Помимо винных туров, мы также можем помочь с рекомендациями и организацией отдыха в самом Мельбурне: лучшие рестораны, бары, океанские дороги, природа, скрытые места и любимые уголки местных жителей.',
+          'Для нас это не просто работа. Это возможность знакомить людей с Австралией такой, какой мы сами её полюбили.'
+        ],
         imgAlt: 'Основатели Alex Trips Wine Tours'
       },
       contact: {
@@ -354,10 +359,14 @@
       },
       about: {
         title: 'About us',
-        p1:
-          'Alex Trips Wine Tours is a family business based in Melbourne. We love Australian wine and design tours with heart — from your first tasting to a glass at sunset.',
-        p2:
-          'We explain wine clearly and personally. You are our guests, not tourists on a bus.',
+        paragraphs: [
+          'We are a Russian-speaking couple based in Melbourne, living in Australia for many years and genuinely in love with this country. Over time, Australia has become more than home for us — it is a place we want to share through its nature, atmosphere, people, food, and remarkable wine culture.',
+          'We travel widely ourselves and always value warm, personal experiences with locals — when a country is shown not from a template, but through someone’s own perspective and love for their region. That is the experience we aim to create for our guests.',
+          'Our tours are not about rushing or coaches with a microphone. They are about a beautiful day, good conversation, wineries with character, stunning landscapes, and the feeling that you have come to friends who have long lived in Australia and want to show you its real side.',
+          'We are happy to talk about wine in clear, approachable Russian, help you discover the best wine regions around Melbourne, and shape routes that are not only scenic, but truly memorable.',
+          'Beyond wine tours, we can also help with recommendations and planning time in Melbourne itself: restaurants, bars, coastal drives, nature, hidden spots, and favourite local corners.',
+          'For us, this is not just work. It is a chance to introduce people to the Australia we have come to love.'
+        ],
         imgAlt: 'Founders of Alex Trips Wine Tours'
       },
       contact: {

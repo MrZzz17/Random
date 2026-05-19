@@ -722,7 +722,8 @@
   line-height:1.08;
   margin-bottom:1.5rem
 }
-.about p{font-size:1.05rem;max-width:36rem;line-height:1.8}
+.about__copy p{font-size:1.05rem;max-width:36rem;line-height:1.8;margin-bottom:.85rem}
+.about__copy p:last-child{margin-bottom:0}
 
 /* —— Contact cinematic —— */
 .contact{
