@@ -539,7 +539,8 @@
     },
     mornington: {
       ru: {
-        title: 'ПОЛУОСТРОВ МОРНИНГТОН',
+        title: 'ПОЛУОСТРОВ',
+        titleLine2: 'МОРНИНГТОН',
         titleEn: 'Mornington Peninsula',
         subtitle: 'Частный винный тур',
         detailHeading: 'Частный винный тур — Полуостров Морнингтон',
