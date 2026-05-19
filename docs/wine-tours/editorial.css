@@ -808,28 +808,36 @@
   border-left:2px solid var(--gold);
   max-width:34rem
 }
-.about__story-text,
-.about__story-quote p{
+.about__story .about__story-text,
+.about__story .about__story-quote,
+.about__story .about__story-quote p{
   font-family:'Playfair Display',serif;
   font-size:clamp(.82rem,1.25vw,.95rem);
   font-style:italic;
-  font-weight:500;
+  font-weight:400;
   line-height:1.38;
-  color:var(--dark-green)
+  color:var(--dark-green);
+  -webkit-font-smoothing:antialiased
 }
-.about__story-text{
+.about__story .about__story-text{
   margin:0 0 .5rem;
   max-width:none
 }
-.about__story-quote{
+.about__story .about__story-quote{
   margin:0;
   padding:0;
   border:none;
-  background:transparent
+  background:transparent;
+  font:inherit;
+  color:inherit
 }
-.about__story-quote p{margin:0}
-.about__story-quote p::before{content:'«'}
-.about__story-quote p::after{content:'»'}
+.about__story .about__story-quote p{
+  margin:0;
+  font:inherit;
+  color:inherit
+}
+.about__story .about__story-quote p::before{content:'«'}
+.about__story .about__story-quote p::after{content:'»'}
 @media(max-width:900px){
   .about__grid{grid-template-columns:1fr;gap:2rem}
   .about__visual{position:static}
