@@ -271,6 +271,7 @@
       return (
         '<article class="tour-card tour-card--' + tour.id + (selectedTourId === tour.id ? ' is-active' : '') + '" data-tour-id="' + tour.id + '">' +
           '<div class="tour-card__visual" role="img" aria-label="" style="background-image:url(\'' + tour.image + '\');background-position:' + tour.imagePosition + '">' +
+            '<span class="tour-card__price" aria-label="' + escapeHtml(t('tours.cardPriceAria')) + '">' + escapeHtml(t('tours.cardPrice')) + '</span>' +
             '<div class="tour-card__overlay" aria-hidden="true"></div>' +
           '</div>' +
           '<div class="tour-card__content">' +

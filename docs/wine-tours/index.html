@@ -207,7 +207,29 @@ main.lang-fade{opacity:.55;transition:opacity .2s ease}
   user-select:none
 }
 .tour-card:hover .tour-card__visual{transform:scale(1.04)}
-.tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%);pointer-events:none}
+.tour-card__price{
+  position:absolute;
+  top:clamp(.85rem,2.2vw,1.35rem);
+  right:clamp(.85rem,2.2vw,1.35rem);
+  z-index:2;
+  pointer-events:none;
+  user-select:none;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(.82rem,1.25vw,1rem);
+  font-weight:500;
+  letter-spacing:.06em;
+  color:rgba(255,252,247,.96);
+  padding:.38rem .78rem .42rem;
+  border-radius:999px;
+  background:rgba(22,18,14,.34);
+  backdrop-filter:saturate(115%) blur(10px);
+  -webkit-backdrop-filter:saturate(115%) blur(10px);
+  border:1px solid rgba(255,255,255,.24);
+  box-shadow:
+ inset 0 1px 0 rgba(255,255,255,.16),
+ 0 6px 20px rgba(12,10,8,.22)
+}
+.tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%);pointer-events:none;z-index:1}
 .tour-card__content{
   position:absolute;
   bottom:0;
@@ -820,9 +842,9 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   });
 })();
 </script>
-<script src="translations.js?v=14"></script>
+<script src="translations.js?v=15"></script>
 <script src="i18n.js?v=2"></script>
-<script src="tours.js?v=10"></script>
+<script src="tours.js?v=11"></script>
 <script src="editorial.js?v=3"></script>
 </body>
 </html>
