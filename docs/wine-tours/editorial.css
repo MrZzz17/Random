@@ -111,8 +111,7 @@
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(200px,280px);
   gap:clamp(1.25rem,3.5vw,2.75rem);
-  align-items:start;
-  margin-top:-1cm
+  align-items:start
 }
 .editorial-features__photo--transfer{
   position:relative;
