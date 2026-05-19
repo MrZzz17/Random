@@ -183,15 +183,16 @@
 .region-card__media{
   position:absolute;
   inset:0;
-  overflow:hidden
+  overflow:hidden;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  transition:transform .7s ease;
+  pointer-events:none;
+  -webkit-user-drag:none;
+  user-select:none
 }
-.region-card__media img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .7s ease
-}
-.region-card:hover .region-card__media img{transform:scale(1.05)}
+.region-card:hover .region-card__media{transform:scale(1.05)}
 .region-card__shade{
   position:absolute;
   inset:0;
@@ -724,18 +725,18 @@
   overflow:hidden;
   box-shadow:0 32px 70px rgba(19,37,28,.12)
 }
-.about__photo img{
+.about__media{
   width:100%;
   aspect-ratio:4/5;
-  object-fit:cover;
-  display:block
+  background:url('img/about-owners.jpg') center/cover no-repeat;
+  display:block;
+  pointer-events:none;
+  -webkit-user-drag:none;
+  user-select:none
 }
-.about__content .eyebrow{margin-bottom:.75rem}
-.about__content .section-title{
-  font-size:clamp(2rem,4vw,3.25rem);
-  line-height:1.08;
-  margin-bottom:1.25rem;
-  max-width:14ch
+.about__heading{
+  margin:0 0 1.25rem;
+  font-weight:600
 }
 .about__lead{
   font-size:clamp(1.02rem,1.35vw,1.15rem);
@@ -748,12 +749,10 @@
 .about__block{
   margin-bottom:1.25rem
 }
-.about__block--story{
-  padding-left:1rem;
-  border-left:2px solid rgba(201,163,90,.55)
-}
 .about__block p,
-.about__panel p{
+.about__panel p,
+.about__closing{
+  font-family:Inter,system-ui,sans-serif;
   font-size:clamp(.92rem,1.1vw,1rem);
   line-height:1.72;
   color:var(--text-muted);
@@ -761,15 +760,27 @@
   margin:0;
   max-width:34rem
 }
-.about__pull{
-  margin:0 0 1.35rem;
-  padding:1.1rem 0 1.1rem 1.25rem;
-  border:none;
+.about__story{
+  margin-bottom:1.35rem;
+  padding:0 0 0 1.25rem;
   border-left:3px solid var(--gold);
-  background:transparent;
-  max-width:32rem
+  max-width:34rem
 }
-.about__pull p{
+.about__story-text{
+  font-size:clamp(.92rem,1.1vw,1rem);
+  line-height:1.72;
+  color:var(--text-muted);
+  font-weight:300;
+  margin:0 0 1.15rem;
+  max-width:none
+}
+.about__story-quote{
+  margin:0;
+  padding:0;
+  border:none;
+  background:transparent
+}
+.about__story-quote p{
   margin:0;
   font-family:'Playfair Display',serif;
   font-size:clamp(1.2rem,2.2vw,1.55rem);
@@ -778,8 +789,8 @@
   line-height:1.45;
   color:var(--dark-green)
 }
-.about__pull p::before{content:'«'}
-.about__pull p::after{content:'»'}
+.about__story-quote p::before{content:'«'}
+.about__story-quote p::after{content:'»'}
 .about__panel{
   background:rgba(255,255,255,.55);
   border-radius:18px;
@@ -794,22 +805,12 @@
   gap:1rem;
   margin-bottom:0
 }
-.about__closing{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1rem,1.25vw,1.1rem);
-  line-height:1.55;
-  color:var(--gold-dk);
-  font-weight:500;
-  margin:0;
-  max-width:30rem
-}
 
 @media(max-width:900px){
   .about__grid{grid-template-columns:1fr;gap:2rem}
   .about__visual{position:static}
   .about__photo{max-width:min(420px,100%);margin:0 auto}
-  .about__content .section-title{max-width:none}
-  .about__pull{max-width:none}
+  .about__story{max-width:none}
 }
 
 /* —— Contact cinematic —— */

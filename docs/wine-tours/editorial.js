@@ -1,6 +1,16 @@
 (function () {
   'use strict';
 
+  var PROTECTED_SELECTOR =
+    '.hero__media, .about__media, .region-card__media, .tour-card__visual, ' +
+    '.editorial-features__media, .editorial-features__photo, .cinematic-divider, .contact__stage';
+
+  function isProtectedTarget(target) {
+    if (!target || !target.closest) return false;
+    if (target.tagName === 'IMG') return true;
+    return !!(target.matches && target.matches(PROTECTED_SELECTOR)) || !!target.closest(PROTECTED_SELECTOR);
+  }
+
   function initReveal() {
     var els = document.querySelectorAll('.reveal-on-scroll');
     if (!els.length) return;
@@ -28,17 +38,29 @@
     });
   }
 
-  function initDecorativePhotos() {
-    document.querySelectorAll('.editorial-features__photo').forEach(function (el) {
-      el.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-      });
-    });
+  function initImageProtection() {
+    var root = document.querySelector('main') || document.body;
+
+    root.addEventListener(
+      'contextmenu',
+      function (e) {
+        if (isProtectedTarget(e.target)) e.preventDefault();
+      },
+      true
+    );
+
+    root.addEventListener(
+      'dragstart',
+      function (e) {
+        if (isProtectedTarget(e.target)) e.preventDefault();
+      },
+      true
+    );
   }
 
   function init() {
     initReveal();
-    initDecorativePhotos();
+    initImageProtection();
   }
 
   if (document.readyState === 'loading') {

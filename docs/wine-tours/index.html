@@ -128,8 +128,17 @@ main.lang-fade{opacity:.55;transition:opacity .2s ease}
 
 /* HERO — single user background image */
 .hero{position:relative;min-height:min(88vh,780px);display:flex;align-items:stretch;overflow:hidden;background:var(--g900)}
-.hero picture{position:absolute;inset:0;display:block}
-.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% center}
+.hero__media{
+  position:absolute;
+  inset:0;
+  background-image:image-set(url('img/hero-bg.webp') type('image/webp'),url('img/hero-bg.png') type('image/png'));
+  background-size:cover;
+  background-position:72% center;
+  background-repeat:no-repeat;
+  pointer-events:none;
+  -webkit-user-drag:none;
+  user-select:none
+}
 .hero__shade{position:absolute;inset:0;background:
   linear-gradient(90deg,rgba(15,24,19,.88) 0%,rgba(15,24,19,.68) 30%,rgba(15,24,19,.22) 50%,transparent 72%),
   linear-gradient(0deg,rgba(15,24,19,.35) 0%,transparent 18%,transparent 82%,rgba(15,24,19,.25) 100%)}
@@ -184,9 +193,20 @@ main.lang-fade{opacity:.55;transition:opacity .2s ease}
 .tour-card{position:relative;border-radius:22px;overflow:hidden;min-height:min(680px,88vh);box-shadow:0 24px 60px rgba(19,37,28,.18);transition:transform .35s ease,box-shadow .35s ease;display:flex;flex-direction:column;isolation:isolate}
 .tour-card:hover{transform:translateY(-6px);box-shadow:0 32px 70px rgba(19,37,28,.28)}
 .tour-card.is-active{outline:2px solid var(--light-gold);outline-offset:3px}
-.tour-card__visual{position:absolute;inset:0;overflow:hidden;z-index:0}
-.tour-card__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;transition:transform .5s ease;will-change:transform}
-.tour-card:hover .tour-card__visual .tour-card__bg{transform:scale(1.04)}
+.tour-card__visual{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:center 35%;
+  transition:transform .5s ease;
+  pointer-events:none;
+  -webkit-user-drag:none;
+  user-select:none
+}
+.tour-card:hover .tour-card__visual{transform:scale(1.04)}
 .tour-card__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(19,37,28,.05) 0%,rgba(19,37,28,.45) 45%,rgba(10,15,12,.92) 100%);pointer-events:none}
 .tour-card__content{position:relative;z-index:2;margin-top:auto;padding:clamp(1.5rem,3vw,2.25rem);color:#fff;transform:translateZ(0)}
 .tour-card__title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,4.25rem);font-weight:600;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;margin-bottom:.35rem}
@@ -297,7 +317,7 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
 .about{padding:4.5rem 0;background:linear-gradient(180deg,#fff 0%,var(--cream) 100%)}
 .about__grid{display:grid;grid-template-columns:1fr 1.05fr;gap:2.75rem;align-items:center}
 .about__photo{border-radius:var(--radius);overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.12)}
-.about__photo img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.about__media{width:100%;aspect-ratio:4/5;background:url('img/about-owners.jpg') center/cover no-repeat;pointer-events:none;-webkit-user-drag:none;user-select:none}
 .about h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.1rem);color:var(--g900);margin-bottom:1rem;font-weight:600}
 .about p{color:var(--muted);font-size:.95rem;font-weight:300;margin-bottom:.85rem;line-height:1.75}
 .about strong{color:var(--text);font-weight:500}
@@ -431,7 +451,7 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
   body.has-mobile-booking-bar{padding-bottom:0}
 }
 </style>
-<link rel="stylesheet" href="editorial.css?v=15">
+<link rel="stylesheet" href="editorial.css?v=19">
 </head>
 <body>
 
@@ -479,10 +499,7 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
 
 <main>
   <section class="hero" id="top">
-    <picture>
-      <source type="image/webp" srcset="img/hero-bg.webp">
-      <img class="hero__bg" src="img/hero-bg.png" alt="Винный тур в виноградниках Австралии на закате" data-i18n-alt="hero.imgAlt" width="1794" height="876" fetchpriority="high" decoding="async">
-    </picture>
+    <div class="hero__media" role="img" aria-label="Винный тур в виноградниках Австралии на закате" data-i18n-attr="hero.imgAlt|aria-label"></div>
     <div class="hero__shade" aria-hidden="true"></div>
     <div class="hero__body">
       <div class="hero__copy">
@@ -645,19 +662,18 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
       <div class="about__grid">
         <div class="about__visual">
           <div class="about__photo">
-            <img src="img/about-owners.jpg" alt="Основатели Alex Trips Wine Tours" data-i18n-alt="about.imgAlt" loading="lazy">
+            <div class="about__media" role="img" aria-label="Основатели Alex Trips Wine Tours" data-i18n-attr="about.imgAlt|aria-label"></div>
           </div>
         </div>
         <div class="about__content">
-          <p class="eyebrow editorial-eyebrow" data-i18n="about.eyebrow">Наша история</p>
-          <h2 class="section-title" data-i18n="about.title">О нас</h2>
+          <h2 class="eyebrow editorial-eyebrow about__heading" data-i18n="about.eyebrow">Наша история</h2>
           <p class="about__lead" data-i18n="about.paragraphs.0">Мы — русскоговорящая пара из Мельбурна, уже много лет живущая в Австралии и по-настоящему влюблённая в эту страну. За это время Австралия стала для нас не просто домом, а местом, которым хочется делиться — через её природу, атмосферу, людей, гастрономию и, конечно, удивительную винную культуру.</p>
-          <div class="about__block about__block--story">
-            <p data-i18n="about.paragraphs.1">Мы сами много путешествуем по миру и всегда особенно ценим не «туристические программы», а тёплые, глубокие впечатления от местных людей — когда тебе показывают страну не по шаблону, а через личный взгляд и любовь к своему региону. Именно такой опыт мы стараемся создавать и для наших гостей.</p>
+          <div class="about__story">
+            <p class="about__story-text" data-i18n="about.paragraphs.1">Мы сами много путешествуем по миру и всегда особенно ценим не «туристические программы», а тёплые, глубокие впечатления от местных людей — когда тебе показывают страну не по шаблону, а через личный взгляд и любовь к своему региону. Именно такой опыт мы стараемся создавать и для наших гостей.</p>
+            <blockquote class="about__story-quote">
+              <p data-i18n="about.pullQuote">Будто вы приехали к друзьям, которые давно живут в Австралии и хотят показать вам её настоящую сторону.</p>
+            </blockquote>
           </div>
-          <blockquote class="about__pull">
-            <p data-i18n="about.pullQuote">Будто вы приехали к друзьям, которые давно живут в Австралии и хотят показать вам её настоящую сторону.</p>
-          </blockquote>
           <div class="about__block">
             <p data-i18n="about.paragraphs.2">Наши туры — это не про спешку и автобусы с микрофоном. Это про красивый день, хорошие разговоры, винодельни с характером, потрясающие пейзажи и ощущение, будто вы приехали к друзьям, которые давно живут в Австралии и хотят показать вам её настоящую сторону.</p>
           </div>
@@ -750,6 +766,6 @@ body.has-mobile-booking-bar .tours{padding-bottom:calc(5.5rem + 88px + env(safe-
 <script src="translations.js?v=6"></script>
 <script src="i18n.js?v=2"></script>
 <script src="tours.js?v=8"></script>
-<script src="editorial.js?v=2"></script>
+<script src="editorial.js?v=3"></script>
 </body>
 </html>

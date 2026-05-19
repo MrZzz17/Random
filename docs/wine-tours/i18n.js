@@ -182,12 +182,11 @@
         ' card" data-region="' +
         escapeHtml(id) +
         '">' +
-        '<div class="region-card__media">' +
-        '<img src="' +
-        escapeHtml(imgSrc) +
-        '" alt="' +
+        '<div class="region-card__media" role="img" aria-label="' +
         escapeHtml(alt) +
-        '" loading="lazy">' +
+        '" style="background-image:url(\'' +
+        escapeHtml(imgSrc) +
+        '\')">' +
         '<div class="region-card__shade" aria-hidden="true"></div>' +
         '</div>' +
         '<div class="region-card__body">' +

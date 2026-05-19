@@ -250,8 +250,7 @@
     grid.innerHTML = getTours().map(function (tour) {
       return (
         '<article class="tour-card tour-card--' + tour.id + (selectedTourId === tour.id ? ' is-active' : '') + '" data-tour-id="' + tour.id + '">' +
-          '<div class="tour-card__visual">' +
-            '<img class="tour-card__bg" src="' + tour.image + '" alt="" loading="lazy" style="object-position:' + tour.imagePosition + '">' +
+          '<div class="tour-card__visual" role="img" aria-label="" style="background-image:url(\'' + tour.image + '\');background-position:' + tour.imagePosition + '">' +
             '<div class="tour-card__overlay" aria-hidden="true"></div>' +
           '</div>' +
           '<div class="tour-card__content">' +
