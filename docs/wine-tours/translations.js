@@ -204,7 +204,28 @@
         contactWaPhone: '61421047915'
       },
       footer: {
-        copyright: '© 2026 Alex Trips Wine Tours'
+        copyright: '© 2026 A&I Wine Journeys'
+      },
+      cinematic: {
+        bgAlt: 'Виноградники на закате',
+        actionsAria: 'Связаться с нами',
+        panelAria: 'Контактная информация',
+        titleHtml:
+          'Готовы провести день<br>среди лучших виноделен<br>Австралии?',
+        lead:
+          'Напишите нам — и мы поможем подобрать маршрут, винодельни и идеальный день за городом.',
+        btnWhatsApp: 'WhatsApp',
+        btnTelegram: 'Telegram',
+        btnEmail: 'Email',
+        panelPlace: 'Melbourne, Australia',
+        panelTagline: 'Private Wine Journeys',
+        panelLang: 'Русскоязычное сопровождение',
+        phoneNote: 'WhatsApp / Telegram',
+        instagram: '@alextrips_wine',
+        brand: 'A&I Wine Journeys',
+        quoteHtml:
+          'Иногда лучшие воспоминания —<br>это просто красивый день,<br>хорошее вино<br>и правильные люди рядом.',
+        copyright: '© 2026 A&I Wine Journeys'
       },
       wineryTypes: {
         'Boutique winery': 'Бутиковая винодельня',
@@ -420,7 +441,28 @@
         contactWaPhone: '61421047915'
       },
       footer: {
-        copyright: '© 2026 Alex Trips Wine Tours'
+        copyright: '© 2026 A&I Wine Journeys'
+      },
+      cinematic: {
+        bgAlt: 'Vineyards at sunset',
+        actionsAria: 'Contact us',
+        panelAria: 'Contact information',
+        titleHtml:
+          'Ready for a day<br>among Australia\'s<br>finest wineries?',
+        lead:
+          'Message us — we will help you choose the route, wineries, and the perfect day out of the city.',
+        btnWhatsApp: 'WhatsApp',
+        btnTelegram: 'Telegram',
+        btnEmail: 'Email',
+        panelPlace: 'Melbourne, Australia',
+        panelTagline: 'Private Wine Journeys',
+        panelLang: 'Russian-language hosting',
+        phoneNote: 'WhatsApp / Telegram',
+        instagram: '@alextrips_wine',
+        brand: 'A&I Wine Journeys',
+        quoteHtml:
+          'Sometimes the best memories are<br>simply a beautiful day,<br>good wine,<br>and the right people beside you.',
+        copyright: '© 2026 A&I Wine Journeys'
       },
       wineryTypes: {
         'Boutique winery': 'Boutique winery',
